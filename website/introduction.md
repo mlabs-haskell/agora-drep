@@ -1,3 +1,0 @@
-# Introduction
-
-Agora <> DRep integration
