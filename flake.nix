@@ -39,8 +39,10 @@
           inputs.simpleHaskellNix.flakeModules.simpleHaskellNix
 
           ./nix/latex
+          ./nix/mdbook
 
           ./specification
+          ./website
         ];
 
         systems = inputs.nixpkgs.lib.systems.flakeExposed;
