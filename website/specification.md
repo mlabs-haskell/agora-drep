@@ -1,3 +1,3 @@
 # Specification
 
-[Specification PDF](/static/agora-drep-specification.pdf)
+[Specification PDF](./static/agora-drep-specification.pdf)
