@@ -100,8 +100,39 @@ data Datum = Datum
 
 \subsection{Proxy Minting Validator}
 
-\subsection{Voting Effect Minting Validator}
+\subsection{Voting Effect Validator}
 
-\subsection{Voting Effect Voting Validator}
+The Voting Effect validator will utilise the above established Proxy Minting Validator, minting a Proxy Governance Authority Token (pGAT).
+By spending the pGAT, we essentially get the same guarantees as with GAT, but we can use Plutus V3, which introduces the functionalities to work with native Cardano governance.
+
+In order to vote on a Cardano Governance Action using this effect the following preconditions must be met:
+\begin{itemize}
+  \item The Voting Effect validator must be registered as a DRep
+  \item staking verification key of the DAO should be delegated to the above DRep
+  \item Governance action with well known id must be already submitted on-chain
+\end{itemize}
+
+The effect transaction will burn exactly one pGAT, and at the same time place a vote to the governance action defined in the datum.
+
+In theory, there could exist more than one Voting effect,
+
+\subsection*{Data Types}
+
+\begin{lstlisting}[language=Haskell]
+data Datum = Datum
+  { governanceActionId :: GovernanceActionId
+  , vote :: Vote
+  }
+\end{lstlisting}
+
+\subsection*{Spending Conditions}
+
+\begin{itemize}
+  \item Transaction burns one PGAT (symbol is known from script parameter)
+  \item Spent UTxO contains PGAT
+  \item \verb|ScriptPurpose| is \verb|Voting|, and the \verb|Voter| set to a \verb|DRepCertificate| with the script hash of this validator
+  \item \verb|Vote| in script context matches the one in the Datum
+\end{itemize}
+
 
 \end{document}
