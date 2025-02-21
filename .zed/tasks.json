@@ -1,0 +1,6 @@
+[
+  {
+    "label": "Preview",
+    "command": "pdflatex --output-dir /tmp ./specification/specification.tex && open /tmp/specification.pdf"
+  }
+]

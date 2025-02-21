@@ -114,7 +114,12 @@ In order to vote on a Cardano Governance Action using this effect the following 
 
 The effect transaction will burn exactly one pGAT, and at the same time place a vote to the governance action defined in the datum.
 
-In theory, there could exist more than one Voting effect,
+\subsection*{DRep registration}
+
+Registering the Voting Effect validator is a one time action, that has to be done after deployment of the protocol.
+The validator script will allow DRep registration unconditionally, but DRep update will be prohibited.
+
+\subsection*{Delegation to DRep}
 
 \subsection*{Data Types}
 
@@ -130,8 +135,12 @@ data Datum = Datum
 \begin{itemize}
   \item Transaction burns one PGAT (symbol is known from script parameter)
   \item Spent UTxO contains PGAT
-  \item \verb|ScriptPurpose| is \verb|Voting|, and the \verb|Voter| set to a \verb|DRepCertificate| with the script hash of this validator
-  \item \verb|Vote| in script context matches the one in the Datum
+  \item if \verb|ScriptPurpose| is \verb|Certifying| then the transaction passes unconditionally
+  \item if \verb|ScriptPurpose| is \verb|Voting|
+        \begin{itemize}
+          \item \verb|Voter| set to a \verb|DRepCertificate| with the script hash of this validator
+          \item \verb|Vote| in script context matches the one in the Datum
+        \end{itemize}
 \end{itemize}
 
 
