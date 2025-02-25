@@ -1,6 +1,6 @@
 [
   {
     "label": "Preview",
-    "command": "pdflatex --output-dir /tmp ./specification/specification.tex && open /tmp/specification.pdf"
+    "command": "/bin/zsh -i -c 'latexmk -pvc -synctex=1 -pdf -recorder ./specification/specification.tex -aux-directory=/tmp/latexmk -output-directory=/tmp/latexmk'"
   }
 ]

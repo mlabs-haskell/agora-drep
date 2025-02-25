@@ -119,8 +119,6 @@ The effect transaction will burn exactly one pGAT, and at the same time place a 
 Registering the Voting Effect validator is a one time action, that has to be done after deployment of the protocol.
 The validator script will allow DRep registration unconditionally, but DRep update will be prohibited.
 
-\subsection*{Delegation to DRep}
-
 \subsection*{Data Types}
 
 \begin{lstlisting}[language=Haskell]
@@ -133,14 +131,24 @@ data Datum = Datum
 \subsection*{Spending Conditions}
 
 \begin{itemize}
-  \item Transaction burns one PGAT (symbol is known from script parameter)
-  \item Spent UTxO contains PGAT
-  \item if \verb|ScriptPurpose| is \verb|Certifying| then the transaction passes unconditionally
-  \item if \verb|ScriptPurpose| is \verb|Voting|
+  \item Transaction burns exactly 1 pGAT (symbol is known from script parameter), and doesn't mint anything
+  \item Spent UTxO contains pGAT
+  \item \verb|ScriptPurpose| is either \verb|Certifying| or \verb|Voting|
         \begin{itemize}
-          \item \verb|Voter| set to a \verb|DRepCertificate| with the script hash of this validator
-          \item \verb|Vote| in script context matches the one in the Datum
+          \item if \verb|Certifying|
+                \begin{itemize}
+                  \item \verb|ScriptContext| does not contain a vote
+                  \item \verb|ScriptContext| contains exactly 1 transaction certificate
+                \end{itemize}
+          \item if \verb|Voting|
+                \begin{itemize}
+                  \item \verb|Voter| set to a \verb|DRepCertificate| with the script hash of this validator
+                  \item \verb|ScriptContext| contains exactly 1 vote, where the \verb|Voter| matches the one in the \verb|ScriptPurpose|, and the \verb|GovernanceId| and \verb|Vote| match the ones in the Datum
+                  \item \verb|ScriptContext| does not contain a certificate
+                \end{itemize}
         \end{itemize}
+  \item \verb|ScriptContext| does not contain proposal procedures
+  \item \verb|ScriptContext| does not contain treasury donations
 \end{itemize}
 
 
