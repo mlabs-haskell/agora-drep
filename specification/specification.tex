@@ -151,5 +151,30 @@ data Datum = Datum
   \item \verb|ScriptContext| does not contain treasury donations
 \end{itemize}
 
+\section{Data Encoding}
+
+Datums and redeemers defined in this specification have to be data-encoded using the following rules in order to achieve the optimal encoding:
+
+\begin{itemize}
+  \item Enums (SoPs where all constructors have no fields) have to be encoded as an integer starting from $0$ following the constructor order from the specification.
+  \item Records (SoPs with only one constructor with at least one field) have to be encoded as a list of data encoded fields rather than wrapped with \verb|Constr 0|.
+  \item Everything else has to be encoded using \verb|Constr| with index starting from $0$ following the constructor from the specification and field list in order of the declaration.
+\end{itemize}
+
+Note that we do not ``mix'' the encodings i.e. even if one of the constructors of the generic SoP has no fields it still has to be encoded using \verb|Constr| rather than as an integer.
+Types that are not defined in this document are standard Plutus types with encoding already specified and the encoding rules do not apply to them.
+
+When the specification does not describe datum or redeemer it is assumed to be never accessed thus plutus data passed to the script is irrelevant and the offchain implementation is free to pass anything and the validator has to succeed anyway.
+Usually the offchain transaction building code will pass unit type encoded as \verb|Constr 0 []| or \verb|0| however it is not strictly required to do so.
+
+\subsection{Plutarch Details}
+
+Note that the following encodings can be achieved automatically using Plutarch's derivation strategies, namely:
+
+\begin{itemize}
+  \item Enum encoding can be derived with \verb|DeriveAsTag| for both \verb|PlutusType| and \verb|PLiftable|
+  \item Record with \verb|DeriveAsDataRec| for \verb|PlutusType| and \allowbreak \verb|DeriveDataPLiftable| for \verb|PLiftable|
+  \item Generic SoP encoding can be derived with \verb|DeriveAsDataStruct| for \verb|PlutusType| and \verb|DeriveDataPLiftable| for \verb|PLiftable|
+\end{itemize}
 
 \end{document}
