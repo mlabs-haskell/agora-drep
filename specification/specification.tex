@@ -51,7 +51,7 @@ The implementation of this specification will be done in Plutarch and available 
 \subsection{V2 / V3 Interactions Limitations}
 
 The Cardano ledger imposes limitations on what transaction can do depending on which versions of Plutus scripts are being executed in the same transaction.
-The limitation that is relevant for us is that transactions that execute V2 Plutus scripts cannot also contain Cardano governance voting actions (see \ref{tab:compatibility}).
+The limitation that is relevant for us is that transactions that execute V2 Plutus scripts cannot also contain Cardano governance voting actions (see Table \ref{tab:compatibility}).
 
 \begin{table}[H]
   \centering
@@ -81,6 +81,11 @@ Note that the actual minting will be done by Proxy Minting Validator.
 While they are described as two separate validators actually they will be the same onchain script that acts differently depending on the purpose it is spent with.
 That approach avoids circular script parametrization as minting part needs to know the address of the spending part and spening part needs to know the currency symbol of the minting part, if they are implemented in the same script that then the script hash is the same and it is passed as a runtime parameter from Cardano node.
 
+For the sake of simplicity and correctness the implementation is limited to migrating only one GAT per transaction.
+In practice such limitation is irrelevant as most Agora proposals have only one effect in the outcome map and proposals are rare enough that the cost of submitting multiple transactions is irrelevant.
+
+Note that this validator is in fact an Agora effect thus the spending conditions must follow the restrictions for Agora effects such as not doing anything that is irrelevant to the GAT migration process as that may accidently allow to trigger other action that is gated behind burning V2 GAT.
+
 \subsubsection*{Data Types}
 
 \begin{lstlisting}[language=Haskell]
@@ -96,9 +101,34 @@ data Datum = Datum
   \item Transaction burns one GAT (symbol is known from script parameter)
   \item Spent UTxO contains GAT
   \item Transaction creates a UTxO at address of \verb|receiverScript| with empty staking part and reference datum with hash equal to \verb|datumHash|.
+  \item Transaction does not mint or burn any tokens other than V2 and V3 GATs.
+  \item Transaction does not include any certificates.
+  \item Transaction does not include script inputs other than own input.
 \end{itemize}
 
 \subsection{Proxy Minting Validator}
+
+Minting validator is tightly coupled to the spending validator and some checks are offloaded there. This validator succeeds when the transaction spends from the spending validator address (that already ensures proper handling of V2 GAT) and that it mints exactly one V3 GAT with empty token name.
+
+\subsubsection*{Spending Conditions}
+
+\begin{itemize}
+  \item Transaction contains an input from Proxy Spending Validator. The address is known as Minting and Spending validators share the same hash.
+  \item Transaction mints only one token with currency symbol equal to own hash.
+  \item Minted token has empty token name.
+\end{itemize}
+
+\subsection{Spending Effect Validator}
+
+Because onchain voting action is gated behind burning pGAT the effect implementation has to be split into spending and voting validators. Spending validator simply allows only for burning the pGAT as long as the transaction.
+
+\subsubsection*{Spending Conditions}
+
+\begin{itemize}
+  \item Transaction contains a vote with own drep hash
+\end{itemize}
+
+Rest  of the checks if performed by the Voting Effect validator.
 
 \subsection{Voting Effect Validator}
 
@@ -133,7 +163,7 @@ data Datum = Datum
 \begin{itemize}
   \item Transaction burns exactly 1 pGAT (symbol is known from script parameter), and doesn't mint anything
   \item Spent UTxO contains pGAT
-  \item \verb|ScriptPurpose| is either \verb|Certifying| or \verb|Voting|
+  \item \verb|ScriptPurpose| is either \verb|Certifying|, \verb|Voting|, or \verb|Spending|
         \begin{itemize}
           \item if \verb|Certifying|
                 \begin{itemize}
@@ -146,10 +176,37 @@ data Datum = Datum
                   \item \verb|ScriptContext| contains exactly 1 vote, where the \verb|Voter| matches the one in the \verb|ScriptPurpose|, and the \verb|GovernanceId| and \verb|Vote| match the ones in the Datum
                   \item \verb|ScriptContext| does not contain a certificate
                 \end{itemize}
+          \item if \verb|Spending|: See Spending Proxy Validator
+
         \end{itemize}
   \item \verb|ScriptContext| does not contain proposal procedures
   \item \verb|ScriptContext| does not contain treasury donations
 \end{itemize}
 
+\section{Data Encoding}
+
+Datums and redeemers defined in this specification have to be data-encoded using the following rules in order to achieve the optimal encoding:
+
+\begin{itemize}
+  \item Enums (SoPs where all constructors have no fields) have to be encoded as an integer starting from $0$ following the constructor order from the specification.
+  \item Records (SoPs with only one constructor with at least one field) have to be encoded as a list of data encoded fields rather than wrapped with \verb|Constr 0|.
+  \item Everything else has to be encoded using \verb|Constr| with index starting from $0$ following the constructor from the specification and field list in order of the declaration.
+\end{itemize}
+
+Note that we do not ``mix'' the encodings i.e. even if one of the constructors of the generic SoP has no fields it still has to be encoded using \verb|Constr| rather than as an integer.
+Types that are not defined in this document are standard Plutus types with encoding already specified and the encoding rules do not apply to them.
+
+When the specification does not describe datum or redeemer it is assumed to be never accessed thus plutus data passed to the script is irrelevant and the offchain implementation is free to pass anything and the validator has to succeed anyway.
+Usually the offchain transaction building code will pass unit type encoded as \verb|Constr 0 []| or \verb|0| however it is not strictly required to do so.
+
+\subsection{Plutarch Details}
+
+Note that the following encodings can be achieved automatically using Plutarch's derivation strategies, namely:
+
+\begin{itemize}
+  \item Enum encoding can be derived with \verb|DeriveAsTag| for both \verb|PlutusType| and \verb|PLiftable|
+  \item Record with \verb|DeriveAsDataRec| for \verb|PlutusType| and \allowbreak \verb|DeriveDataPLiftable| for \verb|PLiftable|
+  \item Generic SoP encoding can be derived with \verb|DeriveAsDataStruct| for \verb|PlutusType| and \verb|DeriveDataPLiftable| for \verb|PLiftable|
+\end{itemize}
 
 \end{document}
