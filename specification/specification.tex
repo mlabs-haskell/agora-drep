@@ -100,8 +100,56 @@ data Datum = Datum
 
 \subsection{Proxy Minting Validator}
 
-\subsection{Voting Effect Minting Validator}
+\subsection{Voting Effect Validator}
 
-\subsection{Voting Effect Voting Validator}
+The Voting Effect validator will utilise the above established Proxy Minting Validator, minting a Proxy Governance Authority Token (pGAT).
+By spending the pGAT, we essentially get the same guarantees as with GAT, but we can use Plutus V3, which introduces the functionalities to work with native Cardano governance.
+
+In order to vote on a Cardano Governance Action using this effect the following preconditions must be met:
+\begin{itemize}
+  \item The Voting Effect validator must be registered as a DRep
+  \item staking verification key of the DAO should be delegated to the above DRep
+  \item Governance action with well known id must be already submitted on-chain
+\end{itemize}
+
+The effect transaction will burn exactly one pGAT, and at the same time place a vote to the governance action defined in the datum.
+
+\subsection*{DRep registration}
+
+Registering the Voting Effect validator is a one time action, that has to be done after deployment of the protocol.
+The validator script will allow DRep registration unconditionally, but DRep update will be prohibited.
+
+\subsection*{Data Types}
+
+\begin{lstlisting}[language=Haskell]
+data Datum = Datum
+  { governanceActionId :: GovernanceActionId
+  , vote :: Vote
+  }
+\end{lstlisting}
+
+\subsection*{Spending Conditions}
+
+\begin{itemize}
+  \item Transaction burns exactly 1 pGAT (symbol is known from script parameter), and doesn't mint anything
+  \item Spent UTxO contains pGAT
+  \item \verb|ScriptPurpose| is either \verb|Certifying| or \verb|Voting|
+        \begin{itemize}
+          \item if \verb|Certifying|
+                \begin{itemize}
+                  \item \verb|ScriptContext| does not contain a vote
+                  \item \verb|ScriptContext| contains exactly 1 transaction certificate
+                \end{itemize}
+          \item if \verb|Voting|
+                \begin{itemize}
+                  \item \verb|Voter| set to a \verb|DRepCertificate| with the script hash of this validator
+                  \item \verb|ScriptContext| contains exactly 1 vote, where the \verb|Voter| matches the one in the \verb|ScriptPurpose|, and the \verb|GovernanceId| and \verb|Vote| match the ones in the Datum
+                  \item \verb|ScriptContext| does not contain a certificate
+                \end{itemize}
+        \end{itemize}
+  \item \verb|ScriptContext| does not contain proposal procedures
+  \item \verb|ScriptContext| does not contain treasury donations
+\end{itemize}
+
 
 \end{document}
