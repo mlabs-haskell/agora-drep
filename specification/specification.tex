@@ -118,6 +118,18 @@ Minting validator is tightly coupled to the spending validator and some checks a
   \item Minted token has empty token name.
 \end{itemize}
 
+\subsection{Spending Effect Validator}
+
+Because onchain voting action is gated behind burning pGAT the effect implementation has to be split into spending and voting validators. Spending validator simply allows only for burning the pGAT as long as the transaction.
+
+\subsubsection*{Spending Conditions}
+
+\begin{itemize}
+  \item Transaction contains a vote with own drep hash
+\end{itemize}
+
+Rest  of the checks if performed by the Voting Effect validator.
+
 \subsection{Voting Effect Validator}
 
 The Voting Effect validator will utilise the above established Proxy Minting Validator, minting a Proxy Governance Authority Token (pGAT).
@@ -151,7 +163,7 @@ data Datum = Datum
 \begin{itemize}
   \item Transaction burns exactly 1 pGAT (symbol is known from script parameter), and doesn't mint anything
   \item Spent UTxO contains pGAT
-  \item \verb|ScriptPurpose| is either \verb|Certifying| or \verb|Voting|
+  \item \verb|ScriptPurpose| is either \verb|Certifying|, \verb|Voting|, or \verb|Spending|
         \begin{itemize}
           \item if \verb|Certifying|
                 \begin{itemize}
@@ -164,6 +176,8 @@ data Datum = Datum
                   \item \verb|ScriptContext| contains exactly 1 vote, where the \verb|Voter| matches the one in the \verb|ScriptPurpose|, and the \verb|GovernanceId| and \verb|Vote| match the ones in the Datum
                   \item \verb|ScriptContext| does not contain a certificate
                 \end{itemize}
+          \item if \verb|Spending|: See Spending Proxy Validator
+
         \end{itemize}
   \item \verb|ScriptContext| does not contain proposal procedures
   \item \verb|ScriptContext| does not contain treasury donations
