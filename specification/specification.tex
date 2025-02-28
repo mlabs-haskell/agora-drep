@@ -51,7 +51,7 @@ The implementation of this specification will be done in Plutarch and available 
 \subsection{V2 / V3 Interactions Limitations}
 
 The Cardano ledger imposes limitations on what transaction can do depending on which versions of Plutus scripts are being executed in the same transaction.
-The limitation that is relevant for us is that transactions that execute V2 Plutus scripts cannot also contain Cardano governance voting actions (see \ref{tab:compatibility}).
+The limitation that is relevant for us is that transactions that execute V2 Plutus scripts cannot also contain Cardano governance voting actions (see Table \ref{tab:compatibility}).
 
 \begin{table}[H]
   \centering
@@ -81,6 +81,11 @@ Note that the actual minting will be done by Proxy Minting Validator.
 While they are described as two separate validators actually they will be the same onchain script that acts differently depending on the purpose it is spent with.
 That approach avoids circular script parametrization as minting part needs to know the address of the spending part and spening part needs to know the currency symbol of the minting part, if they are implemented in the same script that then the script hash is the same and it is passed as a runtime parameter from Cardano node.
 
+For the sake of simplicity and correctness the implementation is limited to migrating only one GAT per transaction.
+In practice such limitation is irrelevant as most Agora proposals have only one effect in the outcome map and proposals are rare enough that the cost of submitting multiple transactions is irrelevant.
+
+Note that this validator is in fact an Agora effect thus the spending conditions must follow the restrictions for Agora effects such as not doing anything that is irrelevant to the GAT migration process as that may accidently allow to trigger other action that is gated behind burning V2 GAT.
+
 \subsubsection*{Data Types}
 
 \begin{lstlisting}[language=Haskell]
@@ -96,6 +101,9 @@ data Datum = Datum
   \item Transaction burns one GAT (symbol is known from script parameter)
   \item Spent UTxO contains GAT
   \item Transaction creates a UTxO at address of \verb|receiverScript| with empty staking part and reference datum with hash equal to \verb|datumHash|.
+  \item Transaction does not mint or burn any tokens other than V2 and V3 GATs.
+  \item Transaction does not include any certificates.
+  \item Transaction does not include script inputs other than own input.
 \end{itemize}
 
 \subsection{Proxy Minting Validator}
