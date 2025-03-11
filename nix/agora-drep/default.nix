@@ -1,0 +1,25 @@
+{ inputs, ... }:
+{
+  perSystem =
+    { simpleHaskellNix, ... }:
+    let
+      agora-drep = simpleHaskellNix.mkPackage {
+        name = "agora-drep";
+        src = ./../../.;
+
+        externalRepositories = {
+          "https://input-output-hk.github.io/cardano-haskell-packages" = inputs.cardano-haskell-packages;
+        };
+
+        externalDependencies = [
+          "${inputs.plutarch}"
+          "${inputs.plutarch}/plutarch-ledger-api"
+        ];
+      };
+    in
+    {
+      inherit (agora-drep) checks packages;
+
+      devShells.agora-drep = agora-drep.devShell;
+    };
+}
