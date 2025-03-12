@@ -83,7 +83,6 @@
                 fourmolu.enable = true;
                 latexindent.enable = true;
                 nixfmt-rfc-style.enable = true;
-                typos.enable = true;
               };
 
               settings = {

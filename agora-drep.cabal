@@ -12,23 +12,98 @@ build-type:         Simple
 extra-doc-files:    CHANGELOG.md
 -- extra-source-files:
 
-common warnings
-    ghc-options: -Wall
+common lang
+  ghc-options:
+    -Werror -Wall -Wcompat -Wincomplete-uni-patterns
+    -Wno-unused-do-bind -Wno-partial-type-signatures
+    -Wmissing-export-lists -Wincomplete-record-updates
+    -Wmissing-deriving-strategies -Wno-name-shadowing -Wunused-foralls
+    -fprint-explicit-foralls -fprint-explicit-kinds -Wunused-do-bind
+
+  default-extensions:
+    BangPatterns
+    BinaryLiterals
+    ConstrainedClassMethods
+    ConstraintKinds
+    DataKinds
+    DeriveAnyClass
+    DeriveDataTypeable
+    DeriveFoldable
+    DeriveFunctor
+    DeriveGeneric
+    DeriveLift
+    DeriveTraversable
+    DerivingStrategies
+    DerivingVia
+    DoAndIfThenElse
+    DuplicateRecordFields
+    EmptyCase
+    EmptyDataDecls
+    EmptyDataDeriving
+    ExistentialQuantification
+    ExplicitForAll
+    FlexibleContexts
+    FlexibleInstances
+    ForeignFunctionInterface
+    GADTSyntax
+    GeneralisedNewtypeDeriving
+    HexFloatLiterals
+    ImplicitPrelude
+    ImportQualifiedPost
+    InstanceSigs
+    KindSignatures
+    LambdaCase
+    MonomorphismRestriction
+    MultiParamTypeClasses
+    NamedFieldPuns
+    NamedWildCards
+    NoStarIsType
+    NumericUnderscores
+    OverloadedLabels
+    OverloadedRecordDot
+    OverloadedStrings
+    PackageImports
+    PartialTypeSignatures
+    PatternGuards
+    PolyKinds
+    PostfixOperators
+    QualifiedDo
+    RankNTypes
+    RelaxedPolyRec
+    ScopedTypeVariables
+    StandaloneDeriving
+    StandaloneKindSignatures
+    TupleSections
+    TypeApplications
+    TypeFamilies
+    TypeOperators
+    TypeSynonymInstances
+    UndecidableInstances
+    ViewPatterns
+
+  default-language:   Haskell2010
+  build-depends:      base >=4.14 && <5
 
 library
-    import:           warnings
-    exposed-modules:  Agora.Proxy
+    import:           lang
+    exposed-modules:
+        Agora.Proxy
+        Agora.AuthorityToken
+        Agora.Utils
     -- other-modules:
     -- other-extensions:
     build-depends:
         , base ^>=4.18.2.1
         , plutarch
         , plutarch-ledger-api
+        , plutus-ledger-api
+        , plutus-tx
+        , generics-sop
     hs-source-dirs:   agora-drep
     default-language: Haskell2010
 
 executable agora-drep
-    import:           warnings
+    import:           lang
     main-is:          Main.hs
     -- other-modules:
     -- other-extensions:
@@ -40,7 +115,7 @@ executable agora-drep
     default-language: Haskell2010
 
 test-suite agora-drep-test
-    import:           warnings
+    import:           lang
     default-language: Haskell2010
     -- other-modules:
     -- other-extensions:
