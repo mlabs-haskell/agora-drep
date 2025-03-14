@@ -39,21 +39,21 @@ import Plutarch.Prelude (
 
 {- | Check that all GATs are valid in a particular TxOut.
 
-   WARNING: As of version 1.0.0, this has been weakened in order to be
-   compatible with RATs. The token name is no longer checked, meaning that a
-   GAT can escape from its effect script, if the effect script is vulnerable.
-   In order to prevent this, all effect scripts should be implemented carefully,
-   and ideally use the trusted effect base. See also 'Agora.Effect'.
+  WARNING: As of version 1.0.0, this has been weakened in order to be
+  compatible with RATs. The token name is no longer checked, meaning that a
+  GAT can escape from its effect script, if the effect script is vulnerable.
+  In order to prevent this, all effect scripts should be implemented carefully,
+  and ideally use the trusted effect base. See also 'Agora.Effect'.
 
-   (before 1.0.0) How this is checked: an AuthorityToken should never leave
-   the Effect it was initially sent to, so we simply check that
-   the script address the token resides in matches the TokenName.
-   Since the TokenName was tagged upon mint with the Effect script
-   it was sent to, this is enough to prove validity.
-   In other words, check that all assets of a particular currency symbol
-   are tagged with a TokenName that matches where they live.
+  (before 1.0.0) How this is checked: an AuthorityToken should never leave
+  the Effect it was initially sent to, so we simply check that
+  the script address the token resides in matches the TokenName.
+  Since the TokenName was tagged upon mint with the Effect script
+  it was sent to, this is enough to prove validity.
+  In other words, check that all assets of a particular currency symbol
+  are tagged with a TokenName that matches where they live.
 
-   @since 1.0.0
+  @since 1.0.0
 -}
 authorityTokensValidIn :: forall (s :: S). Term s (PCurrencySymbol :--> PTxOut :--> PBool)
 authorityTokensValidIn = phoistAcyclic $
@@ -79,7 +79,7 @@ authorityTokensValidIn = phoistAcyclic $
 
 {- | Assert that a single authority token has been burned.
 
-   @since 0.2.0
+  @since 0.2.0
 -}
 singleAuthorityTokenBurned ::
     forall (keys :: KeyGuarantees) (amounts :: AmountGuarantees) (s :: S).
