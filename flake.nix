@@ -24,9 +24,11 @@
       };
     };
     plutarch = {
-      url = "github:Plutonomicon/plutarch-plutus?ref=v1.10.0";
+      url = "github:Plutonomicon/plutarch-plutus?ref=v1.10.1";
       flake = false;
     };
+    cardano-haskell-packages.url = "github:input-output-hk/cardano-haskell-packages?ref=repo";
+    cardano-haskell-packages.flake = false;
   };
   outputs =
     inputs:
@@ -40,6 +42,7 @@
 
           ./nix/latex
           ./nix/mdbook
+          ./nix/agora-drep
 
           ./specification
           ./website
@@ -67,7 +70,6 @@
             pkgs,
             lib,
             system,
-            simpleHaskellNix,
             ...
           }:
           {
@@ -81,7 +83,6 @@
                 fourmolu.enable = true;
                 latexindent.enable = true;
                 nixfmt-rfc-style.enable = true;
-                typos.enable = true;
               };
 
               settings = {
@@ -99,6 +100,7 @@
             devShells = {
               default = pkgs.mkShell {
                 shellHook = config.pre-commit.installationScript;
+                inputsFrom = [ config.devShells.agora-drep ];
 
                 nativeBuildInputs = [
                   pkgs.fd
