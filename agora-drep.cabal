@@ -123,5 +123,20 @@ test-suite agora-drep-test
     hs-source-dirs:   agora-drep-test
     main-is:          Main.hs
     build-depends:
-        base ^>=4.18.2.1,
-        agora-drep
+        , base ^>=4.18.2.1
+        , agora-drep
+        , data-default-class
+        , memory
+        , mtl
+        , QuickCheck
+        , quickcheck-instances
+        , tasty
+        , tasty-hedgehog
+        , tasty-hunit
+        , tasty-quickcheck
+        , plutus-tx
+        , plutarch
+        , plutarch-ledger-api
+        , plutus-ledger-api
+        , plutus-context-builder
+        , plutus-unit

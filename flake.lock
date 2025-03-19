@@ -651,17 +651,33 @@
     "plutarch": {
       "flake": false,
       "locked": {
-        "lastModified": 1739931369,
-        "narHash": "sha256-WSESLdKZttm2EBNv5SY6sZXT+ks87rY3y0gatf1m3Lo=",
+        "lastModified": 1740480471,
+        "narHash": "sha256-k6Sm8DqSvaRDbNsIivzbw/1JrWuiDT7xoVll9ZqGgXM=",
         "owner": "Plutonomicon",
         "repo": "plutarch-plutus",
-        "rev": "93881d63bfe02ea12329fe3d5521935bb7dce18c",
+        "rev": "7b346d00596531d3682204e226f7457d51849a21",
         "type": "github"
       },
       "original": {
         "owner": "Plutonomicon",
-        "ref": "v1.10.1",
+        "ref": "7b346d00596531d3682204e226f7457d51849a21",
         "repo": "plutarch-plutus",
+        "type": "github"
+      }
+    },
+    "plutus-test": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1742246151,
+        "narHash": "sha256-BiWgMKRZLd50TK78Tk5NZ0JmvEpg7AQr6ViUrfUkYvU=",
+        "owner": "mlabs-haskell",
+        "repo": "plutus-test",
+        "rev": "ea931c870594ee6f2b07898fab6c4f42b0993efa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mlabs-haskell",
+        "repo": "plutus-test",
         "type": "github"
       }
     },
@@ -694,6 +710,7 @@
         "hci-effects": "hci-effects",
         "nixpkgs": "nixpkgs",
         "plutarch": "plutarch",
+        "plutus-test": "plutus-test",
         "pre-commit-hooks-nix": "pre-commit-hooks-nix",
         "simpleHaskellNix": "simpleHaskellNix"
       }
