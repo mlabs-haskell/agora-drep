@@ -24,11 +24,17 @@
       };
     };
     plutarch = {
-      url = "github:Plutonomicon/plutarch-plutus?ref=v1.10.1";
+      url = "github:Plutonomicon/plutarch-plutus?ref=7b346d00596531d3682204e226f7457d51849a21";
       flake = false;
     };
-    cardano-haskell-packages.url = "github:input-output-hk/cardano-haskell-packages?ref=repo";
-    cardano-haskell-packages.flake = false;
+    plutus-test = {
+      url = "github:mlabs-haskell/plutus-test";
+      flake = false;
+    };
+    cardano-haskell-packages = {
+      url = "github:input-output-hk/cardano-haskell-packages?ref=repo";
+      flake = false;
+    };
   };
   outputs =
     inputs:
