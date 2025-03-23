@@ -54,7 +54,7 @@ import Plutarch.Prelude (
     (:-->),
  )
 import Plutarch.Repr.Data (DeriveAsDataRec (DeriveAsDataRec))
-import PlutusLedgerApi.V3 (DatumHash, ScriptHash)
+import PlutusLedgerApi.V3 (DatumHash, ScriptHash, ToData (toBuiltinData))
 
 {- | Haskell-level datum for the Proxy Validator script.
 
@@ -66,6 +66,9 @@ data ProxyDatum = ProxyDatum
     }
     deriving stock (Show, GHC.Generic)
     deriving anyclass (SOP.Generic)
+
+instance ToData ProxyDatum where
+    toBuiltinData (ProxyDatum script datum) = toBuiltinData [toBuiltinData script, toBuiltinData datum]
 
 type PProxyDatum :: S -> Type
 data PProxyDatum s = PProxyDatum

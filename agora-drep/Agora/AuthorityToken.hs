@@ -63,6 +63,7 @@ authorityTokensValidIn = phoistAcyclic $
         PValue assetMap <- pmatch $ pfromData value
         pmatch (AssocMap.plookup # authorityTokenSym # assetMap) $ \case
             PJust _tokenMap ->
+                -- TODO: This check only needs to happen for outputs, not inputs (performance)
                 pmatch credential $ \case
                     PPubKeyCredential _ ->
                         -- GATs should only be sent to Effect validators
