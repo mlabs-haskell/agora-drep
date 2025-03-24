@@ -9,9 +9,9 @@ import Agora.Drep.Test.Proxy qualified as Proxy
 
 main :: IO ()
 main = do
-    setLocaleEncoding utf8
-    defaultMain $
-        testGroup
-            "agora-drep"
-            [ Proxy.spec
-            ]
+  setLocaleEncoding utf8
+  defaultMain $
+    testGroup
+      "agora-drep"
+      [ Proxy.spec
+      ]
