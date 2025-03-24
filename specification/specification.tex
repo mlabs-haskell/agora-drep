@@ -5,6 +5,7 @@
 \usepackage{amsthm}
 \usepackage{pgfplots}
 \usepackage{tikz}\usetikzlibrary{decorations,arrows,arrows.meta,positioning}
+\usepackage{booktabs}
 \usepackage{xcolor}
 \usepackage{float}
 \usepackage{array}
@@ -130,6 +131,66 @@ Because onchain voting action is gated behind burning pGAT the effect implementa
 
 Rest  of the checks if performed by the Voting Effect validator.
 
+\subsubsection*{Interaction diagrams}
+
+\begin{figure}[H]
+  \begin{center}
+    \begin{tikzpicture}
+      \node[shape=rectangle,fill=orange!30](tx) {Execution Tx};
+      \node[shape=rectangle,fill=blue!30,left=of tx](p1) {
+        \begin{tabular}{l}
+          Proposal UTxO \\ \toprule
+          \verb|status| = \verb|Locked|
+        \end{tabular}
+      };
+      \node[shape=rectangle,fill=blue!30,below right=of tx](p2){
+        \begin{tabular}{l}
+          Proposal UTxO \\ \toprule
+          \verb|status| = \verb|Finished|
+        \end{tabular}
+      };
+      \node[shape=rectangle,fill=purple!30,above right=of tx](gat){
+        \begin{tabular}{l}
+          Proxy UTxO                   \\ \toprule
+          1 GAT V2                     \\
+          \verb|receiverScript| = $rs$ \\
+          \verb|datumHash| = $dh$
+        \end{tabular}
+      };
+      \draw[->] (p1) -- (tx);
+      \draw[->] (tx) -- (p2);
+      \draw[->] (tx) -- (gat);
+    \end{tikzpicture}
+  \end{center}
+  \caption[]{Minting V2 GAT}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \begin{tikzpicture}
+      \node[shape=rectangle,fill=orange!30](tx) {Proxy Tx};
+      \node[shape=rectangle,fill=purple!30,left=of tx](gat1) {
+        \begin{tabular}{l}
+          Proxy UTxO                   \\ \toprule
+          1 GAT V2                     \\
+          \verb|receiverScript| = $rs$ \\
+          \verb|datumHash| = $dh$
+        \end{tabular}
+      };
+      \node[shape=rectangle,fill=olive!30,right=of tx](gat2){
+        \begin{tabular}{l}
+          $rs$ UTxO \\ \toprule
+          1 GAT V3  \\
+          $dh$
+        \end{tabular}
+      };
+      \draw[->] (gat1) -- (tx);
+      \draw[->] (tx) -- (gat2);
+    \end{tikzpicture}
+  \end{center}
+  \caption[]{GAT Upgrade to V3}
+\end{figure}
+
 \subsection{Voting Effect Validator}
 
 The Voting Effect validator will utilise the above established Proxy Minting Validator, minting a Proxy Governance Authority Token (pGAT).
@@ -144,12 +205,12 @@ In order to vote on a Cardano Governance Action using this effect the following 
 
 The effect transaction will burn exactly one pGAT, and at the same time place a vote to the governance action defined in the datum.
 
-\subsection*{DRep registration}
+\subsubsection*{DRep registration}
 
 Registering the Voting Effect validator is a one time action, that has to be done after deployment of the protocol.
 The validator script will allow DRep registration unconditionally, but DRep update will be prohibited.
 
-\subsection*{Data Types}
+\subsubsection*{Data Types}
 
 \begin{lstlisting}[language=Haskell]
 data Datum = Datum
@@ -158,7 +219,7 @@ data Datum = Datum
   }
 \end{lstlisting}
 
-\subsection*{Spending Conditions}
+\subsubsection*{Spending Conditions}
 
 \begin{itemize}
   \item Transaction burns exactly 1 pGAT (symbol is known from script parameter), and doesn't mint anything
@@ -182,6 +243,73 @@ data Datum = Datum
   \item \verb|ScriptContext| does not contain proposal procedures
   \item \verb|ScriptContext| does not contain treasury donations
 \end{itemize}
+
+\subsubsection*{Interaction Diagrams}
+
+\begin{figure}[H]
+  \begin{center}
+    \begin{tikzpicture}
+      \node[shape=rectangle,fill=orange!30](tx) {Voting Tx};
+      \node[shape=rectangle,fill=olive!30,left=of tx](gat1){
+        \begin{tabular}{l}
+          Voting UTxO               \\ \toprule
+          1 GAT V3                  \\
+          \verb|governanceActionId| \\
+          \verb|vote|
+        \end{tabular}
+      };
+      \draw[->] (gat1) -- (tx);
+    \end{tikzpicture}
+  \end{center}
+  \caption[]{Voting}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \begin{tikzpicture}
+      \node[shape=rectangle,fill=orange!30](tx1) {Execution Tx};
+      \node[shape=rectangle,fill=blue!30,above=of tx](p1) {
+        \begin{tabular}{l}
+          Proposal UTxO \\ \toprule
+          \verb|status| = \verb|Locked|
+        \end{tabular}
+      };
+      \node[shape=rectangle,fill=blue!30,below left=of tx](p2){
+        \begin{tabular}{l}
+          Proposal UTxO \\ \toprule
+          \verb|status| = \verb|Finished|
+        \end{tabular}
+      };
+      \node[shape=rectangle,fill=purple!30,below right=of tx](gat1){
+        \begin{tabular}{l}
+          Proxy UTxO                     \\ \toprule
+          1 GAT V2                       \\
+          \verb|receiverScript| = Voting \\
+          \verb|datumHash| = $hash(\verb|governanceActionId, vote|)$
+        \end{tabular}
+      };
+      \draw[->] (p1) -- (tx1);
+      \draw[->] (tx1) -- (p2);
+      \draw[->] (tx1) -- (gat1);
+
+      \node[shape=rectangle,fill=orange!30,below=of gat1](tx2) {Proxy Tx};
+      \node[shape=rectangle,fill=olive!30,below=of tx2](gat2){
+        \begin{tabular}{l}
+          Voting UTxO               \\ \toprule
+          1 GAT V3                  \\
+          \verb|governanceActionId| \\
+          \verb|vote|
+        \end{tabular}
+      };
+      \draw[->] (gat1) -- (tx2);
+      \draw[->] (tx2) -- (gat2);
+
+      \node[shape=rectangle,fill=orange!30,below=of gat2](tx3) {Voting Tx};
+      \draw[->] (gat2) -- (tx3);
+    \end{tikzpicture}
+  \end{center}
+  \caption[]{Full Workflow}
+\end{figure}
 
 \section{Data Encoding}
 
@@ -208,5 +336,56 @@ Note that the following encodings can be achieved automatically using Plutarch's
   \item Record with \verb|DeriveAsDataRec| for \verb|PlutusType| and \allowbreak \verb|DeriveDataPLiftable| for \verb|PLiftable|
   \item Generic SoP encoding can be derived with \verb|DeriveAsDataStruct| for \verb|PlutusType| and \verb|DeriveDataPLiftable| for \verb|PLiftable|
 \end{itemize}
+
+\section{Estimate}
+
+\begin{itemize}
+  \item Milestone 1 (Spec): 199 hours
+        \begin{itemize}
+          \item 75 h - Research spending, minting, and voting conditions
+          \item 62 h - Draft specifications for each validator
+          \item 62 h - Create a detailed LaTeX document for the conditions
+        \end{itemize}
+
+  \item Milestone 2 (Proxy Implementation): 182 hours
+        \begin{itemize}
+          \item 62 h - Develop the proxy spending validator using Plutarch
+          \item 62 h - Implement the V3 minting policy
+          \item 58 h - Set up a GitHub repository for the project
+        \end{itemize}
+
+  \item Milestone 3 (Spending/Voting Implementation): 182 hours
+        \begin{itemize}
+          \item 68 h - Create a comprehensive test suite for the proxy validator
+          \item 54 h - Conduct code reviews
+          \item 46 h - Validate the implementation using test cases
+          \item 14 h - Document results in a test report
+        \end{itemize}
+
+  \item Milestone 4 (Off-chain \& Frontend Integration): 234 hours
+        \begin{itemize}
+          \item 89 h - Develop the spending effect validators in Plutarch
+          \item 74 h - Write test cases for the spending validators
+          \item 57 h - Review and validate the code with tests
+          \item 14 h - Upload the code to GitHub
+        \end{itemize}
+
+  \item Milestone 5 (Documentation): 234 hours
+        \begin{itemize}
+          \item 90 h - Develop the voting effect validators in Plutarch
+          \item 58 h - Write and execute test cases for voting validators
+          \item 58 h - Conduct final code reviews and validation
+          \item 28 h - Ensure documentation and upload the code to GitHub
+        \end{itemize}
+
+  \item Milestone Final (End-to-End Testing): 300 hours
+        \begin{itemize}
+          \item 101 h - Develop off-chain components for clarity.vote integration
+          \item 71 h - Implement frontend interface for proposals and voting
+          \item 71 h - Create API documentation and tutorial guides
+          \item 57 h - Test on Testnet and prepare a closeout report with a demo video
+        \end{itemize}
+\end{itemize}
+Total: 1331 h
 
 \end{document}

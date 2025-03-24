@@ -5,36 +5,36 @@ import Agora.Utils (psymbolValueOf)
 import Plutarch.Builtin.Bool (PBool)
 import Plutarch.LedgerApi.AssocMap qualified as AssocMap
 import Plutarch.LedgerApi.V3 (
-    AmountGuarantees,
-    KeyGuarantees,
-    PAddress (PAddress),
-    PCredential (PPubKeyCredential, PScriptCredential),
-    PCurrencySymbol,
-    PTxInInfo (PTxInInfo),
-    PTxOut (PTxOut),
-    PValue (PValue),
+  AmountGuarantees,
+  KeyGuarantees,
+  PAddress (PAddress),
+  PCredential (PPubKeyCredential, PScriptCredential),
+  PCurrencySymbol,
+  PTxInInfo (PTxInInfo),
+  PTxOut (PTxOut),
+  PValue (PValue),
  )
 import Plutarch.Monadic qualified as P
 import Plutarch.Prelude (
-    PBool (PTrue),
-    PBuiltinList,
-    PEq ((#==)),
-    PInteger,
-    PMaybe (PJust, PNothing),
-    S,
-    Term,
-    pcon,
-    pconstant,
-    pfoldr,
-    pfromData,
-    phoistAcyclic,
-    pif,
-    plam,
-    pmatch,
-    ptraceInfoIfFalse,
-    (#),
-    (#&&),
-    (:-->),
+  PBool (PTrue),
+  PBuiltinList,
+  PEq ((#==)),
+  PInteger,
+  PMaybe (PJust, PNothing),
+  S,
+  Term,
+  pcon,
+  pconstant,
+  pfoldr,
+  pfromData,
+  phoistAcyclic,
+  pif,
+  plam,
+  pmatch,
+  ptraceInfoIfFalse,
+  (#),
+  (#&&),
+  (:-->),
  )
 
 {- | Check that all GATs are valid in a particular TxOut.
@@ -57,61 +57,62 @@ import Plutarch.Prelude (
 -}
 authorityTokensValidIn :: forall (s :: S). Term s (PCurrencySymbol :--> PTxOut :--> PBool)
 authorityTokensValidIn = phoistAcyclic $
-    plam $ \authorityTokenSym txOut -> P.do
-        PTxOut address value _ _ <- pmatch txOut
-        PAddress credential _ <- pmatch address
-        PValue assetMap <- pmatch $ pfromData value
-        pmatch (AssocMap.plookup # authorityTokenSym # assetMap) $ \case
-            PJust _tokenMap ->
-                pmatch credential $ \case
-                    PPubKeyCredential _ ->
-                        -- GATs should only be sent to Effect validators
-                        ptraceInfoIfFalse "authorityTokensValidIn: GAT incorrectly lives at PubKey" $ pconstant False
-                    PScriptCredential _ ->
-                        -- NOTE: We no longer can perform a check on `TokenName` content here.
-                        -- Instead, the auth check system uses `TokenName`s, but it cannot
-                        -- check for GATs incorrectly escaping scripts. The effect scripts
-                        -- need to be written very carefully in order to disallow this.
-                        pcon PTrue
-            PNothing ->
-                -- No GATs exist at this output!
-                pcon PTrue
+  plam $ \authorityTokenSym txOut -> P.do
+    PTxOut address value _ _ <- pmatch txOut
+    PAddress credential _ <- pmatch address
+    PValue assetMap <- pmatch $ pfromData value
+    pmatch (AssocMap.plookup # authorityTokenSym # assetMap) $ \case
+      PJust _tokenMap ->
+        -- TODO: This check only needs to happen for outputs, not inputs (performance)
+        pmatch credential $ \case
+          PPubKeyCredential _ ->
+            -- GATs should only be sent to Effect validators
+            ptraceInfoIfFalse "authorityTokensValidIn: GAT incorrectly lives at PubKey" $ pconstant False
+          PScriptCredential _ ->
+            -- NOTE: We no longer can perform a check on `TokenName` content here.
+            -- Instead, the auth check system uses `TokenName`s, but it cannot
+            -- check for GATs incorrectly escaping scripts. The effect scripts
+            -- need to be written very carefully in order to disallow this.
+            pcon PTrue
+      PNothing ->
+        -- No GATs exist at this output!
+        pcon PTrue
 
 {- | Assert that a single authority token has been burned.
 
   @since 0.2.0
 -}
 singleAuthorityTokenBurned ::
-    forall (keys :: KeyGuarantees) (amounts :: AmountGuarantees) (s :: S).
-    Term s PCurrencySymbol ->
-    Term s (PBuiltinList PTxInInfo) ->
-    Term s (PValue keys amounts) ->
-    Term s PBool
+  forall (keys :: KeyGuarantees) (amounts :: AmountGuarantees) (s :: S).
+  Term s PCurrencySymbol ->
+  Term s (PBuiltinList PTxInInfo) ->
+  Term s (PValue keys amounts) ->
+  Term s PBool
 singleAuthorityTokenBurned gatCs inputs mint = P.do
-    let gatAmountMinted :: Term _ PInteger
-        gatAmountMinted = psymbolValueOf # gatCs # mint
+  let gatAmountMinted :: Term _ PInteger
+      gatAmountMinted = psymbolValueOf # gatCs # mint
 
-    let inputsWithGAT =
-            pfoldr
-                # plam
-                    ( \input v -> pmatch input $ \case
-                        PTxInInfo _txOutRef resolved ->
-                            pif
-                                (authorityTokensValidIn # gatCs # resolved)
-                                ( P.do
-                                    PTxOut _ value _ _ <- pmatch resolved
+  let inputsWithGAT =
+        pfoldr
+          # plam
+            ( \input v -> pmatch input $ \case
+                PTxInInfo _txOutRef resolved ->
+                  pif
+                    (authorityTokensValidIn # gatCs # resolved)
+                    ( P.do
+                        PTxOut _ value _ _ <- pmatch resolved
 
-                                    v + (psymbolValueOf # gatCs # pfromData value)
-                                )
-                                (P.fail "While counting GATs at inputs: all GATs must be valid")
+                        v + (psymbolValueOf # gatCs # pfromData value)
                     )
-                # 0
-                # inputs
+                    (P.fail "While counting GATs at inputs: all GATs must be valid")
+            )
+          # 0
+          # inputs
 
-    foldr1
-        (#&&)
-        [ ptraceInfoIfFalse "singleAuthorityTokenBurned: Must burn exactly 1 GAT" $
-            gatAmountMinted #== -1
-        , ptraceInfoIfFalse "Only one GAT must exist at the inputs" $
-            inputsWithGAT #== 1
-        ]
+  foldr1
+    (#&&)
+    [ ptraceInfoIfFalse "singleAuthorityTokenBurned: Must burn exactly 1 GAT" $
+        gatAmountMinted #== -1
+    , ptraceInfoIfFalse "Only one GAT must exist at the inputs" $
+        inputsWithGAT #== 1
+    ]
