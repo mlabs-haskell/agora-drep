@@ -87,6 +87,7 @@
             pre-commit.settings = {
               hooks = {
                 fourmolu.enable = true;
+                cabal-fmt.enable = true;
                 latexindent.enable = true;
                 nixfmt-rfc-style.enable = true;
               };
