@@ -67,6 +67,23 @@
         "type": "github"
       }
     },
+    "cardano-haskell-packages": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1741834602,
+        "narHash": "sha256-10IY32W6tX83sajGviI5VPUbbeTSaIdLfH8V2/6Cj5M=",
+        "owner": "input-output-hk",
+        "repo": "cardano-haskell-packages",
+        "rev": "c715830d75ee968e373fc1b95145ad27108ff935",
+        "type": "github"
+      },
+      "original": {
+        "owner": "input-output-hk",
+        "ref": "repo",
+        "repo": "cardano-haskell-packages",
+        "type": "github"
+      }
+    },
     "cardano-shell": {
       "flake": false,
       "locked": {
@@ -634,16 +651,16 @@
     "plutarch": {
       "flake": false,
       "locked": {
-        "lastModified": 1738185013,
-        "narHash": "sha256-lU2JF9KYvzEPfVLHdLkrM1hTTuc9NYi2hQPFnLDm2d8=",
+        "lastModified": 1739931369,
+        "narHash": "sha256-WSESLdKZttm2EBNv5SY6sZXT+ks87rY3y0gatf1m3Lo=",
         "owner": "Plutonomicon",
         "repo": "plutarch-plutus",
-        "rev": "fd7d1c1fc173542f952f19272554027183659dd6",
+        "rev": "93881d63bfe02ea12329fe3d5521935bb7dce18c",
         "type": "github"
       },
       "original": {
         "owner": "Plutonomicon",
-        "ref": "v1.10.0",
+        "ref": "v1.10.1",
         "repo": "plutarch-plutus",
         "type": "github"
       }
@@ -672,6 +689,7 @@
     },
     "root": {
       "inputs": {
+        "cardano-haskell-packages": "cardano-haskell-packages",
         "flake-parts": "flake-parts",
         "hci-effects": "hci-effects",
         "nixpkgs": "nixpkgs",
