@@ -27,10 +27,12 @@
       url = "github:Plutonomicon/plutarch-plutus?ref=7b346d00596531d3682204e226f7457d51849a21";
       flake = false;
     };
-    cardano-haskell-packages.url = "github:input-output-hk/cardano-haskell-packages?ref=repo";
-    cardano-haskell-packages.flake = false;
     plutus-test = {
       url = "github:mlabs-haskell/plutus-test/szg251/fix";
+      flake = false;
+    };
+    cardano-haskell-packages = {
+      url = "github:input-output-hk/cardano-haskell-packages?ref=repo";
       flake = false;
     };
   };
@@ -85,6 +87,7 @@
             pre-commit.settings = {
               hooks = {
                 fourmolu.enable = true;
+                cabal-fmt.enable = true;
                 latexindent.enable = true;
                 nixfmt-rfc-style.enable = true;
               };

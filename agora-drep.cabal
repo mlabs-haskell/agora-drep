@@ -1,15 +1,18 @@
-cabal-version:      3.0
-name:               agora-drep
-version:            0.1.0.0
+cabal-version:   3.0
+name:            agora-drep
+version:         0.1.0.0
+
 -- synopsis:
 -- description:
-license:            Apache-2.0
-license-file:       LICENSE
-author:             Szabo Gergely
-maintainer:         gergely@mlabs.city
+license:         Apache-2.0
+license-file:    LICENSE
+author:          Szabo Gergely
+maintainer:      gergely@mlabs.city
+
 -- copyright:
-build-type:         Simple
-extra-doc-files:    CHANGELOG.md
+build-type:      Simple
+extra-doc-files: CHANGELOG.md
+
 -- extra-source-files:
 
 common lang
@@ -85,64 +88,68 @@ common lang
   build-depends:      base >=4.14 && <5
 
 library
-    import:           lang
-    exposed-modules:
-        Agora.Proxy
-        Agora.AuthorityToken
-        Agora.Utils
-    -- other-modules:
-    -- other-extensions:
-    build-depends:
-        , base ^>=4.18.2.1
-        , plutarch
-        , plutarch-ledger-api
-        , plutus-ledger-api
-        , plutus-tx
-        , generics-sop
-    hs-source-dirs:   agora-drep
-    default-language: Haskell2010
+  import:           lang
+  exposed-modules:
+    Agora.AuthorityToken
+    Agora.Proxy
+    Agora.Utils
+
+  -- other-modules:
+  -- other-extensions:
+  build-depends:
+    , base                 ^>=4.18.2.1
+    , generics-sop
+    , plutarch
+    , plutarch-ledger-api
+    , plutus-ledger-api
+    , plutus-tx
+
+  hs-source-dirs:   agora-drep
+  default-language: Haskell2010
 
 executable agora-drep
-    import:           lang
-    main-is:          Main.hs
-    -- other-modules:
-    -- other-extensions:
-    build-depends:
-        base ^>=4.18.2.1,
-        agora-drep
+  import:           lang
+  main-is:          Main.hs
 
-    hs-source-dirs:   agora-drep-script-export
-    default-language: Haskell2010
+  -- other-modules:
+  -- other-extensions:
+  build-depends:
+    , agora-drep
+    , base        ^>=4.18.2.1
+
+  hs-source-dirs:   agora-drep-script-export
+  default-language: Haskell2010
 
 test-suite agora-drep-test
-    import:           lang
-    default-language: Haskell2010
-    other-modules:
-        Spec.Proxy
-        Spec.Proxy.Context
-    -- other-extensions:
-    type:             exitcode-stdio-1.0
-    hs-source-dirs:   agora-drep-test
-    main-is:          Main.hs
-    build-depends:
-        , base ^>=4.18.2.1
-        , agora-drep
-        , bytestring
-        , cryptonite
-        , data-default-class
-        , memory
-        , mtl
-        , QuickCheck
-        , quickcheck-instances
-        , tasty
-        , tasty-hedgehog
-        , tasty-hunit
-        , tasty-quickcheck
-        , text
-        , plutus-tx
-        , plutarch
-        , plutarch-ledger-api
-        , plutus-ledger-api
-        , plutus-context-builder
-        , plutus-unit
-        , plutus-core
+  import:           lang
+  default-language: Haskell2010
+  other-modules:
+    Spec.Proxy
+    Spec.Proxy.Context
+
+  -- other-extensions:
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   agora-drep-test
+  main-is:          Main.hs
+  build-depends:
+    , agora-drep
+    , base                    ^>=4.18.2.1
+    , bytestring
+    , cryptonite
+    , data-default-class
+    , memory
+    , mtl
+    , plutarch
+    , plutarch-ledger-api
+    , plutus-context-builder
+    , plutus-core
+    , plutus-ledger-api
+    , plutus-tx
+    , plutus-unit
+    , QuickCheck
+    , quickcheck-instances
+    , tasty
+    , tasty-hedgehog
+    , tasty-hunit
+    , tasty-quickcheck
+    , text
