@@ -117,7 +117,9 @@ executable agora-drep
 test-suite agora-drep-test
     import:           lang
     default-language: Haskell2010
-    -- other-modules:
+    other-modules:
+        Spec.Proxy
+        Spec.Proxy.Context
     -- other-extensions:
     type:             exitcode-stdio-1.0
     hs-source-dirs:   agora-drep-test
@@ -125,6 +127,8 @@ test-suite agora-drep-test
     build-depends:
         , base ^>=4.18.2.1
         , agora-drep
+        , bytestring
+        , cryptonite
         , data-default-class
         , memory
         , mtl
@@ -134,9 +138,11 @@ test-suite agora-drep-test
         , tasty-hedgehog
         , tasty-hunit
         , tasty-quickcheck
+        , text
         , plutus-tx
         , plutarch
         , plutarch-ledger-api
         , plutus-ledger-api
         , plutus-context-builder
         , plutus-unit
+        , plutus-core

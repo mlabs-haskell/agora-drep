@@ -26,6 +26,7 @@ import Plutarch.LedgerApi.V3 (
     PTxOut (PTxOut),
     PValue (PValue),
  )
+import Plutarch.LedgerApi.Value (padaSymbol)
 import Plutarch.Monadic qualified as P
 import Plutarch.Prelude (
     ClosedTerm,
@@ -46,12 +47,13 @@ import Plutarch.Prelude (
     pfilter,
     pfoldr,
     pfromData,
+    pfstBuiltin,
     pif,
     plam,
     plength,
     pmap,
     pmatch,
-    ptraceInfo,
+    pnot,
     ptraceInfoIfFalse,
     ptryFrom,
     tcont,
@@ -62,18 +64,45 @@ import Plutarch.Prelude (
     (:-->),
  )
 import Plutarch.Repr.Data (DeriveAsDataRec (DeriveAsDataRec))
-import PlutusLedgerApi.V3 (DatumHash, ScriptHash)
+import PlutusLedgerApi.V3 (DatumHash, FromData (fromBuiltinData), ScriptHash, toBuiltin, toData)
+import PlutusTx (ToData (toBuiltinData))
+import PlutusTx qualified
+import PlutusTx.Builtins (chooseData, unsafeDataAsList)
 
 {- | Haskell-level datum for the Proxy Validator script.
 
-  @since 0.1.0
+ @since 0.1.0
 -}
 data ProxyDatum = ProxyDatum
-    { receiverScript :: ScriptHash
-    , datumHash :: DatumHash
+    { pdReceiverScript :: ScriptHash
+    , pdDatumHash :: DatumHash
     }
     deriving stock (Show, GHC.Generic)
     deriving anyclass (SOP.Generic)
+
+instance PlutusTx.FromData ProxyDatum where
+    {-# INLINEABLE fromBuiltinData #-}
+    fromBuiltinData d =
+        chooseData
+            d
+            (const Nothing)
+            (const Nothing)
+            ( \d' ->
+                case unsafeDataAsList d' of
+                    [receiverScript, datumHash] ->
+                        ProxyDatum
+                            <$> fromBuiltinData receiverScript
+                            <*> fromBuiltinData datumHash
+                    _ -> Nothing
+            )
+            (const Nothing)
+            (const Nothing)
+            d
+
+instance PlutusTx.ToData ProxyDatum where
+    {-# INLINEABLE toBuiltinData #-}
+    toBuiltinData (ProxyDatum receiverScript datumHash) =
+        toBuiltin $ PlutusTx.List [toData receiverScript, toData datumHash]
 
 type PProxyDatum :: S -> Type
 data PProxyDatum s = PProxyDatum
@@ -139,7 +168,7 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                     -- receiverScript with empty staking part and reference datum
                     -- with hash equal to datumHash.
                     let singleOutputWithDatum =
-                            ptraceInfoIfFalse "Exactly one output at the receiver script address should exist with datum hash defined." $
+                            ptraceInfoIfFalse "Exactly one output at the receiver script address should exist with datum hash defined in ProxyDatum." $
                                 outputsAtReceiver #== 1
 
                     -- Filtering inputs to later verify that only one script input exists in the transaction
@@ -183,6 +212,11 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                     PValue mintAssetMap <- pmatch mint
                     PMap mintAssetList <- pmatch mintAssetMap
 
+                    let tokenMint =
+                            pfilter
+                                # plam (\mint -> pnot #$ padaSymbol #== pfromData (pfstBuiltin # mint))
+                                # mintAssetList
+
                     -- Spending condition 4: Transaction does not mint or burn any tokens other than V2 and V3 GATs.
                     let singleGat3Minted =
                             ptraceInfoIfFalse "Transaction must mint a single V3 Authority token (GAT)" $
@@ -192,7 +226,7 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                     -- there should be exactly two currency symbols in the value
                     let onlyGatsMinted =
                             ptraceInfoIfFalse "Transaction must not mint or burn anything else than GAT tokens" $
-                                (plength # mintAssetList) #== 2
+                                (plength # tokenMint) #== 2
 
                     -- Spending condition 5: Transaction does not include any certificates
                     let noCertsIncluded =
@@ -202,17 +236,16 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                     -- Spending condition 6: Transaction does not include script inputs other than own input.
                     let singleScriptInput = ptraceInfoIfFalse "Transaction must not include script inputs other than own input." $ (plength # inputsWithScript) #== 1
 
-                    ptraceInfoIfFalse "[ProxyValidator spending]" $
-                        foldr1
-                            (#&&)
-                            [ singleAuthTokenBurned
-                            , singleOutputWithDatum
-                            , noCertsIncluded
-                            , singleScriptInput
-                            , singleGat3Minted
-                            , onlyGatsMinted
-                            ]
+                    foldr1
+                        (#&&)
+                        [ singleAuthTokenBurned
+                        , singleOutputWithDatum
+                        , noCertsIncluded
+                        , singleScriptInput
+                        , singleGat3Minted
+                        , onlyGatsMinted
+                        ]
                 PMintingScript _ -> pcon PFalse
                 _ -> pcon PFalse
 
-    pif valid (pcon PUnit) (ptraceInfo "[ProxyValidator] Validation failed" perror)
+    pif valid (pcon PUnit) perror

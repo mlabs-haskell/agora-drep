@@ -30,7 +30,7 @@
     cardano-haskell-packages.url = "github:input-output-hk/cardano-haskell-packages?ref=repo";
     cardano-haskell-packages.flake = false;
     plutus-test = {
-      url = "github:mlabs-haskell/plutus-test";
+      url = "github:mlabs-haskell/plutus-test/szg251/fix";
       flake = false;
     };
   };
