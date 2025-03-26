@@ -3,7 +3,7 @@ module Spec.Proxy (spec) where
 import Agora.Proxy (proxyScript)
 import Data.Text qualified as Text
 import Plutarch.Internal.Term qualified as Term
-import Spec.Proxy.Context (contextSpec)
+import Spec.Proxy.Context (mintingContextSpec, spendingContextSpec)
 import Test.Tasty (TestTree, adjustOption, testGroup)
 import Test.Tasty.QuickCheck (QuickCheckTests)
 
@@ -12,7 +12,8 @@ spec =
   adjustOption extraOptions $
     testGroup
       "Proxy Spending Validator"
-      [ contextSpec script
+      [ spendingContextSpec script
+      , mintingContextSpec script
       ]
   where
     script =

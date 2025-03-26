@@ -1,4 +1,4 @@
-module Spec.Proxy.Context (contextSpec) where
+module Spec.Proxy.Context (spendingContextSpec, mintingContextSpec) where
 
 import Agora.Proxy (ProxyDatum (ProxyDatum, pdDatumHash, pdReceiverScript))
 import Crypto.Hash (
@@ -14,6 +14,7 @@ import Plutarch.Script (Script (Script), unScript)
 import Plutarch.Test.Program (ScriptCase (ScriptCase), ScriptResult (ScriptFailure, ScriptSuccess), testScript)
 import Plutus.ContextBuilder (
   UTXO,
+  buildMinting',
   buildSpending',
   input,
   mint,
@@ -22,6 +23,7 @@ import Plutus.ContextBuilder (
   withCredential,
   withHashDatum,
   withInlineDatum,
+  withMinting,
   withSpendingUTXO,
   withValue,
  )
@@ -50,36 +52,56 @@ data TestConfig = TestConfig
   , ownScript :: Script
   }
 
--- | Unit tests
-contextSpec :: Script -> TestTree
-contextSpec gat3Script =
+testConfigFromScript :: Script -> TestConfig
+testConfigFromScript gat3Script =
   let gat3ScriptHash = scriptHash gat3Script
       ScriptHash scriptHashBS = gat3ScriptHash
-      config =
-        TestConfig
-          { gat3Credential = ScriptCredential gat3ScriptHash
-          , gat3CurSym = CurrencySymbol scriptHashBS
-          , ownScript = gat3Script
-          }
-      mkTest' = mkTest config
-   in testGroup
-        "Context tests"
-        [ mkTest' "OK case: Valid GAT3 mint" validGAT3Mint ScriptSuccess
-        , mkTest' "Fail case: Missing GAT v2 burn" missingGat2Burn ScriptFailure
-        , mkTest' "Fail case: Missing GAT v2 token from spent UTxO" missingGat2FromUtxo ScriptFailure
-        , mkTest' "Fail case: Minting more than one GAT v3" mintMoreThan1Gat3 ScriptFailure
-        , mkTest' "Fail case: Missing GAT v3 token from spent UTxO" missingGat2FromUtxo ScriptFailure
-        , mkTest' "Fail case: Missing output at receiver address" missingReceiverOutput ScriptFailure
-        , mkTest' "Fail case: Invalid datum in receiver UTxO" invalidGAT3Datum ScriptFailure
-        , mkTest' "Fail case: Mint unknown token alongside GATs" mint3rdToken ScriptFailure
-        , mkTest' "Fail case: Transaction includes certificates" includesCerts ScriptFailure
-        , mkTest' "Fail case: Transaction includes script input other than own input" includesOtherScripts ScriptFailure
-        ]
+   in TestConfig
+        { gat3Credential = ScriptCredential gat3ScriptHash
+        , gat3CurSym = CurrencySymbol scriptHashBS
+        , ownScript = gat3Script
+        }
+
+-- | Unit tests
+spendingContextSpec :: Script -> TestTree
+spendingContextSpec gat3Script =
+  let
+    config = testConfigFromScript gat3Script
+    mkTest' = mkTest config
+   in
+    testGroup
+      "Context tests"
+      [ mkTest' "OK case: Valid GAT2 spend" validGAT2Spend ScriptSuccess
+      , mkTest' "Fail case: Missing GAT v2 burn" missingGat2Burn ScriptFailure
+      , mkTest' "Fail case: Missing GAT v2 token from spent UTxO" missingGat2FromUtxo ScriptFailure
+      , mkTest' "Fail case: Minting more than one GAT v3" mintMoreThan1Gat3 ScriptFailure
+      , mkTest' "Fail case: Missing GAT v3 token from spent UTxO" missingGat2FromUtxo ScriptFailure
+      , mkTest' "Fail case: Missing output at receiver address" missingReceiverOutput ScriptFailure
+      , mkTest' "Fail case: Invalid datum in receiver UTxO" invalidGAT3Datum ScriptFailure
+      , mkTest' "Fail case: Mint unknown token alongside GATs" mint3rdToken ScriptFailure
+      , mkTest' "Fail case: Transaction includes certificates" includesCerts ScriptFailure
+      , mkTest' "Fail case: Transaction includes script input other than own input" includesOtherScripts ScriptFailure
+      ]
+
+-- | Unit tests
+mintingContextSpec :: Script -> TestTree
+mintingContextSpec gat3Script =
+  let
+    config = testConfigFromScript gat3Script
+    mkTest' = mkTest config
+   in
+    testGroup
+      "Context tests"
+      [ mkTest' "OK case: Valid GAT3 mint" validGAT3Mint ScriptSuccess
+      , mkTest' "Fail case: Minting more than one GAT v3" mintMoreThan1Gat3' ScriptFailure
+      , mkTest' "Fail case: GAT v3 multiple tokens with different token names" multipleTokenNames ScriptFailure
+      , mkTest' "Fail case: GAT v3 token name not empty" nonEmptyTokenName ScriptFailure
+      ]
 
 -- * ScriptContexts for the test cases
 
-validGAT3Mint :: TestConfig -> ScriptContext
-validGAT3Mint config =
+validGAT2Spend :: TestConfig -> ScriptContext
+validGAT2Spend config =
   buildSpending' $
     mconcat
       [ withSpendingUTXO (gat2Utxo config)
@@ -180,6 +202,43 @@ includesOtherScripts config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
       ]
 
+validGAT3Mint :: TestConfig -> ScriptContext
+validGAT3Mint config =
+  buildMinting' $
+    mconcat
+      [ withMinting (gat3CurSym config)
+      , input (gat2Utxo config)
+      , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
+      ]
+
+mintMoreThan1Gat3' :: TestConfig -> ScriptContext
+mintMoreThan1Gat3' config =
+  buildMinting' $
+    mconcat
+      [ withMinting (gat3CurSym config)
+      , input (gat2Utxo config)
+      , mint (Value.singleton (gat3CurSym config) (TokenName "") 2)
+      ]
+
+multipleTokenNames :: TestConfig -> ScriptContext
+multipleTokenNames config =
+  buildMinting' $
+    mconcat
+      [ withMinting (gat3CurSym config)
+      , input (gat2Utxo config)
+      , mint (Value.singleton (gat3CurSym config) (TokenName "oo-wee") 1)
+      , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
+      ]
+
+nonEmptyTokenName :: TestConfig -> ScriptContext
+nonEmptyTokenName config =
+  buildMinting' $
+    mconcat
+      [ withMinting (gat3CurSym config)
+      , input (gat2Utxo config)
+      , mint (Value.singleton (gat3CurSym config) (TokenName "oo-wee") 1)
+      ]
+
 -- * Building blocks for the test ScriptContexts
 
 -- | Hash of the receiver script of the GAT v3 token
@@ -238,7 +297,8 @@ invalidGat3Utxo config =
 mkTest :: TestConfig -> String -> (TestConfig -> ScriptContext) -> ScriptResult -> TestTree
 mkTest config testName toContext expectedResult =
   let script = ownScript config
-      Script applied = uncheckedApplyDataToScript (toContext config) $ uncheckedApplyDataToScript gat2CurSym script
+      context = toContext config
+      Script applied = uncheckedApplyDataToScript (context) $ uncheckedApplyDataToScript gat2CurSym script
    in testScript $ ScriptCase testName expectedResult applied applied
 
 uncheckedApplyDataToScript :: (ToData argument) => argument -> Script -> Script

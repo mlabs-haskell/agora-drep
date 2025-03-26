@@ -7,6 +7,7 @@ import Data.Kind (Type)
 import GHC.Generics qualified as GHC
 import Generics.SOP qualified as SOP
 import Plutarch.Internal.Term (Term)
+import Plutarch.LedgerApi.AssocMap qualified as AssocMap
 import Plutarch.LedgerApi.Utils (pmaybeDataToMaybe, pmaybeToMaybeData)
 import Plutarch.LedgerApi.V3 (
   PAddress (PAddress),
@@ -24,7 +25,7 @@ import Plutarch.LedgerApi.V3 (
   PTxOut (PTxOut),
   PValue (PValue),
  )
-import Plutarch.LedgerApi.Value (padaSymbol)
+import Plutarch.LedgerApi.Value (padaSymbol, padaToken)
 import Plutarch.Monadic qualified as P
 import Plutarch.Prelude (
   ClosedTerm,
@@ -116,13 +117,15 @@ instance PTryFrom PData (PAsData PProxyDatum)
 proxyScript :: ClosedTerm (PAsData PCurrencySymbol :--> PAsData PScriptContext :--> PUnit)
 proxyScript = plam $ \authSymbol' ctx -> P.do
   PScriptContext txInfo _redeemer scriptInfo <- pmatch $ pfromData ctx
+
+  PTxInfo inputs' _ outputs _ mint' txCerts _ _ _ _ _ _ _ _ _ _ <- pmatch txInfo
+
+  let mint = pfromData mint'
+  let inputs = pmap # plam pfromData # pfromData inputs'
+
   let valid =
         pmatch scriptInfo $ \case
           PSpendingScript txOutRef mayDatum -> P.do
-            PTxInfo inputs' _ outputs _ mint' txCerts _ _ _ _ _ _ _ _ _ _ <- pmatch txInfo
-
-            let mint = pfromData mint'
-            let inputs = pmap # plam pfromData # pfromData inputs'
             let authSymbol = pfromData authSymbol'
 
             -- Spending Condition 1: Transaction burns one GAT (symbol is known from script parameter)
@@ -170,7 +173,7 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                     outputsAtReceiver #== 1
 
             -- Filtering inputs to later verify that only one script input exists in the transaction
-            let inputsWithScript =
+            let scriptInputs =
                   pfilter
                     # plam
                       ( \input -> pmatch input $ \case
@@ -199,7 +202,7 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                       ( \input -> pmatch input $ \case
                           PTxInInfo txOutRef' _ -> txOutRef' #== txOutRef
                       )
-                    # inputsWithScript
+                    # scriptInputs
 
             PScriptHash rawScriptHash <- pmatch ownScriptHash
 
@@ -232,7 +235,9 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                     (plength # pfromData txCerts) #== 0
 
             -- Spending condition 6: Transaction does not include script inputs other than own input.
-            let singleScriptInput = ptraceInfoIfFalse "Transaction must not include script inputs other than own input." $ (plength # inputsWithScript) #== 1
+            let singleScriptInput =
+                  ptraceInfoIfFalse "Transaction must not include script inputs other than own input." $
+                    (plength # scriptInputs) #== 1
 
             foldr1
               (#&&)
@@ -243,7 +248,49 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
               , singleGat3Minted
               , onlyGatsMinted
               ]
-          PMintingScript _ -> pcon PFalse
+          PMintingScript currencySymbol -> P.do
+            let ownCurrencySymbol = pfromData currencySymbol
+            PCurrencySymbol rawScriptHash <- pmatch ownCurrencySymbol
+            let ownScriptHash = pcon $ PScriptHash rawScriptHash
+
+            -- let own = pfilterScriptInputs # inputs
+            let proxyValidatorInputs =
+                  pfilter
+                    # plam
+                      ( \input -> pmatch input $ \case
+                          PTxInInfo _ resolved -> P.do
+                            PTxOut addr _ _ _ <- pmatch resolved
+                            PAddress cred _ <- pmatch addr
+                            pmatch cred $ \case
+                              PScriptCredential scriptHash ->
+                                pfromData scriptHash #== ownScriptHash
+                              _ -> pcon PFalse
+                      )
+                    # inputs
+
+            -- Spending Condition 1: Transaction contains an input from Proxy Spending Validator.
+            let hasProxyValidatorInput =
+                  ptraceInfoIfFalse "Transaction must contain an input from Proxy Validator." $
+                    (plength # proxyValidatorInputs) #== 1
+
+            PValue mintAssetMap <- pmatch mint
+
+            PJust assets <- pmatch $ AssocMap.plookup # ownCurrencySymbol # mintAssetMap
+            PJust mintedGAT3 <- pmatch $ AssocMap.plookup # padaToken # assets
+
+            PMap assetList <- pmatch assets
+
+            -- Spending Condition 2: Transaction mints only one token with currency symbol equal to own hash.
+            -- Spending Condition 3: Minted token has empty token name.
+            let singleGat3Minted =
+                  ptraceInfoIfFalse "Transaction must mint a single V3 Authority token (GAT) with empty token name" $
+                    mintedGAT3 #== 1 #&& (plength # assetList #== 1)
+
+            foldr1
+              (#&&)
+              [ hasProxyValidatorInput
+              , singleGat3Minted
+              ]
           _ -> pcon PFalse
 
   pif valid (pcon PUnit) perror
