@@ -253,7 +253,6 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
             PCurrencySymbol rawScriptHash <- pmatch ownCurrencySymbol
             let ownScriptHash = pcon $ PScriptHash rawScriptHash
 
-            -- let own = pfilterScriptInputs # inputs
             let proxyValidatorInputs =
                   pfilter
                     # plam
@@ -275,16 +274,17 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
 
             PValue mintAssetMap <- pmatch mint
 
-            PJust assets <- pmatch $ AssocMap.plookup # ownCurrencySymbol # mintAssetMap
-            PJust mintedGAT3 <- pmatch $ AssocMap.plookup # padaToken # assets
-
+            let assets = AssocMap.ptryLookup # ownCurrencySymbol # mintAssetMap
             PMap assetList <- pmatch assets
+            let assetCount = plength # assetList
+
+            let mintedGAT3 = AssocMap.ptryLookup # padaToken # assets
 
             -- Spending Condition 2: Transaction mints only one token with currency symbol equal to own hash.
             -- Spending Condition 3: Minted token has empty token name.
             let singleGat3Minted =
                   ptraceInfoIfFalse "Transaction must mint a single V3 Authority token (GAT) with empty token name" $
-                    mintedGAT3 #== 1 #&& (plength # assetList #== 1)
+                    mintedGAT3 #== 1 #&& (assetCount #== 1)
 
             foldr1
               (#&&)
