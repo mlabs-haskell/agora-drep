@@ -28,7 +28,7 @@
       flake = false;
     };
     plutus-test = {
-      url = "github:mlabs-haskell/plutus-test";
+      url = "github:mlabs-haskell/plutus-test/szg251/fix";
       flake = false;
     };
     cardano-haskell-packages = {
