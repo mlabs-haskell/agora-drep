@@ -1,4 +1,12 @@
-module Spec.Proxy.Context (spendingContextSpec, mintingContextSpec) where
+module Spec.Proxy.Context (
+  TestConfig,
+  testConfigFromScript,
+  spendingContextSpec,
+  mintingContextSpec,
+  validGAT2Spend,
+  validGAT3Mint,
+  uncheckedApplyDataToScript,
+) where
 
 import Agora.Proxy (ProxyDatum (ProxyDatum, pdDatumHash, pdReceiverScript))
 import Crypto.Hash (

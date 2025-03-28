@@ -7,6 +7,7 @@ author:          Szabo Gergely
 maintainer:      gergely@mlabs.city
 build-type:      Simple
 extra-doc-files: CHANGELOG.md
+data-files:      agora-drep-bench/*.csv
 
 common lang
   ghc-options:
@@ -146,8 +147,11 @@ benchmark agora-drep-bench
   type:           exitcode-stdio-1.0
   main-is:        Bench.hs
   build-depends:
+    , agora-drep
     , agora-drep-spec
     , plutarch
     , plutarch-ledger-api
     , plutarch-testlib
+    , plutus-core
+    , plutus-ledger-api
     , tasty

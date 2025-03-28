@@ -74,6 +74,7 @@
           {
             config,
             pkgs,
+            self',
             lib,
             system,
             ...
@@ -115,6 +116,15 @@
                 ];
               };
             };
+
+            # FIXME: Add  --fail-if-more-mem 100 when we'll have
+            # https://github.com/Plutonomicon/plutarch-plutus/pull/827
+            checks.bench-baseline = pkgs.runCommand "bench-baseline" { } ''
+              ${
+                self'.apps."agora-drep:bench:agora-drep-bench".program
+              } --baseline ${./agora-drep-bench/baseline.csv} --fail-if-bigger 100 --fail-if-smaller 0.001 --fail-if-more-cpu 100 --fail-if-less-cpu 0.001 --fail-if-less-mem 0.001
+              touch $out
+            '';
           };
       }
     );
