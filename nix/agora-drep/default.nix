@@ -22,7 +22,7 @@
       };
     in
     {
-      inherit (agora-drep) checks packages;
+      inherit (agora-drep) checks packages apps;
 
       devShells.agora-drep = agora-drep.devShell;
     };
