@@ -14,6 +14,8 @@
         externalDependencies = [
           "${inputs.plutarch}"
           "${inputs.plutarch}/plutarch-ledger-api"
+          "${inputs.plutarch}/plutarch-testlib"
+          "${inputs.plutarch}/plutarch-orphanage"
           "${inputs.plutus-test}/plutus-context-builder"
           "${inputs.plutus-test}/plutus-unit"
         ];
