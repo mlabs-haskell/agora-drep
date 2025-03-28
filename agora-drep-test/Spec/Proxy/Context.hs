@@ -70,7 +70,7 @@ spendingContextSpec gat3Script =
     mkTest' = mkTest config
    in
     testGroup
-      "Context tests"
+      "Spending Context tests"
       [ mkTest' "OK case: Valid GAT2 spend" validGAT2Spend ScriptSuccess
       , mkTest' "Fail case: Missing GAT v2 burn" missingGat2Burn ScriptFailure
       , mkTest' "Fail case: Missing GAT v2 token from spent UTxO" missingGat2FromUtxo ScriptFailure
@@ -91,7 +91,7 @@ mintingContextSpec gat3Script =
     mkTest' = mkTest config
    in
     testGroup
-      "Context tests"
+      "Minting Context tests"
       [ mkTest' "OK case: Valid GAT3 mint" validGAT3Mint ScriptSuccess
       , mkTest' "Fail case: Minting more than one GAT v3" mintMoreThan1Gat3' ScriptFailure
       , mkTest' "Fail case: GAT v3 multiple tokens with different token names" multipleTokenNames ScriptFailure
@@ -298,7 +298,7 @@ mkTest :: TestConfig -> String -> (TestConfig -> ScriptContext) -> ScriptResult 
 mkTest config testName toContext expectedResult =
   let script = ownScript config
       context = toContext config
-      Script applied = uncheckedApplyDataToScript (context) $ uncheckedApplyDataToScript gat2CurSym script
+      Script applied = uncheckedApplyDataToScript context $ uncheckedApplyDataToScript gat2CurSym script
    in testScript $ ScriptCase testName expectedResult applied applied
 
 uncheckedApplyDataToScript :: (ToData argument) => argument -> Script -> Script

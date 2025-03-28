@@ -668,16 +668,16 @@
     "plutus-test": {
       "flake": false,
       "locked": {
-        "lastModified": 1742917243,
-        "narHash": "sha256-dNOPjSmLyu2vaPbgBbXQBRxxuyLz/qLbHRqlT7KGF8M=",
+        "lastModified": 1743173557,
+        "narHash": "sha256-DyGc0IOajB/KvU2tDhwEZWlvIz0/N3FDERNO6S2QrrI=",
         "owner": "mlabs-haskell",
         "repo": "plutus-test",
-        "rev": "d4d921cd8b5491947be6936c118a77ddc5c78574",
+        "rev": "54f3e27306345c19bc0f44679d907f53b5aaa3d3",
         "type": "github"
       },
       "original": {
         "owner": "mlabs-haskell",
-        "ref": "szg251/fix",
+        "ref": "szg251/add-missing-tx-info-data",
         "repo": "plutus-test",
         "type": "github"
       }

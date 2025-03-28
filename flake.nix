@@ -28,7 +28,7 @@
       flake = false;
     };
     plutus-test = {
-      url = "github:mlabs-haskell/plutus-test/szg251/fix";
+      url = "github:mlabs-haskell/plutus-test/szg251/add-missing-tx-info-data";
       flake = false;
     };
     cardano-haskell-packages = {

@@ -84,6 +84,7 @@ library
   import:           lang
   exposed-modules:
     Agora.AuthorityToken
+    Agora.Effects.Voting
     Agora.Proxy
     Agora.Utils
 
@@ -108,6 +109,8 @@ test-suite agora-drep-test
   import:           lang
   default-language: Haskell2010
   other-modules:
+    Spec.Effects.Voting
+    Spec.Effects.Voting.Context
     Spec.Proxy
     Spec.Proxy.Context
 
