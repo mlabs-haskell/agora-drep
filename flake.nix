@@ -89,19 +89,21 @@
               hooks = {
                 fourmolu.enable = true;
                 cabal-fmt.enable = true;
-                latexindent.enable = true;
+                latexindent = {
+                  enable = true;
+                  settings.flags = lib.concatStringsSep " " [
+                    "--yaml=\"defaultIndent:'  ', onlyOneBackUp: 1\""
+                    "--local"
+                    "--silent"
+                    "--overwriteIfDifferent"
+                    "--logfile=/dev/null"
+                  ];
+                };
                 nixfmt-rfc-style.enable = true;
-              };
-
-              settings = {
-                latexindent.flags = lib.concatStringsSep " " [
-                  "--yaml=\"defaultIndent:'  ', onlyOneBackUp: 1\""
-                  "--local"
-                  "--silent"
-                  "--overwriteIfDifferent"
-                  "--logfile=/dev/null"
-                ];
-                typos.ignored-words = [ "wheres" ];
+                typos = {
+                  enable = true;
+                  settings.ignored-words = [ "wheres" ];
+                };
               };
             };
 
