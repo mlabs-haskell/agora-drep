@@ -1,6 +1,6 @@
 module Agora.Proxy (proxyScript, PProxyDatum (..), ProxyDatum (..)) where
 
-import Agora.Utils (pcountIf)
+import Agora.Utils (pcountIf, pcurrencySymbolToScriptHash, pscriptHashToCurrencySymbol)
 import Data.Kind (Type)
 import GHC.Generics qualified as GHC
 import Generics.SOP qualified as SOP
@@ -9,13 +9,13 @@ import Plutarch.LedgerApi.Utils (PMaybeData (PDJust))
 import Plutarch.LedgerApi.V3 (
   PAddress (PAddress),
   PCredential (PScriptCredential),
-  PCurrencySymbol (PCurrencySymbol),
+  PCurrencySymbol,
   PDatum (PDatum),
   PDatumHash,
   PMap (PMap),
   POutputDatum (POutputDatumHash),
   PScriptContext (PScriptContext),
-  PScriptHash (PScriptHash),
+  PScriptHash,
   PScriptInfo (PMintingScript, PSpendingScript),
   PTxInInfo (PTxInInfo),
   PTxInfo (PTxInfo),
@@ -38,7 +38,6 @@ import Plutarch.Prelude (
   S,
   pcon,
   pconstant,
-  pdata,
   perror,
   pfilter,
   pfoldr,
@@ -46,6 +45,7 @@ import Plutarch.Prelude (
   pfstBuiltin,
   pif,
   plam,
+  plet,
   pmatch,
   psndBuiltin,
   ptraceInfoIfFalse,
@@ -193,11 +193,9 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                   PTxOut addr _ _ _ <- pmatch resolved
                   PAddress cred _ <- pmatch addr
                   PScriptCredential scriptHash <- pmatch cred
-                  pfromData scriptHash
+                  scriptHash
 
-            PScriptHash rawScriptHash <- pmatch ownScriptHash
-
-            let ownCurrencySymbol = pdata $ pcon $ PCurrencySymbol rawScriptHash
+            ownCurrencySymbol <- plet $ pscriptHashToCurrencySymbol ownScriptHash
 
             -- Spending Condition 1: Transaction burns one GAT (symbol is known from script parameter)
             -- Spending Condition 2: Spent UTxO contains GAT
@@ -237,11 +235,6 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
               , mintCheck
               ]
           PMintingScript currencySymbol -> P.do
-            -- TODO: punsafeCoerce this
-            let ownCurrencySymbol = pfromData currencySymbol
-            PCurrencySymbol rawScriptHash <- pmatch ownCurrencySymbol
-            let ownScriptHash = pcon $ PScriptHash rawScriptHash
-
             let isValidatorInput =
                   plam
                     ( \input -> pmatch (pfromData input) $ \case
@@ -250,7 +243,7 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                           PAddress cred _ <- pmatch addr
                           pmatch cred $ \case
                             PScriptCredential scriptHash ->
-                              pfromData scriptHash #== ownScriptHash
+                              scriptHash #== pcurrencySymbolToScriptHash currencySymbol
                             _ -> pcon PFalse
                     )
 

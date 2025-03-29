@@ -1,9 +1,16 @@
-module Agora.Utils (psymbolValueOf, pcountIf) where
+module Agora.Utils (
+  psymbolValueOf,
+  pcountIf,
+  pcurrencySymbolToScriptHash,
+  pscriptHashToCurrencySymbol,
+) where
 
+import Plutarch.Internal.Term (punsafeCoerce)
 import Plutarch.LedgerApi.AssocMap qualified as AssocMap
-import Plutarch.LedgerApi.V3 (AmountGuarantees, KeyGuarantees, PCurrencySymbol, PMap (PMap), PValue (PValue))
+import Plutarch.LedgerApi.V3 (AmountGuarantees, KeyGuarantees, PCurrencySymbol, PMap (PMap), PScriptHash, PValue (PValue))
 import Plutarch.Monadic qualified as P
 import Plutarch.Prelude (
+  PAsData,
   PBool,
   PInteger,
   PIsListLike,
@@ -55,3 +62,9 @@ pcountIf =
               (self # xs)
         )
         (const 0)
+
+pcurrencySymbolToScriptHash :: Term s (PAsData PCurrencySymbol) -> Term s (PAsData PScriptHash)
+pcurrencySymbolToScriptHash = punsafeCoerce
+
+pscriptHashToCurrencySymbol :: Term s (PAsData PScriptHash) -> Term s (PAsData PCurrencySymbol)
+pscriptHashToCurrencySymbol = punsafeCoerce
