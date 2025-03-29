@@ -26,12 +26,13 @@ import Plutarch.Monadic qualified as P
 import Plutarch.Prelude (
   ClosedTerm,
   PAsData,
-  PBool (PFalse, PTrue),
+  PBool (PFalse),
   PBuiltinList (PCons, PNil),
   PData,
   PEq ((#==)),
   PInteger,
   PIsData,
+  PListLike (pcons, pnil),
   PTryFrom,
   PUnit (PUnit),
   PlutusType,
@@ -39,7 +40,6 @@ import Plutarch.Prelude (
   pcon,
   pconstant,
   perror,
-  pfilter,
   pfoldr,
   pfromData,
   pfstBuiltin,
@@ -47,6 +47,7 @@ import Plutarch.Prelude (
   plam,
   plet,
   pmatch,
+  precList,
   psndBuiltin,
   ptraceInfoIfFalse,
   ptryFrom,
@@ -173,28 +174,21 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
             -- If there is only one script input and we are running that means that we are that input
             -- so no need to check explicitly
             let scriptInputs =
-                  pfilter
-                    # plam
-                      ( \input -> pmatch (pfromData input) $ \case
-                          PTxInInfo _ resolved -> P.do
-                            PTxOut addr _ _ _ <- pmatch resolved
-                            PAddress cred _ <- pmatch addr
-                            pmatch cred $ \case
-                              PScriptCredential _ -> pcon PTrue
-                              _ -> pcon PFalse
-                      )
+                  precList
+                    ( \self input rest -> pmatch (pfromData input) $ \case
+                        PTxInInfo _ resolved -> P.do
+                          PTxOut addr _ _ _ <- pmatch resolved
+                          PAddress cred _ <- pmatch addr
+                          pmatch cred $ \case
+                            PScriptCredential hash -> pcons # hash # (self # rest)
+                            _ -> self # rest
+                    )
+                    (const (pnil @PBuiltinList))
                     # pfromData inputs
 
             -- Spending condition 6: Transaction does not include script inputs other than own input.
-            PCons ownInput scriptInputsRest <- pmatch scriptInputs
+            PCons ownScriptHash scriptInputsRest <- pmatch scriptInputs
             PNil <- pmatch scriptInputsRest
-            let ownScriptHash = P.do
-                  PTxInInfo _ resolved <- pmatch $ pfromData ownInput
-                  PTxOut addr _ _ _ <- pmatch resolved
-                  PAddress cred _ <- pmatch addr
-                  PScriptCredential scriptHash <- pmatch cred
-                  scriptHash
-
             ownCurrencySymbol <- plet $ pscriptHashToCurrencySymbol ownScriptHash
 
             -- Spending Condition 1: Transaction burns one GAT (symbol is known from script parameter)
