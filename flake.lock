@@ -668,17 +668,17 @@
     "plutus-test": {
       "flake": false,
       "locked": {
-        "lastModified": 1742917243,
-        "narHash": "sha256-dNOPjSmLyu2vaPbgBbXQBRxxuyLz/qLbHRqlT7KGF8M=",
+        "lastModified": 1743286678,
+        "narHash": "sha256-XB9gkIeIAATNslqRTwvY5dbaswh7LSdMUm2CDO53iNI=",
         "owner": "mlabs-haskell",
         "repo": "plutus-test",
-        "rev": "d4d921cd8b5491947be6936c118a77ddc5c78574",
+        "rev": "de837ba35a1fa99ce6beafc11ca7421a7260ebdc",
         "type": "github"
       },
       "original": {
         "owner": "mlabs-haskell",
-        "ref": "szg251/fix",
         "repo": "plutus-test",
+        "rev": "de837ba35a1fa99ce6beafc11ca7421a7260ebdc",
         "type": "github"
       }
     },
