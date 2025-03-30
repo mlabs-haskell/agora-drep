@@ -220,14 +220,11 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                     )
 
             -- Spending condition 5: Transaction does not include any certificates
-            let noCertsIncluded =
-                  ptraceInfoIfFalse "Transaction must not include any certificates" $
-                    txCerts #== pconstant []
+            PNil <- pmatch (pfromData txCerts)
 
             foldr1
               (#&&)
               [ singleOutputWithDatum
-              , noCertsIncluded
               , mintCheck
               ]
           PMintingScript currencySymbol -> P.do
