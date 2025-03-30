@@ -9,16 +9,9 @@ module Spec.Proxy.Context (
 ) where
 
 import Agora.Proxy (ProxyDatum (ProxyDatum, pdDatumHash, pdReceiverScript))
-import Crypto.Hash (
-  Blake2b_224 (Blake2b_224),
-  hashWith,
- )
 
-import Data.ByteArray qualified as ByteArray
-import Data.ByteString (ByteString)
-import Data.ByteString.Short qualified as ByteStringS
-import Plutarch.LedgerApi.V3 (datumHash)
-import Plutarch.Script (Script (Script), unScript)
+import Plutarch.LedgerApi.V3 (datumHash, scriptHash)
+import Plutarch.Script (Script (Script))
 import Plutarch.Test.Program (ScriptCase (ScriptCase), ScriptResult (ScriptFailure, ScriptSuccess), testScript)
 import Plutus.ContextBuilder (
   UTXO,
@@ -38,7 +31,6 @@ import Plutus.ContextBuilder (
 import PlutusCore qualified as PLC
 import PlutusLedgerApi.V1.Value qualified as Value
 import PlutusLedgerApi.V3 (
-  BuiltinByteString,
   Credential (ScriptCredential),
   CurrencySymbol (CurrencySymbol),
   Datum (Datum),
@@ -47,10 +39,8 @@ import PlutusLedgerApi.V3 (
   ToData (toBuiltinData),
   TokenName (TokenName),
   TxCert (TxCertRegStaking),
-  serialiseUPLC,
   toData,
  )
-import PlutusTx.Prelude (toBuiltin)
 import Test.Tasty (TestTree, testGroup)
 import UntypedPlutusCore (Program (Program), Term (Apply, Constant))
 
@@ -310,7 +300,7 @@ mkTest :: TestConfig -> String -> (TestConfig -> ScriptContext) -> ScriptResult 
 mkTest config testName toContext expectedResult =
   let script = ownScript config
       context = toContext config
-      Script applied = uncheckedApplyDataToScript (context) $ uncheckedApplyDataToScript gat2CurSym script
+      Script applied = uncheckedApplyDataToScript context $ uncheckedApplyDataToScript gat2CurSym script
    in testScript $ ScriptCase testName expectedResult applied applied
 
 uncheckedApplyDataToScript :: (ToData argument) => argument -> Script -> Script
@@ -321,17 +311,3 @@ uncheckedApplyDataToScript argument (Script (Program () version unappliedTerm)) 
     . Constant ()
     . PLC.someValue
     $ toData argument
-
--- TODO: Remove this once Plutarch scriptHash function is fixed
-scriptHash :: Script -> ScriptHash
-scriptHash = hashScriptWithPrefix "\x03"
-
--- TODO: Remove this once Plutarch scriptHash function is fixed
-hashScriptWithPrefix :: ByteString -> Script -> ScriptHash
-hashScriptWithPrefix prefix scr =
-  ScriptHash . hashBlake2b_224 $
-    prefix <> (ByteStringS.fromShort . serialiseUPLC . unScript $ scr)
-
--- TODO: Remove this once Plutarch scriptHash function is fixed
-hashBlake2b_224 :: ByteString -> BuiltinByteString
-hashBlake2b_224 = toBuiltin . ByteArray.convert @_ @ByteString . hashWith Blake2b_224
