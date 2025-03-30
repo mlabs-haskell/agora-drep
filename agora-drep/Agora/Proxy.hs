@@ -208,15 +208,15 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                   pif
                     (mintCs1 #== ownCurrencySymbol)
                     ( ((pfstBuiltin # mintTokenPair1) #== pconstant adaToken)
-                        #&& ((psndBuiltin # mintTokenPair1) #== pconstant 1)
+                        #&& (pfromData (psndBuiltin # mintTokenPair1) #== pconstant 1)
                         #&& (mintCs2 #== authSymbol')
-                        #&& ((psndBuiltin # mintTokenPair2) #== pconstant (-1))
+                        #&& (pfromData (psndBuiltin # mintTokenPair2) #== pconstant (-1))
                     )
                     ( ((pfstBuiltin # mintTokenPair2) #== pconstant adaToken)
-                        #&& ((psndBuiltin # mintTokenPair2) #== pconstant 1)
+                        #&& (pfromData (psndBuiltin # mintTokenPair2) #== pconstant 1)
                         #&& (mintCs2 #== ownCurrencySymbol)
                         #&& (mintCs1 #== authSymbol')
-                        #&& ((psndBuiltin # mintTokenPair1) #== pconstant (-1))
+                        #&& (pfromData (psndBuiltin # mintTokenPair1) #== pconstant (-1))
                     )
 
             -- Spending condition 5: Transaction does not include any certificates
@@ -251,10 +251,10 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                   pif
                     (mintCs1 #== currencySymbol)
                     ( ((pfstBuiltin # mintTokenPair1) #== pconstant adaToken)
-                        #&& ((psndBuiltin # mintTokenPair1) #== pconstant 1)
+                        #&& (pfromData (psndBuiltin # mintTokenPair1) #== pconstant 1)
                     )
                     ( (mintCs2 #== currencySymbol)
-                        #&& ((psndBuiltin # mintTokenPair2) #== pconstant 1)
+                        #&& (pfromData (psndBuiltin # mintTokenPair2) #== pconstant 1)
                         #&& ((pfstBuiltin # mintTokenPair2) #== pconstant adaToken)
                     )
 
