@@ -22,6 +22,7 @@ import Plutarch.LedgerApi.V3 (
   PTxOut (PTxOut),
   PValue (PValue),
  )
+import Plutarch.Maybe (PMaybe (PNothing), pjust)
 import Plutarch.Monadic qualified as P
 import Plutarch.Prelude (
   ClosedTerm,
@@ -32,7 +33,7 @@ import Plutarch.Prelude (
   PEq ((#==)),
   PInteger,
   PIsData,
-  PListLike (pcons, pnil),
+  PMaybe (PJust),
   PTryFrom,
   PUnit (PUnit),
   PlutusType,
@@ -180,15 +181,16 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                           PTxOut addr _ _ _ <- pmatch resolved
                           PAddress cred _ <- pmatch addr
                           pmatch cred $ \case
-                            PScriptCredential hash -> pcons # hash # (self # rest)
+                            PScriptCredential hash -> pmatch (self # rest) $ \case
+                              PNothing -> pjust # hash
+                              PJust _ -> perror
                             _ -> self # rest
                     )
-                    (const (pnil @PBuiltinList))
+                    (const (pconstant @(PMaybe (PAsData PScriptHash)) Nothing))
                     # pfromData inputs
 
             -- Spending condition 6: Transaction does not include script inputs other than own input.
-            PCons ownScriptHash scriptInputsRest <- pmatch scriptInputs
-            PNil <- pmatch scriptInputsRest
+            PJust ownScriptHash <- pmatch scriptInputs
             ownCurrencySymbol <- plet $ pscriptHashToCurrencySymbol ownScriptHash
 
             -- Spending Condition 1: Transaction burns one GAT (symbol is known from script parameter)
