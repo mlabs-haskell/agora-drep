@@ -7,6 +7,7 @@ author:          Szabo Gergely
 maintainer:      gergely@mlabs.city
 build-type:      Simple
 extra-doc-files: CHANGELOG.md
+data-files:      agora-drep-bench/*.csv
 
 common lang
   ghc-options:
@@ -81,7 +82,8 @@ common lang
   build-depends:      base
 
 library
-  import:           lang
+  import:          lang
+  hs-source-dirs:  agora-drep
   exposed-modules:
     Agora.AuthorityToken
     Agora.Proxy
@@ -94,26 +96,20 @@ library
     , plutus-ledger-api
     , plutus-tx
 
-  hs-source-dirs:   agora-drep
-  default-language: Haskell2010
-
 executable agora-drep
-  import:           lang
-  main-is:          Main.hs
-  build-depends:    agora-drep
-  hs-source-dirs:   agora-drep-script-export
-  default-language: Haskell2010
+  import:         lang
+  main-is:        Main.hs
+  build-depends:  agora-drep
+  hs-source-dirs: agora-drep-script-export
 
-test-suite agora-drep-test
-  import:           lang
-  default-language: Haskell2010
-  other-modules:
+-- Factored out to share code between test and bench units
+library agora-drep-spec
+  import:          lang
+  hs-source-dirs:  agora-drep-spec
+  exposed-modules:
     Spec.Proxy
     Spec.Proxy.Context
 
-  type:             exitcode-stdio-1.0
-  hs-source-dirs:   agora-drep-test
-  main-is:          Main.hs
   build-depends:
     , agora-drep
     , bytestring
@@ -135,3 +131,27 @@ test-suite agora-drep-test
     , tasty-hunit
     , tasty-quickcheck
     , text
+
+test-suite agora-drep-test
+  import:         lang
+  hs-source-dirs: agora-drep-test
+  type:           exitcode-stdio-1.0
+  main-is:        Main.hs
+  build-depends:
+    , agora-drep-spec
+    , tasty
+
+benchmark agora-drep-bench
+  import:         lang
+  hs-source-dirs: agora-drep-bench
+  type:           exitcode-stdio-1.0
+  main-is:        Bench.hs
+  build-depends:
+    , agora-drep
+    , agora-drep-spec
+    , plutarch
+    , plutarch-ledger-api
+    , plutarch-testlib
+    , plutus-core
+    , plutus-ledger-api
+    , tasty

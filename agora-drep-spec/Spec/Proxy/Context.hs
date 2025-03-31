@@ -1,16 +1,17 @@
-module Spec.Proxy.Context (spendingContextSpec, mintingContextSpec) where
+module Spec.Proxy.Context (
+  TestConfig,
+  testConfigFromScript,
+  spendingContextSpec,
+  mintingContextSpec,
+  validGAT2Spend,
+  validGAT3Mint,
+  uncheckedApplyDataToScript,
+) where
 
 import Agora.Proxy (ProxyDatum (ProxyDatum, pdDatumHash, pdReceiverScript))
-import Crypto.Hash (
-  Blake2b_224 (Blake2b_224),
-  hashWith,
- )
 
-import Data.ByteArray qualified as ByteArray
-import Data.ByteString (ByteString)
-import Data.ByteString.Short qualified as ByteStringS
-import Plutarch.LedgerApi.V3 (datumHash)
-import Plutarch.Script (Script (Script), unScript)
+import Plutarch.LedgerApi.V3 (datumHash, scriptHash)
+import Plutarch.Script (Script (Script))
 import Plutarch.Test.Program (ScriptCase (ScriptCase), ScriptResult (ScriptFailure, ScriptSuccess), testScript)
 import Plutus.ContextBuilder (
   UTXO,
@@ -30,7 +31,6 @@ import Plutus.ContextBuilder (
 import PlutusCore qualified as PLC
 import PlutusLedgerApi.V1.Value qualified as Value
 import PlutusLedgerApi.V3 (
-  BuiltinByteString,
   Credential (ScriptCredential),
   CurrencySymbol (CurrencySymbol),
   Datum (Datum),
@@ -39,10 +39,8 @@ import PlutusLedgerApi.V3 (
   ToData (toBuiltinData),
   TokenName (TokenName),
   TxCert (TxCertRegStaking),
-  serialiseUPLC,
   toData,
  )
-import PlutusTx.Prelude (toBuiltin)
 import Test.Tasty (TestTree, testGroup)
 import UntypedPlutusCore (Program (Program), Term (Apply, Constant))
 
@@ -209,6 +207,7 @@ validGAT3Mint config =
       [ withMinting (gat3CurSym config)
       , input (gat2Utxo config)
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
+      , mint (Value.singleton gat2CurSym (TokenName "") (-1))
       ]
 
 mintMoreThan1Gat3' :: TestConfig -> ScriptContext
@@ -218,6 +217,7 @@ mintMoreThan1Gat3' config =
       [ withMinting (gat3CurSym config)
       , input (gat2Utxo config)
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 2)
+      , mint (Value.singleton gat2CurSym (TokenName "") (-1))
       ]
 
 multipleTokenNames :: TestConfig -> ScriptContext
@@ -228,6 +228,7 @@ multipleTokenNames config =
       , input (gat2Utxo config)
       , mint (Value.singleton (gat3CurSym config) (TokenName "oo-wee") 1)
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
+      , mint (Value.singleton gat2CurSym (TokenName "") (-1))
       ]
 
 nonEmptyTokenName :: TestConfig -> ScriptContext
@@ -237,6 +238,7 @@ nonEmptyTokenName config =
       [ withMinting (gat3CurSym config)
       , input (gat2Utxo config)
       , mint (Value.singleton (gat3CurSym config) (TokenName "oo-wee") 1)
+      , mint (Value.singleton gat2CurSym (TokenName "") (-1))
       ]
 
 -- * Building blocks for the test ScriptContexts
@@ -298,7 +300,7 @@ mkTest :: TestConfig -> String -> (TestConfig -> ScriptContext) -> ScriptResult 
 mkTest config testName toContext expectedResult =
   let script = ownScript config
       context = toContext config
-      Script applied = uncheckedApplyDataToScript (context) $ uncheckedApplyDataToScript gat2CurSym script
+      Script applied = uncheckedApplyDataToScript context $ uncheckedApplyDataToScript gat2CurSym script
    in testScript $ ScriptCase testName expectedResult applied applied
 
 uncheckedApplyDataToScript :: (ToData argument) => argument -> Script -> Script
@@ -309,17 +311,3 @@ uncheckedApplyDataToScript argument (Script (Program () version unappliedTerm)) 
     . Constant ()
     . PLC.someValue
     $ toData argument
-
--- TODO: Remove this once Plutarch scriptHash function is fixed
-scriptHash :: Script -> ScriptHash
-scriptHash = hashScriptWithPrefix "\x03"
-
--- TODO: Remove this once Plutarch scriptHash function is fixed
-hashScriptWithPrefix :: ByteString -> Script -> ScriptHash
-hashScriptWithPrefix prefix scr =
-  ScriptHash . hashBlake2b_224 $
-    prefix <> (ByteStringS.fromShort . serialiseUPLC . unScript $ scr)
-
--- TODO: Remove this once Plutarch scriptHash function is fixed
-hashBlake2b_224 :: ByteString -> BuiltinByteString
-hashBlake2b_224 = toBuiltin . ByteArray.convert @_ @ByteString . hashWith Blake2b_224
