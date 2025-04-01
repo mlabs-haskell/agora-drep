@@ -1,3 +1,4 @@
+-- | @since WIP
 module Agora.Utils (
   psymbolValueOf,
   pcountIf,
@@ -5,6 +6,7 @@ module Agora.Utils (
   pscriptHashToCurrencySymbol,
 ) where
 
+import Data.Kind (Type)
 import Plutarch.Internal.Term (punsafeCoerce)
 import Plutarch.LedgerApi.AssocMap qualified as AssocMap
 import Plutarch.LedgerApi.V3 (AmountGuarantees, KeyGuarantees, PCurrencySymbol, PMap (PMap), PScriptHash, PValue (PValue))
@@ -31,7 +33,7 @@ import Plutarch.Prelude (
 
 {- | Get the sum of all values belonging to a particular CurrencySymbol.
 
-  @since 1.1.0
+  @since WIP
 -}
 psymbolValueOf ::
   forall (keys :: KeyGuarantees) (amounts :: AmountGuarantees) (s :: S).
@@ -50,7 +52,10 @@ psymbolValueOf =
 
 @since WIP
 -}
-pcountIf :: (PIsListLike list a) => Term s ((a :--> PBool) :--> list a :--> PInteger)
+pcountIf ::
+  forall (list :: (S -> Type) -> (S -> Type)) (a :: S -> Type) (s :: S).
+  (PIsListLike list a) =>
+  Term s ((a :--> PBool) :--> list a :--> PInteger)
 pcountIf =
   phoistAcyclic $
     plam $ \predicate ->
@@ -63,8 +68,16 @@ pcountIf =
         )
         (const 0)
 
-pcurrencySymbolToScriptHash :: Term s (PAsData PCurrencySymbol) -> Term s (PAsData PScriptHash)
+-- | @since WIP
+pcurrencySymbolToScriptHash ::
+  forall (s :: S).
+  Term s (PAsData PCurrencySymbol) ->
+  Term s (PAsData PScriptHash)
 pcurrencySymbolToScriptHash = punsafeCoerce
 
-pscriptHashToCurrencySymbol :: Term s (PAsData PScriptHash) -> Term s (PAsData PCurrencySymbol)
+-- | @since WIP
+pscriptHashToCurrencySymbol ::
+  forall (s :: S).
+  Term s (PAsData PScriptHash) ->
+  Term s (PAsData PCurrencySymbol)
 pscriptHashToCurrencySymbol = punsafeCoerce

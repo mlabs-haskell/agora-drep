@@ -1,0 +1,3 @@
+# Haddock
+
+[Haddock](./haddock)

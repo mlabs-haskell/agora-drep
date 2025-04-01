@@ -11,6 +11,9 @@
           preBuild = ''
             mkdir -p static
             cp ${self'.packages.specification}/specification.pdf static/agora-drep-specification.pdf
+            cp -r ${
+              self'.packages."agora-drep:lib:agora-drep".passthru.haddock.doc
+            }/share/doc/agora-drep/html ./haddock
           '';
         };
       };
