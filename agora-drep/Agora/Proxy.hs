@@ -241,28 +241,8 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                     )
 
             -- Spending Condition 1: Transaction contains an input from Proxy Spending Validator.
-            let hasProxyValidatorInput =
-                  ptraceInfoIfFalse "Transaction must contain an input from Proxy Validator." $
-                    (pcountIf # isValidatorInput # pfromData inputs) #== 1
-
-            -- Spending Condition 2: Transaction mints only one token with currency symbol equal to own hash.
-            -- Spending Condition 3: Minted token has empty token name.
-            let mintCheck =
-                  pif
-                    (mintCs1 #== currencySymbol)
-                    ( ((pfstBuiltin # mintTokenPair1) #== pconstant adaToken)
-                        #&& (pfromData (psndBuiltin # mintTokenPair1) #== pconstant 1)
-                    )
-                    ( (mintCs2 #== currencySymbol)
-                        #&& (pfromData (psndBuiltin # mintTokenPair2) #== pconstant 1)
-                        #&& ((pfstBuiltin # mintTokenPair2) #== pconstant adaToken)
-                    )
-
-            foldr1
-              (#&&)
-              [ hasProxyValidatorInput
-              , mintCheck
-              ]
+            ptraceInfoIfFalse "Transaction must contain an input from Proxy Validator." $
+              (pcountIf # isValidatorInput # pfromData inputs) #== 1
           _ -> perror
 
   pif valid (pcon PUnit) perror

@@ -91,9 +91,7 @@ mintingContextSpec gat3Script =
     testGroup
       "Context tests"
       [ mkTest' "OK case: Valid GAT3 mint" validGAT3Mint ScriptSuccess
-      , mkTest' "Fail case: Minting more than one GAT v3" mintMoreThan1Gat3' ScriptFailure
-      , mkTest' "Fail case: GAT v3 multiple tokens with different token names" multipleTokenNames ScriptFailure
-      , mkTest' "Fail case: GAT v3 token name not empty" nonEmptyTokenName ScriptFailure
+      , mkTest' "Fail case: Minting without spending own input" mintWithoutSpend ScriptFailure
       ]
 
 -- * ScriptContexts for the test cases
@@ -210,35 +208,12 @@ validGAT3Mint config =
       , mint (Value.singleton gat2CurSym (TokenName "") (-1))
       ]
 
-mintMoreThan1Gat3' :: TestConfig -> ScriptContext
-mintMoreThan1Gat3' config =
+mintWithoutSpend :: TestConfig -> ScriptContext
+mintWithoutSpend config =
   buildMinting' $
     mconcat
       [ withMinting (gat3CurSym config)
-      , input (gat2Utxo config)
-      , mint (Value.singleton (gat3CurSym config) (TokenName "") 2)
-      , mint (Value.singleton gat2CurSym (TokenName "") (-1))
-      ]
-
-multipleTokenNames :: TestConfig -> ScriptContext
-multipleTokenNames config =
-  buildMinting' $
-    mconcat
-      [ withMinting (gat3CurSym config)
-      , input (gat2Utxo config)
-      , mint (Value.singleton (gat3CurSym config) (TokenName "oo-wee") 1)
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
-      , mint (Value.singleton gat2CurSym (TokenName "") (-1))
-      ]
-
-nonEmptyTokenName :: TestConfig -> ScriptContext
-nonEmptyTokenName config =
-  buildMinting' $
-    mconcat
-      [ withMinting (gat3CurSym config)
-      , input (gat2Utxo config)
-      , mint (Value.singleton (gat3CurSym config) (TokenName "oo-wee") 1)
-      , mint (Value.singleton gat2CurSym (TokenName "") (-1))
       ]
 
 -- * Building blocks for the test ScriptContexts
