@@ -45,7 +45,7 @@ data TestConfigProxy = TestConfigProxy
   }
 
 instance TestConfig TestConfigProxy where
-  ownScript config = uncheckedApplyDataToScript config.gat3CurSym (gat3Script config)
+  ownScript config = uncheckedApplyDataToScript gat2CurSym (gat3Script config)
 
   testConfigFromScript gat3Script =
     let gat3ScriptHash = scriptHash gat3Script
