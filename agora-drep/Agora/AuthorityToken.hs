@@ -16,6 +16,7 @@ import Plutarch.LedgerApi.V3 (
  )
 import Plutarch.Monadic qualified as P
 import Plutarch.Prelude (
+  PAsData,
   PBool (PTrue),
   PBuiltinList,
   PEq ((#==)),
@@ -85,7 +86,7 @@ authorityTokensValidIn = phoistAcyclic $
 singleAuthorityTokenBurned ::
   forall (keys :: KeyGuarantees) (amounts :: AmountGuarantees) (s :: S).
   Term s PCurrencySymbol ->
-  Term s (PBuiltinList PTxInInfo) ->
+  Term s (PBuiltinList (PAsData PTxInInfo)) ->
   Term s (PValue keys amounts) ->
   Term s PBool
 singleAuthorityTokenBurned gatCs inputs mint = P.do
@@ -95,7 +96,7 @@ singleAuthorityTokenBurned gatCs inputs mint = P.do
   let inputsWithGAT =
         pfoldr
           # plam
-            ( \input v -> pmatch input $ \case
+            ( \input v -> pmatch (pfromData input) $ \case
                 PTxInInfo _txOutRef resolved ->
                   pif
                     (authorityTokensValidIn # gatCs # resolved)

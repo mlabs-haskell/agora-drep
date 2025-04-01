@@ -24,11 +24,11 @@
       };
     };
     plutarch = {
-      url = "github:Plutonomicon/plutarch-plutus?ref=7b346d00596531d3682204e226f7457d51849a21";
+      url = "github:Plutonomicon/plutarch-plutus?ref=staging";
       flake = false;
     };
     plutus-test = {
-      url = "github:mlabs-haskell/plutus-test";
+      url = "github:mlabs-haskell/plutus-test?ref=staging";
       flake = false;
     };
     cardano-haskell-packages = {
@@ -74,6 +74,7 @@
           {
             config,
             pkgs,
+            self',
             lib,
             system,
             ...
@@ -88,19 +89,21 @@
               hooks = {
                 fourmolu.enable = true;
                 cabal-fmt.enable = true;
-                latexindent.enable = true;
+                latexindent = {
+                  enable = true;
+                  settings.flags = lib.concatStringsSep " " [
+                    "--yaml=\"defaultIndent:'  ', onlyOneBackUp: 1\""
+                    "--local"
+                    "--silent"
+                    "--overwriteIfDifferent"
+                    "--logfile=/dev/null"
+                  ];
+                };
                 nixfmt-rfc-style.enable = true;
-              };
-
-              settings = {
-                latexindent.flags = lib.concatStringsSep " " [
-                  "--yaml=\"defaultIndent:'  ', onlyOneBackUp: 1\""
-                  "--local"
-                  "--silent"
-                  "--overwriteIfDifferent"
-                  "--logfile=/dev/null"
-                ];
-                typos.ignored-words = [ "wheres" ];
+                typos = {
+                  enable = true;
+                  settings.ignored-words = [ "wheres" ];
+                };
               };
             };
 
@@ -115,6 +118,13 @@
                 ];
               };
             };
+
+            checks.bench-baseline = pkgs.runCommand "bench-baseline" { } ''
+              ${
+                self'.apps."agora-drep:bench:agora-drep-bench".program
+              } --baseline ${./agora-drep-bench/baseline.csv} --fail-if-bigger 100 --fail-if-smaller 0.001 --fail-if-more-cpu 100 --fail-if-less-cpu 0.001 --fail-if-more-mem 100 --fail-if-less-mem 0.001
+              touch $out
+            '';
           };
       }
     );

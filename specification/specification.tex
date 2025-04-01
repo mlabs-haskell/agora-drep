@@ -225,28 +225,30 @@ data Datum = Datum
 \begin{itemize}
   \item \verb|ScriptPurpose| is either \verb|Certifying|, \verb|Voting|, or \verb|Spending|
         \begin{itemize}
-          \item if \verb|Spending|: See Spending Proxy Validator
+          \item if \verb|Spending|
                 \begin {itemize}
-          \item if \verb|Certifying|
-                \begin{itemize}
-                  \item \verb|ScriptContext| contains exactly 1 transaction DRep registration certificate
-                  \item \verb|ScriptContext| does not contain a vote
-                  \item \verb|ScriptContext| does not contain proposal procedures
-                  \item \verb|ScriptContext| does not contain treasury donations
-                \end{itemize}
-          \item if \verb|Voting|
-                \begin{itemize}
-                  \item transaction spends exactly 1 script input, where the script hash matches the DRep credential of the Voting Effect script hash (the address is known as Voter DRep and the spending validator share the same script hash)
-                  \item above input has \verb|Voting Effect datum| as a hashed datum
-                  \item \verb|ScriptContext| contains exactly 1 vote, where the \verb|GovernanceId| and \verb|Vote| match the ones in the \verb|Voting Effect's datum|
-                  \item \verb|ScriptContext| does not contain a certificate
-                  \item \verb|ScriptContext| does not contain proposal procedures
-                  \item \verb|ScriptContext| does not contain treasury donations
-                \end{itemize}
 
-                \end {itemize}
-
+          \item \verb|ScriptContext| contains exactly 1 script input
+          \item \verb|ScriptContext| contains exactly 1 vote where the \verb|Voter| is the DRep credential of the Voting Script (script hash is common with the spending script)
         \end{itemize}
+  \item if \verb|Certifying|
+        \begin{itemize}
+          \item \verb|ScriptContext| contains exactly 1 transaction DRep registration certificate
+          \item \verb|ScriptContext| does not contain a vote
+          \item \verb|ScriptContext| does not contain proposal procedures
+          \item \verb|ScriptContext| does not contain treasury donations
+        \end{itemize}
+  \item if \verb|Voting|
+        \begin{itemize}
+          \item above input has \verb|Voting Effect datum| as a hashed datum
+          \item \verb|ScriptContext| contains exactly 1 vote, where the \verb|GovernanceId| and \verb|Vote| match the ones in the \verb|Voting Effect's datum|
+          \item \verb|ScriptContext| does not contain a certificate
+          \item \verb|ScriptContext| does not contain proposal procedures
+          \item \verb|ScriptContext| does not contain treasury donations
+        \end{itemize}
+
+
+\end{itemize}
 \end{itemize}
 
 \subsubsection*{Interaction Diagrams}

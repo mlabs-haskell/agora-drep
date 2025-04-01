@@ -651,16 +651,16 @@
     "plutarch": {
       "flake": false,
       "locked": {
-        "lastModified": 1740480471,
-        "narHash": "sha256-k6Sm8DqSvaRDbNsIivzbw/1JrWuiDT7xoVll9ZqGgXM=",
+        "lastModified": 1743134969,
+        "narHash": "sha256-JNtWz6qxkcnEDYwtc4inKg5s7xtHLvDjFk9diHq4WZ4=",
         "owner": "Plutonomicon",
         "repo": "plutarch-plutus",
-        "rev": "7b346d00596531d3682204e226f7457d51849a21",
+        "rev": "b626f27265474ce7bfb59bc4b53e0ab4495f9af6",
         "type": "github"
       },
       "original": {
         "owner": "Plutonomicon",
-        "ref": "7b346d00596531d3682204e226f7457d51849a21",
+        "ref": "staging",
         "repo": "plutarch-plutus",
         "type": "github"
       }
@@ -677,6 +677,7 @@
       },
       "original": {
         "owner": "mlabs-haskell",
+        "ref": "staging",
         "repo": "plutus-test",
         "type": "github"
       }

@@ -208,6 +208,10 @@ validSpend config =
       [ withSpendingUTXO (gat3Utxo config)
       , mint (Value.singleton gat3CurSym (TokenName "") (-1))
       , input (gat3Utxo config)
+      , vote
+          (DRepVoter (DRepCredential (vsCredential config)))
+          (GovernanceActionId (TxId "") 0)
+          VoteYes
       ]
 
 missingGat3Spending :: TestConfig -> ScriptContext
@@ -216,6 +220,10 @@ missingGat3Spending config =
     mconcat
       [ withSpendingUTXO (gat3Utxo config)
       , input (gat3Utxo config)
+      , vote
+          (DRepVoter (DRepCredential (vsCredential config)))
+          (GovernanceActionId (TxId "") 0)
+          VoteYes
       ]
 
 -- | Proxy Datum, attached to the GAT v2 token's UTxO

@@ -11,11 +11,13 @@ import Plutarch.LedgerApi.V3 (
   PCurrencySymbol,
   PDRepCredential (PDRepCredential),
   PDatum (PDatum),
+  PDatumHash,
   PGovernanceActionId,
   PMap (PMap),
   PMaybeData (PDNothing),
   POutputDatum (POutputDatumHash),
   PScriptContext (PScriptContext),
+  PScriptHash,
   PScriptInfo (PCertifyingScript, PSpendingScript, PVotingScript),
   PTxCert (PTxCertRegDRep),
   PTxInInfo (PTxInInfo),
@@ -24,37 +26,38 @@ import Plutarch.LedgerApi.V3 (
   PVote,
   PVoter (PDRepVoter),
  )
+import Plutarch.Maybe (pjust)
 import Plutarch.Monadic qualified as P
 import Plutarch.Prelude (
   ClosedTerm,
   PAsData,
-  PBool (PFalse, PTrue),
+  PBool (PFalse),
   PBuiltinList (PCons, PNil),
   PData,
   PEq ((#==)),
   PIsData,
-  PListLike (phead, pnull),
+  PListLike (pnull),
+  PMaybe (PJust, PNothing),
   PTryFrom,
   PUnit (PUnit),
   PlutusType,
   S,
   Term,
   pcon,
+  pconstant,
   perror,
-  pfilter,
   pfromData,
   pfstBuiltin,
   pif,
   plam,
   plength,
-  pmap,
   pmatch,
+  precList,
   psndBuiltin,
   ptryFrom,
   tcont,
   unTermCont,
   (#),
-  (#$),
   (#&&),
   (:-->),
  )
@@ -118,9 +121,8 @@ votingEffectValidator :: ClosedTerm (PAsData PCurrencySymbol :--> PAsData PScrip
 votingEffectValidator = plam $ \authSymbol' ctx -> P.do
   PScriptContext txInfo _redeemer scriptInfo <- pmatch $ pfromData ctx
 
-  PTxInfo inputs' _ _outputs _ mint' txCerts' _ _ _ _ datums' _ votes' pprocs' _ trDonations <- pmatch txInfo
+  PTxInfo inputs _ _outputs _ mint' txCerts' _ _ _ _ datums' _ votes' pprocs' _ trDonations <- pmatch txInfo
 
-  let inputs = pmap # plam pfromData # pfromData inputs'
   let txCerts = pfromData txCerts'
   let votes = pfromData votes'
   let pprocs = pfromData pprocs'
@@ -134,7 +136,36 @@ votingEffectValidator = plam $ \authSymbol' ctx -> P.do
             let authSymbol = pfromData authSymbol'
             -- Spending Condition 1: Transaction burns one GAT
             -- Spending Condition 2: Spent UTxO contains GAT
-            singleAuthorityTokenBurned authSymbol inputs mint
+
+            -- Spending condition 6: Transaction does not include script inputs other than own input.
+            -- If there is only one script input and we are running that means that we are that input
+            -- so no need to check explicitly
+            PJust ownScriptHash <-
+              pmatch $
+                precList
+                  ( \self input rest -> pmatch (pfromData input) $ \case
+                      PTxInInfo _ resolved -> P.do
+                        PTxOut addr _ _ _ <- pmatch resolved
+                        PAddress cred _ <- pmatch addr
+                        pmatch cred $ \case
+                          PScriptCredential hash -> pmatch (self # rest) $ \case
+                            PNothing -> pjust # hash
+                            PJust _ -> perror
+                          _ -> self # rest
+                  )
+                  (const (pconstant @(PMaybe (PAsData PScriptHash)) Nothing))
+                  # pfromData inputs
+
+            PMap voteList <- pmatch votes
+            PCons votePair voteList' <- pmatch voteList
+            PNil <- pmatch voteList'
+
+            PDRepVoter voter <- pmatch . pfromData $ pfstBuiltin # votePair
+            PDRepCredential cred <- pmatch voter
+            PScriptCredential scriptHash <- pmatch cred
+
+            singleAuthorityTokenBurned authSymbol (pfromData inputs) mint
+              #&& (scriptHash #== ownScriptHash)
           PCertifyingScript _ txCert -> P.do
             let votes = pfromData votes'
 
@@ -153,51 +184,30 @@ votingEffectValidator = plam $ \authSymbol' ctx -> P.do
             PTxCertRegDRep _ _ <- pmatch txCert
 
             hasNoVotes #&& noProposalProcedures #&& noTrDonations
-          PVotingScript voter -> P.do
-            PDRepVoter drepCred <- pmatch voter
-            PDRepCredential cred <- pmatch drepCred
-            PScriptCredential scriptHash <- pmatch cred
-
+          PVotingScript _voter -> P.do
             let noProposalProcedures =
                   ptraceInfoIfFalse "Transaction must not contain any proposal procedures." $ pnull # pprocs
 
             let noTrDonations =
                   ptraceInfoIfFalse "Transaction must not contain any treasury donations." $ trDonations #== pcon PDNothing
 
-            -- Filtering inputs to later verify that only one script input exists in the transaction
-            let scriptInputs =
-                  pfilter
-                    # plam
-                      ( \input -> pmatch input $ \case
-                          PTxInInfo _ resolved -> P.do
-                            PTxOut addr _ _ _ <- pmatch resolved
-                            PAddress cred _ <- pmatch addr
-                            pmatch cred $ \case
-                              PScriptCredential _ -> pcon PTrue
-                              _ -> pcon PFalse
-                      )
-                    # inputs
-
-            POutputDatumHash datumHash <-
+            -- The spending script ensures that there is only one script input
+            PJust datumHash <-
               pmatch $
-                phead
-                  #$ pmap
-                  # plam
-                    ( \input -> pmatch input $ \case
-                        PTxInInfo _ resolved -> P.do
-                          PTxOut _ _ datum _ <- pmatch resolved
-                          datum
-                    )
-                  #$ pfilter
-                  # plam
-                    ( \input -> pmatch input $ \case
-                        PTxInInfo _ resolved -> P.do
-                          PTxOut addr _ _ _ <- pmatch resolved
-                          PAddress cred _ <- pmatch addr
-                          PScriptCredential scriptHash' <- pmatch cred
-                          scriptHash #== scriptHash'
-                    )
-                  # scriptInputs
+                precList
+                  ( \self input rest -> pmatch (pfromData input) $ \case
+                      PTxInInfo _ resolved -> P.do
+                        PTxOut addr _ datum _ <- pmatch resolved
+                        POutputDatumHash datumHash <- pmatch datum
+                        PAddress cred _ <- pmatch addr
+                        pmatch cred $ \case
+                          PScriptCredential _ -> pmatch (self # rest) $ \case
+                            PNothing -> pjust # datumHash
+                            PJust _ -> perror
+                          _ -> self # rest
+                  )
+                  (const (pconstant @(PMaybe (PAsData PDatumHash)) Nothing))
+                  # pfromData inputs
 
             PMap voteList <- pmatch votes
             PCons votePair voteList' <- pmatch voteList
@@ -226,11 +236,6 @@ votingEffectValidator = plam $ \authSymbol' ctx -> P.do
                     #&& (govActionId #== govActionId')
                     #&& (vote #== vote')
 
-            -- Spending condition 6: Transaction does not include script inputs other than own input.
-            let singleScriptInput =
-                  ptraceInfoIfFalse "Transaction must not include script inputs other than own input." $
-                    (plength # scriptInputs) #== 1
-
             let hasNoCerts =
                   ptraceInfoIfFalse "Transaction must contain exactly 1 transaction certificate." $
                     (plength # txCerts) #== 0
@@ -238,7 +243,6 @@ votingEffectValidator = plam $ \authSymbol' ctx -> P.do
             foldr1
               (#&&)
               [ datumCheck
-              , singleScriptInput
               , hasNoCerts
               , noProposalProcedures
               , noTrDonations
