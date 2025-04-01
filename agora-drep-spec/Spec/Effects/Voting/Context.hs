@@ -1,32 +1,46 @@
-module Spec.Effects.Voting.Context (certifyingContextSpec, votingContextSpec, spendingContextSpec) where
+module Spec.Effects.Voting.Context (
+  certifyingContextSpec,
+  votingContextSpec,
+  spendingContextSpec,
+) where
 
 import Agora.Effects.Voting (VotingDatum (VotingDatum, vdGovernanceActionId, vdVote))
-import Crypto.Hash (Blake2b_224 (Blake2b_224), hashWith)
-import Data.ByteArray qualified as ByteArray
-import Data.ByteString (ByteString)
-import Data.ByteString.Short qualified as ByteStringS
-import Plutarch.Script (Script (Script), unScript)
-import Plutarch.Test.Program (ScriptCase (ScriptCase), ScriptResult (ScriptFailure, ScriptSuccess), testScript)
+import Plutarch.LedgerApi.V3 (scriptHash)
+import Plutarch.Script (Script)
+import Plutarch.Test.Program (ScriptResult (ScriptFailure, ScriptSuccess))
 import Plutus.ContextBuilder (UTXO, buildCertifying', buildSpending', buildVoting', input, mint, proposalProcedure, treasuryDonation, txCert, vote, withCertifying, withCredential, withHashDatum, withSpendingUTXO, withValue, withVoting)
-import PlutusCore qualified as PLC
 import PlutusLedgerApi.V1.Value qualified as Value
-import PlutusLedgerApi.V3 (BuiltinByteString, Credential (ScriptCredential), CurrencySymbol (CurrencySymbol), DRepCredential (DRepCredential), GovernanceAction (InfoAction), GovernanceActionId (GovernanceActionId), Lovelace (Lovelace), ProposalProcedure (ProposalProcedure), ScriptContext, ScriptHash (ScriptHash), ToData, TokenName (TokenName), TxId (TxId), Vote (VoteNo, VoteYes), serialiseUPLC, toBuiltin, toData)
+import PlutusLedgerApi.V3 (
+  Credential (ScriptCredential),
+  CurrencySymbol (CurrencySymbol),
+  DRepCredential (DRepCredential),
+  GovernanceAction (InfoAction),
+  GovernanceActionId (GovernanceActionId),
+  Lovelace (Lovelace),
+  ProposalProcedure (ProposalProcedure),
+  ScriptContext,
+  TokenName (TokenName),
+  TxId (TxId),
+  Vote (VoteNo, VoteYes),
+ )
 import PlutusLedgerApi.V3.Contexts (TxCert (TxCertRegDRep, TxCertRegStaking), Voter (DRepVoter))
+import Spec.Utils (TestConfig (ownScript), mkTest, testConfigFromScript, uncheckedApplyDataToScript)
 import Test.Tasty (TestTree, testGroup)
-import UntypedPlutusCore (Program (Program), Term (Apply, Constant))
 
-data TestConfig = TestConfig
+data TestConfigVoting = TestConfigVoting
   { vsCredential :: Credential
-  , ownScript :: Script
+  , vsScript :: Script
   }
 
-testConfigFromScript :: Script -> TestConfig
-testConfigFromScript votingScript =
-  let votingScriptHash = scriptHash votingScript
-   in TestConfig
-        { vsCredential = ScriptCredential votingScriptHash
-        , ownScript = votingScript
-        }
+instance TestConfig TestConfigVoting where
+  ownScript config = uncheckedApplyDataToScript gat3CurSym (vsScript config)
+
+  testConfigFromScript votingScript =
+    let votingScriptHash = scriptHash votingScript
+     in TestConfigVoting
+          { vsCredential = ScriptCredential votingScriptHash
+          , vsScript = votingScript
+          }
 
 -- | Unit tests
 certifyingContextSpec :: Script -> TestTree
@@ -76,7 +90,7 @@ spendingContextSpec votingScript =
 
 -- -- * ScriptContexts for the test cases
 
-validCert :: TestConfig -> ScriptContext
+validCert :: TestConfigVoting -> ScriptContext
 validCert config =
   let regDRep = TxCertRegDRep (DRepCredential (vsCredential config)) (Lovelace 5_000_000)
    in buildCertifying' $
@@ -86,7 +100,7 @@ validCert config =
           , txCert regDRep
           ]
 
-hasVotes :: TestConfig -> ScriptContext
+hasVotes :: TestConfigVoting -> ScriptContext
 hasVotes config =
   let regDRep = TxCertRegDRep (DRepCredential (vsCredential config)) (Lovelace 5_000_000)
    in buildCertifying' $
@@ -100,7 +114,7 @@ hasVotes config =
           , txCert regDRep
           ]
 
-multipleTxCerts :: TestConfig -> ScriptContext
+multipleTxCerts :: TestConfigVoting -> ScriptContext
 multipleTxCerts config =
   let regDRep = TxCertRegDRep (DRepCredential (vsCredential config)) 5_000_000
    in buildCertifying' $
@@ -111,7 +125,7 @@ multipleTxCerts config =
           , txCert (TxCertRegStaking (vsCredential config) (Just 5_000_000))
           ]
 
-hasPProcs :: TestConfig -> ScriptContext
+hasPProcs :: TestConfigVoting -> ScriptContext
 hasPProcs config =
   let regDRep = TxCertRegDRep (DRepCredential (vsCredential config)) 5_000_000
    in buildCertifying' $
@@ -122,7 +136,7 @@ hasPProcs config =
           , proposalProcedure (ProposalProcedure 5_000_000 (vsCredential config) InfoAction)
           ]
 
-hasTrDonations :: TestConfig -> ScriptContext
+hasTrDonations :: TestConfigVoting -> ScriptContext
 hasTrDonations config =
   let regDRep = TxCertRegDRep (DRepCredential (vsCredential config)) (Lovelace 5_000_000)
    in buildCertifying' $
@@ -133,7 +147,7 @@ hasTrDonations config =
           , treasuryDonation 5_000_000
           ]
 
-validVote :: TestConfig -> ScriptContext
+validVote :: TestConfigVoting -> ScriptContext
 validVote config =
   let voter = DRepVoter (DRepCredential (vsCredential config))
    in buildVoting' $
@@ -146,7 +160,7 @@ validVote config =
               VoteYes
           ]
 
-missingGat3 :: TestConfig -> ScriptContext
+missingGat3 :: TestConfigVoting -> ScriptContext
 missingGat3 config =
   let voter = DRepVoter (DRepCredential (vsCredential config))
    in buildVoting' $
@@ -158,7 +172,7 @@ missingGat3 config =
               VoteYes
           ]
 
-mismatchingVote :: TestConfig -> ScriptContext
+mismatchingVote :: TestConfigVoting -> ScriptContext
 mismatchingVote config =
   let voter = DRepVoter (DRepCredential (vsCredential config))
    in buildVoting' $
@@ -171,7 +185,7 @@ mismatchingVote config =
               VoteNo
           ]
 
-hasTxCerts :: TestConfig -> ScriptContext
+hasTxCerts :: TestConfigVoting -> ScriptContext
 hasTxCerts config =
   let voter = DRepVoter (DRepCredential (vsCredential config))
    in buildVoting' $
@@ -181,7 +195,7 @@ hasTxCerts config =
           , txCert (TxCertRegStaking (vsCredential config) (Just 5_000_000))
           ]
 
-hasPProcsVoting :: TestConfig -> ScriptContext
+hasPProcsVoting :: TestConfigVoting -> ScriptContext
 hasPProcsVoting config =
   let voter = DRepVoter (DRepCredential (vsCredential config))
    in buildVoting' $
@@ -191,7 +205,7 @@ hasPProcsVoting config =
           , proposalProcedure (ProposalProcedure 5_000_000 (vsCredential config) InfoAction)
           ]
 
-hasTrDonationsVoting :: TestConfig -> ScriptContext
+hasTrDonationsVoting :: TestConfigVoting -> ScriptContext
 hasTrDonationsVoting config =
   let voter = DRepVoter (DRepCredential (vsCredential config))
    in buildVoting' $
@@ -201,7 +215,7 @@ hasTrDonationsVoting config =
           , treasuryDonation 5_000_000
           ]
 
-validSpend :: TestConfig -> ScriptContext
+validSpend :: TestConfigVoting -> ScriptContext
 validSpend config =
   buildSpending' $
     mconcat
@@ -214,7 +228,7 @@ validSpend config =
           VoteYes
       ]
 
-missingGat3Spending :: TestConfig -> ScriptContext
+missingGat3Spending :: TestConfigVoting -> ScriptContext
 missingGat3Spending config =
   buildSpending' $
     mconcat
@@ -239,42 +253,10 @@ gat3CurSym :: CurrencySymbol
 gat3CurSym = CurrencySymbol "aabbcc"
 
 -- | UTxO containing GAT v2 token
-gat3Utxo :: TestConfig -> UTXO
+gat3Utxo :: TestConfigVoting -> UTXO
 gat3Utxo config =
   mconcat
     [ withValue (Value.singleton gat3CurSym (TokenName "") 1)
     , withHashDatum votingDatum
     , withCredential (vsCredential config)
     ]
-
--- -- * Test utilities
-
-mkTest :: TestConfig -> String -> (TestConfig -> ScriptContext) -> ScriptResult -> TestTree
-mkTest config testName toContext expectedResult =
-  let script = ownScript config
-      context = toContext config
-      Script applied = uncheckedApplyDataToScript context $ uncheckedApplyDataToScript gat3CurSym script
-   in testScript $ ScriptCase testName expectedResult applied applied
-
-uncheckedApplyDataToScript :: (ToData argument) => argument -> Script -> Script
-uncheckedApplyDataToScript argument (Script (Program () version unappliedTerm)) =
-  Script
-    . Program () version
-    . Apply () unappliedTerm
-    . Constant ()
-    . PLC.someValue
-    $ toData argument
-
--- TODO: Remove this once Plutarch scriptHash function is fixed
-scriptHash :: Script -> ScriptHash
-scriptHash = hashScriptWithPrefix "\x03"
-
--- TODO: Remove this once Plutarch scriptHash function is fixed
-hashScriptWithPrefix :: ByteString -> Script -> ScriptHash
-hashScriptWithPrefix prefix scr =
-  ScriptHash . hashBlake2b_224 $
-    prefix <> (ByteStringS.fromShort . serialiseUPLC . unScript $ scr)
-
--- TODO: Remove this once Plutarch scriptHash function is fixed
-hashBlake2b_224 :: ByteString -> BuiltinByteString
-hashBlake2b_224 = toBuiltin . ByteArray.convert @_ @ByteString . hashWith Blake2b_224

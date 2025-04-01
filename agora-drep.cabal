@@ -113,6 +113,7 @@ library agora-drep-spec
     Spec.Effects.Voting.Context
     Spec.Proxy
     Spec.Proxy.Context
+    Spec.Utils
 
   build-depends:
     , agora-drep
