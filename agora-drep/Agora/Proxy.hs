@@ -26,7 +26,6 @@ import Plutarch.LedgerApi.V3 (
 import Plutarch.Maybe (PMaybe (PNothing), pjust)
 import Plutarch.Monadic qualified as P
 import Plutarch.Prelude (
-  ClosedTerm,
   PAsData,
   PBool (PFalse),
   PBuiltinList (PCons, PNil),
