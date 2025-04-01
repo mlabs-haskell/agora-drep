@@ -3,7 +3,7 @@ module Spec.Effects.Voting (spec) where
 import Agora.Effects.Voting (votingEffectValidator)
 import Data.Text qualified as Text
 import Plutarch.Internal.Term qualified as Term
-import Spec.Effects.Voting.Context (certifyingContextSpec)
+import Spec.Effects.Voting.Context (certifyingContextSpec, spendingContextSpec, votingContextSpec)
 import Test.Tasty (TestTree, adjustOption, testGroup)
 import Test.Tasty.QuickCheck (QuickCheckTests)
 
@@ -13,6 +13,8 @@ spec =
     testGroup
       "Voting Effect Validator"
       [ certifyingContextSpec script
+      , votingContextSpec script
+      , spendingContextSpec script
       ]
   where
     script =
