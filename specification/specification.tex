@@ -193,6 +193,7 @@ Rest  of the checks if performed by the Voting Effect validator.
 
 The Voting Effect validator will utilise the above established Proxy Minting Validator, minting a Proxy Governance Authority Token (pGAT).
 By spending the pGAT, we essentially get the same guarantees as with GAT, but we can use Plutus V3, which introduces the functionalities to work with native Cardano governance.
+Similarly to the Proxy Validator, the script serves multiple purposes, to avoid the circular dependency problem (see explanation in 2.1 Proxy Spending Validator).
 
 In order to vote on a Cardano Governance Action using this effect the following preconditions must be met:
 \begin{itemize}
@@ -220,26 +221,32 @@ data Datum = Datum
 \subsubsection*{Spending Conditions}
 
 \begin{itemize}
-  \item Transaction burns exactly 1 pGAT (symbol is known from script parameter), and doesn't mint anything
-  \item Spent UTxO contains pGAT
   \item \verb|ScriptPurpose| is either \verb|Certifying|, \verb|Voting|, or \verb|Spending|
         \begin{itemize}
-          \item if \verb|Certifying|
-                \begin{itemize}
-                  \item \verb|ScriptContext| does not contain a vote
-                  \item \verb|ScriptContext| contains exactly 1 transaction certificate
-                \end{itemize}
-          \item if \verb|Voting|
-                \begin{itemize}
-                  \item \verb|Voter| set to a \verb|DRepCertificate| with the script hash of this validator
-                  \item \verb|ScriptContext| contains exactly 1 vote, where the \verb|Voter| matches the one in the \verb|ScriptPurpose|, and the \verb|GovernanceId| and \verb|Vote| match the ones in the Datum
-                  \item \verb|ScriptContext| does not contain a certificate
-                \end{itemize}
-          \item if \verb|Spending|: See Spending Proxy Validator
+          \item if \verb|Spending|
+                \begin {itemize}
 
+          \item \verb|ScriptContext| contains exactly 1 script input
+          \item \verb|ScriptContext| contains exactly 1 vote where the \verb|Voter| is the DRep credential of the Voting Script (script hash is common with the spending script)
         \end{itemize}
-  \item \verb|ScriptContext| does not contain proposal procedures
-  \item \verb|ScriptContext| does not contain treasury donations
+  \item if \verb|Certifying|
+        \begin{itemize}
+          \item \verb|ScriptContext| contains exactly 1 transaction DRep registration certificate
+          \item \verb|ScriptContext| does not contain a vote
+          \item \verb|ScriptContext| does not contain proposal procedures
+          \item \verb|ScriptContext| does not contain treasury donations
+        \end{itemize}
+  \item if \verb|Voting|
+        \begin{itemize}
+          \item above input has \verb|Voting Effect datum| as a hashed datum
+          \item \verb|ScriptContext| contains exactly 1 vote, where the \verb|GovernanceId| and \verb|Vote| match the ones in the \verb|Voting Effect's datum|
+          \item \verb|ScriptContext| does not contain a certificate
+          \item \verb|ScriptContext| does not contain proposal procedures
+          \item \verb|ScriptContext| does not contain treasury donations
+        \end{itemize}
+
+
+\end{itemize}
 \end{itemize}
 
 \subsubsection*{Interaction Diagrams}

@@ -13,8 +13,8 @@ import Plutarch.Internal.Term (
 import Plutarch.Script (Script (Script))
 import Plutarch.Test.Bench (bench, defaultMain)
 import PlutusLedgerApi.V3 (CurrencySymbol (CurrencySymbol), ScriptContext)
-import Spec.Proxy.Context (uncheckedApplyDataToScript)
 import Spec.Proxy.Context qualified as Proxy
+import Spec.Utils (TestConfig (testConfigFromScript), uncheckedApplyDataToScript)
 import Test.Tasty (TestName, TestTree, testGroup)
 import UntypedPlutusCore (Program (_progTerm))
 
@@ -27,7 +27,7 @@ main =
       , benchScript "GAT V3 Mint" compiledProxyScript Proxy.validGAT3Mint
       ]
 
-benchScript :: TestName -> Script -> (Proxy.TestConfig -> ScriptContext) -> TestTree
+benchScript :: (TestConfig c) => TestName -> Script -> (c -> ScriptContext) -> TestTree
 benchScript name script mkContext =
   let
     gat2CurSym :: CurrencySymbol
@@ -35,7 +35,7 @@ benchScript name script mkContext =
    in
     bench
       name
-      (unsafeTermFromScript (uncheckedApplyDataToScript (mkContext (Proxy.testConfigFromScript script)) $ uncheckedApplyDataToScript gat2CurSym script))
+      (unsafeTermFromScript (uncheckedApplyDataToScript (mkContext (testConfigFromScript script)) $ uncheckedApplyDataToScript gat2CurSym script))
 
 compiledProxyScript :: Script
 compiledProxyScript =
