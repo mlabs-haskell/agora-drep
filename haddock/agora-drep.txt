@@ -88,3 +88,20 @@ singleAuthorityTokenBurned :: forall (keys :: KeyGuarantees) (amounts :: AmountG
 --   
 --   @since WIP
 authorityTokensValidIn :: forall (s :: S). Term s (PCurrencySymbol :--> (PTxOut :--> PBool))
+
+module Agora.Effects.Voting
+votingEffectValidator :: ClosedTerm (PAsData PCurrencySymbol :--> (PAsData PScriptContext :--> PUnit))
+
+-- | Haskell-level datum for the Voting Effect Validator script.
+data VotingDatum
+VotingDatum :: GovernanceActionId -> Vote -> VotingDatum
+[$sel:vdGovernanceActionId:VotingDatum] :: VotingDatum -> GovernanceActionId
+[$sel:vdVote:VotingDatum] :: VotingDatum -> Vote
+instance Plutarch.Internal.PlutusType.PlutusType Agora.Effects.Voting.PVotingDatum
+instance Plutarch.Internal.IsData.PIsData Agora.Effects.Voting.PVotingDatum
+instance Plutarch.Internal.Eq.PEq Agora.Effects.Voting.PVotingDatum
+instance forall (s :: Plutarch.Internal.Term.S). Generics.SOP.Universe.Generic (Agora.Effects.Voting.PVotingDatum s)
+instance forall (s :: Plutarch.Internal.Term.S). GHC.Generics.Generic (Agora.Effects.Voting.PVotingDatum s)
+instance Plutarch.Internal.TryFrom.PTryFrom Plutarch.Builtin.Data.PData (Plutarch.Builtin.Data.PAsData Agora.Effects.Voting.PVotingDatum)
+instance PlutusTx.IsData.Class.FromData Agora.Effects.Voting.VotingDatum
+instance PlutusTx.IsData.Class.ToData Agora.Effects.Voting.VotingDatum
