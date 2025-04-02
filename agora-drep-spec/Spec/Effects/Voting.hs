@@ -1,9 +1,9 @@
-module Spec.Proxy (spec) where
+module Spec.Effects.Voting (spec) where
 
-import Agora.Proxy (proxyScript)
+import Agora.Effects.Voting (votingEffectValidator)
 import Data.Text qualified as Text
 import Plutarch.Internal.Term qualified as Term
-import Spec.Proxy.Context (mintingContextSpec, spendingContextSpec)
+import Spec.Effects.Voting.Context (certifyingContextSpec, spendingContextSpec, votingContextSpec)
 import Test.Tasty (TestTree, adjustOption, testGroup)
 import Test.Tasty.QuickCheck (QuickCheckTests)
 
@@ -11,14 +11,15 @@ spec :: TestTree
 spec =
   adjustOption extraOptions $
     testGroup
-      "Proxy Validator"
-      [ spendingContextSpec script
-      , mintingContextSpec script
+      "Voting Effect Validator"
+      [ certifyingContextSpec script
+      , votingContextSpec script
+      , spendingContextSpec script
       ]
   where
     script =
       either (error . Text.unpack) id $
-        Term.compile (Term.Tracing Term.LogInfo Term.DoTracing) proxyScript
+        Term.compile (Term.Tracing Term.LogInfo Term.DoTracing) votingEffectValidator
 
     -- 100 tests is way too small for a property test to search for a counterexample
     extraOptions :: QuickCheckTests -> QuickCheckTests

@@ -1,18 +1,14 @@
 module Spec.Proxy.Context (
-  TestConfig,
-  testConfigFromScript,
   spendingContextSpec,
   mintingContextSpec,
   validGAT2Spend,
   validGAT3Mint,
-  uncheckedApplyDataToScript,
 ) where
 
 import Agora.Proxy (ProxyDatum (ProxyDatum, pdDatumHash, pdReceiverScript))
-
 import Plutarch.LedgerApi.V3 (datumHash, scriptHash)
-import Plutarch.Script (Script (Script))
-import Plutarch.Test.Program (ScriptCase (ScriptCase), ScriptResult (ScriptFailure, ScriptSuccess), testScript)
+import Plutarch.Script (Script)
+import Plutarch.Test.Program (ScriptResult (ScriptFailure, ScriptSuccess))
 import Plutus.ContextBuilder (
   UTXO,
   buildMinting',
@@ -28,7 +24,6 @@ import Plutus.ContextBuilder (
   withSpendingUTXO,
   withValue,
  )
-import PlutusCore qualified as PLC
 import PlutusLedgerApi.V1.Value qualified as Value
 import PlutusLedgerApi.V3 (
   Credential (ScriptCredential),
@@ -39,26 +34,27 @@ import PlutusLedgerApi.V3 (
   ToData (toBuiltinData),
   TokenName (TokenName),
   TxCert (TxCertRegStaking),
-  toData,
  )
+import Spec.Utils (TestConfig (ownScript, testConfigFromScript), mkTest, uncheckedApplyDataToScript)
 import Test.Tasty (TestTree, testGroup)
-import UntypedPlutusCore (Program (Program), Term (Apply, Constant))
 
-data TestConfig = TestConfig
+data TestConfigProxy = TestConfigProxy
   { gat3Credential :: Credential
   , gat3CurSym :: CurrencySymbol
-  , ownScript :: Script
+  , gat3Script :: Script
   }
 
-testConfigFromScript :: Script -> TestConfig
-testConfigFromScript gat3Script =
-  let gat3ScriptHash = scriptHash gat3Script
-      ScriptHash scriptHashBS = gat3ScriptHash
-   in TestConfig
-        { gat3Credential = ScriptCredential gat3ScriptHash
-        , gat3CurSym = CurrencySymbol scriptHashBS
-        , ownScript = gat3Script
-        }
+instance TestConfig TestConfigProxy where
+  ownScript config = uncheckedApplyDataToScript gat2CurSym (gat3Script config)
+
+  testConfigFromScript gat3Script =
+    let gat3ScriptHash = scriptHash gat3Script
+        ScriptHash scriptHashBS = gat3ScriptHash
+     in TestConfigProxy
+          { gat3Credential = ScriptCredential gat3ScriptHash
+          , gat3CurSym = CurrencySymbol scriptHashBS
+          , gat3Script
+          }
 
 -- | Unit tests
 spendingContextSpec :: Script -> TestTree
@@ -68,7 +64,7 @@ spendingContextSpec gat3Script =
     mkTest' = mkTest config
    in
     testGroup
-      "Context tests"
+      "Spending Context tests"
       [ mkTest' "OK case: Valid GAT2 spend" validGAT2Spend ScriptSuccess
       , mkTest' "Fail case: Missing GAT v2 burn" missingGat2Burn ScriptFailure
       , mkTest' "Fail case: Missing GAT v2 token from spent UTxO" missingGat2FromUtxo ScriptFailure
@@ -89,7 +85,7 @@ mintingContextSpec gat3Script =
     mkTest' = mkTest config
    in
     testGroup
-      "Context tests"
+      "Minting Context tests"
       [ mkTest' "OK case: Valid GAT3 mint" validGAT3Mint ScriptSuccess
       , mkTest' "Fail case: Minting more than one GAT v3" mintMoreThan1Gat3' ScriptFailure
       , mkTest' "Fail case: GAT v3 multiple tokens with different token names" multipleTokenNames ScriptFailure
@@ -98,7 +94,7 @@ mintingContextSpec gat3Script =
 
 -- * ScriptContexts for the test cases
 
-validGAT2Spend :: TestConfig -> ScriptContext
+validGAT2Spend :: TestConfigProxy -> ScriptContext
 validGAT2Spend config =
   buildSpending' $
     mconcat
@@ -109,7 +105,7 @@ validGAT2Spend config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
       ]
 
-missingGat2Burn :: TestConfig -> ScriptContext
+missingGat2Burn :: TestConfigProxy -> ScriptContext
 missingGat2Burn config =
   buildSpending' $
     mconcat
@@ -119,7 +115,7 @@ missingGat2Burn config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
       ]
 
-missingGat2FromUtxo :: TestConfig -> ScriptContext
+missingGat2FromUtxo :: TestConfigProxy -> ScriptContext
 missingGat2FromUtxo config =
   buildSpending' $
     mconcat
@@ -128,7 +124,7 @@ missingGat2FromUtxo config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
       ]
 
-mintMoreThan1Gat3 :: TestConfig -> ScriptContext
+mintMoreThan1Gat3 :: TestConfigProxy -> ScriptContext
 mintMoreThan1Gat3 config =
   buildSpending' $
     mconcat
@@ -139,7 +135,7 @@ mintMoreThan1Gat3 config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 2)
       ]
 
-missingReceiverOutput :: TestConfig -> ScriptContext
+missingReceiverOutput :: TestConfigProxy -> ScriptContext
 missingReceiverOutput config =
   buildSpending' $
     mconcat
@@ -149,7 +145,7 @@ missingReceiverOutput config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
       ]
 
-invalidGAT3Datum :: TestConfig -> ScriptContext
+invalidGAT3Datum :: TestConfigProxy -> ScriptContext
 invalidGAT3Datum config =
   buildSpending' $
     mconcat
@@ -160,7 +156,7 @@ invalidGAT3Datum config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
       ]
 
-mint3rdToken :: TestConfig -> ScriptContext
+mint3rdToken :: TestConfigProxy -> ScriptContext
 mint3rdToken config =
   buildSpending' $
     mconcat
@@ -172,7 +168,7 @@ mint3rdToken config =
       , mint (Value.singleton (CurrencySymbol "aabbccdd1234") (TokenName "") 1)
       ]
 
-includesCerts :: TestConfig -> ScriptContext
+includesCerts :: TestConfigProxy -> ScriptContext
 includesCerts config =
   buildSpending' $
     mconcat
@@ -184,7 +180,7 @@ includesCerts config =
       , txCert (TxCertRegStaking (gat3Credential config) (Just 5000000))
       ]
 
-includesOtherScripts :: TestConfig -> ScriptContext
+includesOtherScripts :: TestConfigProxy -> ScriptContext
 includesOtherScripts config =
   buildSpending' $
     mconcat
@@ -200,7 +196,7 @@ includesOtherScripts config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
       ]
 
-validGAT3Mint :: TestConfig -> ScriptContext
+validGAT3Mint :: TestConfigProxy -> ScriptContext
 validGAT3Mint config =
   buildMinting' $
     mconcat
@@ -210,7 +206,7 @@ validGAT3Mint config =
       , mint (Value.singleton gat2CurSym (TokenName "") (-1))
       ]
 
-mintMoreThan1Gat3' :: TestConfig -> ScriptContext
+mintMoreThan1Gat3' :: TestConfigProxy -> ScriptContext
 mintMoreThan1Gat3' config =
   buildMinting' $
     mconcat
@@ -220,7 +216,7 @@ mintMoreThan1Gat3' config =
       , mint (Value.singleton gat2CurSym (TokenName "") (-1))
       ]
 
-multipleTokenNames :: TestConfig -> ScriptContext
+multipleTokenNames :: TestConfigProxy -> ScriptContext
 multipleTokenNames config =
   buildMinting' $
     mconcat
@@ -231,7 +227,7 @@ multipleTokenNames config =
       , mint (Value.singleton gat2CurSym (TokenName "") (-1))
       ]
 
-nonEmptyTokenName :: TestConfig -> ScriptContext
+nonEmptyTokenName :: TestConfigProxy -> ScriptContext
 nonEmptyTokenName config =
   buildMinting' $
     mconcat
@@ -268,7 +264,7 @@ gat2CurSym :: CurrencySymbol
 gat2CurSym = CurrencySymbol "aabbcc"
 
 -- | UTxO containing GAT v2 token
-gat2Utxo :: TestConfig -> UTXO
+gat2Utxo :: TestConfigProxy -> UTXO
 gat2Utxo config =
   mconcat
     [ withValue (Value.singleton gat2CurSym (TokenName "") 1)
@@ -277,7 +273,7 @@ gat2Utxo config =
     ]
 
 -- | UTxO containing GAT v3 token
-gat3Utxo :: TestConfig -> UTXO
+gat3Utxo :: TestConfigProxy -> UTXO
 gat3Utxo config =
   mconcat
     [ withValue (Value.singleton (gat3CurSym config) (TokenName "") 1)
@@ -286,28 +282,10 @@ gat3Utxo config =
     ]
 
 -- | UTxO containing GAT v3 token
-invalidGat3Utxo :: TestConfig -> UTXO
+invalidGat3Utxo :: TestConfigProxy -> UTXO
 invalidGat3Utxo config =
   mconcat
     [ withValue (Value.singleton (gat3CurSym config) (TokenName "") 1)
     , withHashDatum (01234 :: Integer)
     , withCredential receiverCredential
     ]
-
--- * Test utilities
-
-mkTest :: TestConfig -> String -> (TestConfig -> ScriptContext) -> ScriptResult -> TestTree
-mkTest config testName toContext expectedResult =
-  let script = ownScript config
-      context = toContext config
-      Script applied = uncheckedApplyDataToScript context $ uncheckedApplyDataToScript gat2CurSym script
-   in testScript $ ScriptCase testName expectedResult applied applied
-
-uncheckedApplyDataToScript :: (ToData argument) => argument -> Script -> Script
-uncheckedApplyDataToScript argument (Script (Program () version unappliedTerm)) =
-  Script
-    . Program () version
-    . Apply () unappliedTerm
-    . Constant ()
-    . PLC.someValue
-    $ toData argument

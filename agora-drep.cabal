@@ -86,6 +86,7 @@ library
   hs-source-dirs:  agora-drep
   exposed-modules:
     Agora.AuthorityToken
+    Agora.Effects.Voting
     Agora.Proxy
     Agora.Utils
 
@@ -101,14 +102,18 @@ executable agora-drep
   main-is:        Main.hs
   build-depends:  agora-drep
   hs-source-dirs: agora-drep-script-export
+  other-modules:
 
 -- Factored out to share code between test and bench units
 library agora-drep-spec
   import:          lang
   hs-source-dirs:  agora-drep-spec
   exposed-modules:
+    Spec.Effects.Voting
+    Spec.Effects.Voting.Context
     Spec.Proxy
     Spec.Proxy.Context
+    Spec.Utils
 
   build-depends:
     , agora-drep
