@@ -126,12 +126,12 @@ proxyScript :: (forall (s :: S). Term s (PAsData PCurrencySymbol :--> PAsData PS
 proxyScript = plam $ \authSymbol' ctx -> P.do
   PScriptContext txInfo _redeemer scriptInfo <- pmatch $ pfromData ctx
 
-  -- When this script runs also V2 GAT gets burned so that guarantees that no V3 thing happens
-  PTxInfo inputs _ outputs _ mint txCerts _ _ _ _ _ _ _ _ _ _ <- pmatch txInfo
-
   let valid =
         pmatch scriptInfo $ \case
           PSpendingScript _txOutRef mayDatum -> P.do
+            -- When this script runs also V2 GAT gets burned so that guarantees that no V3 thing happens
+            PTxInfo inputs _ outputs _ mint txCerts _ _ _ _ _ _ _ _ _ _ <- pmatch txInfo
+
             PDJust datum <- pmatch mayDatum
             PDatum rawDatum <- pmatch (pfromData datum)
 
@@ -239,6 +239,9 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
               , mintCheck
               ]
           PMintingScript currencySymbol -> P.do
+            -- When this script runs also V2 GAT gets burned so that guarantees that no V3 thing happens
+            PTxInfo inputs _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <- pmatch txInfo
+
             let isValidatorInput =
                   plam
                     ( \input -> pmatch (pfromData input) $ \case
