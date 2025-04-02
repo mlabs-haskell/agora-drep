@@ -1,4 +1,7 @@
--- | This module was copied from the Liqwid-Labs/agora repo, and updated to work with Plutus V3 and Plutarch 1.10.1
+{- | This module was copied from the Liqwid-Labs/agora repo, and updated to work with Plutus V3 and Plutarch 1.10.1
+
+ @since WIP
+-}
 module Agora.AuthorityToken (singleAuthorityTokenBurned, authorityTokensValidIn) where
 
 import Agora.Utils (psymbolValueOf)
@@ -54,7 +57,7 @@ import Plutarch.Prelude (
   In other words, check that all assets of a particular currency symbol
   are tagged with a TokenName that matches where they live.
 
-  @since 1.0.0
+  @since WIP
 -}
 authorityTokensValidIn :: forall (s :: S). Term s (PCurrencySymbol :--> PTxOut :--> PBool)
 authorityTokensValidIn = phoistAcyclic $
@@ -81,7 +84,7 @@ authorityTokensValidIn = phoistAcyclic $
 
 {- | Assert that a single authority token has been burned.
 
-  @since 0.2.0
+  @since WIP
 -}
 singleAuthorityTokenBurned ::
   forall (keys :: KeyGuarantees) (amounts :: AmountGuarantees) (s :: S).

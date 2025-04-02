@@ -1,3 +1,4 @@
+-- | @since WIP
 module Agora.Proxy (proxyScript, PProxyDatum (..), ProxyDatum (..)) where
 
 import Agora.Utils (pcountIf, pcurrencySymbolToScriptHash, pscriptHashToCurrencySymbol)
@@ -25,7 +26,6 @@ import Plutarch.LedgerApi.V3 (
 import Plutarch.Maybe (PMaybe (PNothing), pjust)
 import Plutarch.Monadic qualified as P
 import Plutarch.Prelude (
-  ClosedTerm,
   PAsData,
   PBool (PFalse),
   PBuiltinList (PCons, PNil),
@@ -66,15 +66,24 @@ import PlutusTx.Builtins (chooseData, unsafeDataAsList)
 
 {- | Haskell-level datum for the Proxy Validator script.
 
- @since 0.1.0
+ @since WIP
 -}
 data ProxyDatum = ProxyDatum
   { pdReceiverScript :: ScriptHash
   , pdDatumHash :: DatumHash
   }
-  deriving stock (Show, GHC.Generic)
-  deriving anyclass (SOP.Generic)
+  deriving stock
+    ( -- | @since WIP
+      Show
+    , -- | @since WIP
+      GHC.Generic
+    )
+  deriving anyclass
+    ( -- | @since WIP
+      SOP.Generic
+    )
 
+-- | @since WIP
 instance PlutusTx.FromData ProxyDatum where
   {-# INLINEABLE fromBuiltinData #-}
   fromBuiltinData d =
@@ -94,11 +103,13 @@ instance PlutusTx.FromData ProxyDatum where
       (const Nothing)
       d
 
+-- | @since WIP
 instance PlutusTx.ToData ProxyDatum where
   {-# INLINEABLE toBuiltinData #-}
   toBuiltinData (ProxyDatum receiverScript datumHash) =
     toBuiltin $ PlutusTx.List [toData receiverScript, toData datumHash]
 
+-- | @since WIP
 type PProxyDatum :: S -> Type
 data PProxyDatum s = PProxyDatum
   { receiverScript :: Term s (PAsData PScriptHash)
@@ -110,7 +121,8 @@ data PProxyDatum s = PProxyDatum
 
 instance PTryFrom PData (PAsData PProxyDatum)
 
-proxyScript :: ClosedTerm (PAsData PCurrencySymbol :--> PAsData PScriptContext :--> PUnit)
+-- | @since WIP
+proxyScript :: (forall (s :: S). Term s (PAsData PCurrencySymbol :--> PAsData PScriptContext :--> PUnit))
 proxyScript = plam $ \authSymbol' ctx -> P.do
   PScriptContext txInfo _redeemer scriptInfo <- pmatch $ pfromData ctx
 
