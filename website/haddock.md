@@ -1,3 +1,3 @@
 # Haddock
 
-[Haddock](./haddock)
+[Haddock](./haddock/)
