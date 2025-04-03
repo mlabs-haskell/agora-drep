@@ -76,7 +76,7 @@
 </span><span id="line-74"></span><span>  </span><span class="hs-special">}</span><span>
 </span><span id="line-75"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span>
 </span><span id="line-76"></span><span>    </span><span class="hs-special">(</span><span> </span><span class="annot"><span class="hs-comment">-- | @since WIP</span></span><span>
-</span><span id="line-77"></span><span>      </span><span id="local-6989586621679198066"><span id="local-6989586621679198074"><span id="local-6989586621679198078"><span class="annot"><span class="annottext">Int -&gt; ProxyDatum -&gt; ShowS
+</span><span id="line-77"></span><span>      </span><span id="local-6989586621679198008"><span id="local-6989586621679198016"><span id="local-6989586621679198020"><span class="annot"><span class="annottext">Int -&gt; ProxyDatum -&gt; ShowS
 [ProxyDatum] -&gt; ShowS
 ProxyDatum -&gt; String
 (Int -&gt; ProxyDatum -&gt; ShowS)
@@ -93,7 +93,7 @@ $cshowList :: [ProxyDatum] -&gt; ShowS
 showList :: [ProxyDatum] -&gt; ShowS
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Show.html#Show"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span>
 </span><span id="line-78"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-comment">-- | @since WIP</span></span><span>
-</span><span id="line-79"></span><span>      </span><span id="local-6989586621679198082"><span id="local-6989586621679198084"><span class="annot"><span class="annottext">(forall x. ProxyDatum -&gt; Rep ProxyDatum x)
+</span><span id="line-79"></span><span>      </span><span id="local-6989586621679198024"><span id="local-6989586621679198026"><span class="annot"><span class="annottext">(forall x. ProxyDatum -&gt; Rep ProxyDatum x)
 -&gt; (forall x. Rep ProxyDatum x -&gt; ProxyDatum) -&gt; Generic ProxyDatum
 forall x. Rep ProxyDatum x -&gt; ProxyDatum
 forall x. ProxyDatum -&gt; Rep ProxyDatum x
@@ -107,7 +107,7 @@ to :: forall x. Rep ProxyDatum x -&gt; ProxyDatum
 </span><span id="line-80"></span><span>    </span><span class="hs-special">)</span><span>
 </span><span id="line-81"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">anyclass</span></span><span>
 </span><span id="line-82"></span><span>    </span><span class="hs-special">(</span><span> </span><span class="annot"><span class="hs-comment">-- | @since WIP</span></span><span>
-</span><span id="line-83"></span><span>      </span><span id="local-6989586621679198091"><span id="local-6989586621679198100"><span class="annot"><span class="annottext">All @[Type] (SListI @Type) (Code ProxyDatum)
+</span><span id="line-83"></span><span>      </span><span id="local-6989586621679198033"><span id="local-6989586621679198042"><span class="annot"><span class="annottext">All @[Type] (SListI @Type) (Code ProxyDatum)
 All @[Type] (SListI @Type) (Code ProxyDatum) =&gt;
 (ProxyDatum -&gt; Rep ProxyDatum)
 -&gt; (Rep ProxyDatum -&gt; ProxyDatum) -&gt; Generic ProxyDatum
@@ -126,9 +126,9 @@ to :: Rep ProxyDatum -&gt; ProxyDatum
 </span><span id="line-86"></span><span class="annot"><span class="hs-comment">-- | @since WIP</span></span><span>
 </span><span id="line-87"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">PlutusTx.FromData</span></span><span> </span><span class="annot"><a href="Agora.Proxy.html#ProxyDatum"><span class="hs-identifier hs-type">ProxyDatum</span></a></span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-88"></span><span>  </span><span class="hs-pragma">{-# INLINEABLE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">fromBuiltinData</span></span><span> </span><span class="hs-pragma">#-}</span><span>
-</span><span id="line-89"></span><span>  </span><span id="local-6989586621679198150"><span class="annot"><span class="annottext">fromBuiltinData :: BuiltinData -&gt; Maybe ProxyDatum
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">fromBuiltinData</span></span></span><span> </span><span id="local-6989586621679198151"><span class="annot"><span class="annottext">BuiltinData
-</span><a href="#local-6989586621679198151"><span class="hs-identifier hs-var">d</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-89"></span><span>  </span><span id="local-6989586621679198092"><span class="annot"><span class="annottext">fromBuiltinData :: BuiltinData -&gt; Maybe ProxyDatum
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">fromBuiltinData</span></span></span><span> </span><span id="local-6989586621679198093"><span class="annot"><span class="annottext">BuiltinData
+</span><a href="#local-6989586621679198093"><span class="hs-identifier hs-var">d</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-90"></span><span>    </span><span class="annot"><span class="annottext">BuiltinData
 -&gt; (BuiltinData -&gt; Maybe ProxyDatum)
 -&gt; (BuiltinData -&gt; Maybe ProxyDatum)
@@ -140,7 +140,7 @@ to :: Rep ProxyDatum -&gt; ProxyDatum
 forall a. BuiltinData -&gt; a -&gt; a -&gt; a -&gt; a -&gt; a -&gt; a
 </span><span class="hs-identifier hs-var">chooseData</span></span><span>
 </span><span id="line-91"></span><span>      </span><span class="annot"><span class="annottext">BuiltinData
-</span><a href="#local-6989586621679198151"><span class="hs-identifier hs-var">d</span></a></span><span>
+</span><a href="#local-6989586621679198093"><span class="hs-identifier hs-var">d</span></a></span><span>
 </span><span id="line-92"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Maybe ProxyDatum -&gt; BuiltinData -&gt; Maybe ProxyDatum
 forall a b. a -&gt; b -&gt; a
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#const"><span class="hs-identifier hs-var">const</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe ProxyDatum
@@ -151,14 +151,14 @@ forall a b. a -&gt; b -&gt; a
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#const"><span class="hs-identifier hs-var">const</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe ProxyDatum
 forall a. Maybe a
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-94"></span><span>      </span><span class="hs-special">(</span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679198153"><span class="annot"><span class="annottext">BuiltinData
-</span><a href="#local-6989586621679198153"><span class="hs-identifier hs-var">d'</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-94"></span><span>      </span><span class="hs-special">(</span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679198095"><span class="annot"><span class="annottext">BuiltinData
+</span><a href="#local-6989586621679198095"><span class="hs-identifier hs-var">d'</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-95"></span><span>          </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">BuiltinData -&gt; [BuiltinData]
 </span><span class="hs-identifier hs-var">unsafeDataAsList</span></span><span> </span><span class="annot"><span class="annottext">BuiltinData
-</span><a href="#local-6989586621679198153"><span class="hs-identifier hs-var">d'</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-96"></span><span>            </span><span class="hs-special">[</span><span id="local-6989586621679198154"><span class="annot"><span class="annottext">BuiltinData
-</span><a href="#local-6989586621679198154"><span class="hs-identifier hs-var">receiverScript</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679198155"><span class="annot"><span class="annottext">BuiltinData
-</span><a href="#local-6989586621679198155"><span class="hs-identifier hs-var">datumHash</span></a></span></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679198095"><span class="hs-identifier hs-var">d'</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-96"></span><span>            </span><span class="hs-special">[</span><span id="local-6989586621679198096"><span class="annot"><span class="annottext">BuiltinData
+</span><a href="#local-6989586621679198096"><span class="hs-identifier hs-var">receiverScript</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679198097"><span class="annot"><span class="annottext">BuiltinData
+</span><a href="#local-6989586621679198097"><span class="hs-identifier hs-var">datumHash</span></a></span></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-97"></span><span>              </span><span class="annot"><span class="annottext">ScriptHash -&gt; DatumHash -&gt; ProxyDatum
 </span><a href="Agora.Proxy.html#ProxyDatum"><span class="hs-identifier hs-var">ProxyDatum</span></a></span><span>
 </span><span id="line-98"></span><span>                </span><span class="annot"><span class="annottext">(ScriptHash -&gt; DatumHash -&gt; ProxyDatum)
@@ -167,7 +167,7 @@ forall (f :: Type -&gt; Type) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/Data.Functor.html#%3C%24%3E"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">BuiltinData -&gt; Maybe ScriptHash
 forall a. FromData a =&gt; BuiltinData -&gt; Maybe a
 </span><span class="hs-identifier hs-var">fromBuiltinData</span></span><span> </span><span class="annot"><span class="annottext">BuiltinData
-</span><a href="#local-6989586621679198154"><span class="hs-identifier hs-var">receiverScript</span></a></span><span>
+</span><a href="#local-6989586621679198096"><span class="hs-identifier hs-var">receiverScript</span></a></span><span>
 </span><span id="line-99"></span><span>                </span><span class="annot"><span class="annottext">Maybe (DatumHash -&gt; ProxyDatum)
 -&gt; Maybe DatumHash -&gt; Maybe ProxyDatum
 forall a b. Maybe (a -&gt; b) -&gt; Maybe a -&gt; Maybe b
@@ -177,7 +177,7 @@ f (a -&gt; b) -&gt; f a -&gt; f b
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%3C%2A%3E"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">BuiltinData -&gt; Maybe DatumHash
 forall a. FromData a =&gt; BuiltinData -&gt; Maybe a
 </span><span class="hs-identifier hs-var">fromBuiltinData</span></span><span> </span><span class="annot"><span class="annottext">BuiltinData
-</span><a href="#local-6989586621679198155"><span class="hs-identifier hs-var">datumHash</span></a></span><span>
+</span><a href="#local-6989586621679198097"><span class="hs-identifier hs-var">datumHash</span></a></span><span>
 </span><span id="line-100"></span><span>            </span><span class="annot"><span class="annottext">[BuiltinData]
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe ProxyDatum
 forall a. Maybe a
@@ -194,15 +194,15 @@ forall a b. a -&gt; b -&gt; a
 forall a. Maybe a
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-104"></span><span>      </span><span class="annot"><span class="annottext">BuiltinData
-</span><a href="#local-6989586621679198151"><span class="hs-identifier hs-var">d</span></a></span><span>
+</span><a href="#local-6989586621679198093"><span class="hs-identifier hs-var">d</span></a></span><span>
 </span><span id="line-105"></span><span>
 </span><span id="line-106"></span><span class="annot"><span class="hs-comment">-- | @since WIP</span></span><span>
 </span><span id="line-107"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">PlutusTx.ToData</span></span><span> </span><span class="annot"><a href="Agora.Proxy.html#ProxyDatum"><span class="hs-identifier hs-type">ProxyDatum</span></a></span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-108"></span><span>  </span><span class="hs-pragma">{-# INLINEABLE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">toBuiltinData</span></span><span> </span><span class="hs-pragma">#-}</span><span>
-</span><span id="line-109"></span><span>  </span><span id="local-6989586621679198166"><span class="annot"><span class="annottext">toBuiltinData :: ProxyDatum -&gt; BuiltinData
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">toBuiltinData</span></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Agora.Proxy.html#ProxyDatum"><span class="hs-identifier hs-type">ProxyDatum</span></a></span><span> </span><span id="local-6989586621679198167"><span class="annot"><span class="annottext">ScriptHash
-</span><a href="#local-6989586621679198167"><span class="hs-identifier hs-var">receiverScript</span></a></span></span><span> </span><span id="local-6989586621679198168"><span class="annot"><span class="annottext">DatumHash
-</span><a href="#local-6989586621679198168"><span class="hs-identifier hs-var">datumHash</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-109"></span><span>  </span><span id="local-6989586621679198108"><span class="annot"><span class="annottext">toBuiltinData :: ProxyDatum -&gt; BuiltinData
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">toBuiltinData</span></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Agora.Proxy.html#ProxyDatum"><span class="hs-identifier hs-type">ProxyDatum</span></a></span><span> </span><span id="local-6989586621679198109"><span class="annot"><span class="annottext">ScriptHash
+</span><a href="#local-6989586621679198109"><span class="hs-identifier hs-var">receiverScript</span></a></span></span><span> </span><span id="local-6989586621679198110"><span class="annot"><span class="annottext">DatumHash
+</span><a href="#local-6989586621679198110"><span class="hs-identifier hs-var">datumHash</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-110"></span><span>    </span><span class="annot"><span class="annottext">Data -&gt; ToBuiltin Data
 forall a. HasToBuiltin a =&gt; a -&gt; ToBuiltin a
 </span><span class="hs-identifier hs-var">toBuiltin</span></span><span> </span><span class="annot"><span class="annottext">(Data -&gt; ToBuiltin Data) -&gt; Data -&gt; ToBuiltin Data
@@ -211,20 +211,20 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">PlutusTx.List</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">ScriptHash -&gt; Data
 forall a. ToData a =&gt; a -&gt; Data
 </span><span class="hs-identifier hs-var">toData</span></span><span> </span><span class="annot"><span class="annottext">ScriptHash
-</span><a href="#local-6989586621679198167"><span class="hs-identifier hs-var">receiverScript</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">DatumHash -&gt; Data
+</span><a href="#local-6989586621679198109"><span class="hs-identifier hs-var">receiverScript</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">DatumHash -&gt; Data
 forall a. ToData a =&gt; a -&gt; Data
 </span><span class="hs-identifier hs-var">toData</span></span><span> </span><span class="annot"><span class="annottext">DatumHash
-</span><a href="#local-6989586621679198168"><span class="hs-identifier hs-var">datumHash</span></a></span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679198110"><span class="hs-identifier hs-var">datumHash</span></a></span><span class="hs-special">]</span><span>
 </span><span id="line-111"></span><span>
 </span><span id="line-112"></span><span class="annot"><span class="hs-comment">-- | @since WIP</span></span><span>
 </span><span id="line-113"></span><span class="hs-keyword">type</span><span> </span><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier hs-type">PProxyDatum</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">S</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/ghc-prim-0.10.0/src/GHC.Types.html#Type"><span class="hs-identifier hs-type">Type</span></a></span><span>
-</span><span id="line-114"></span><span class="hs-keyword">data</span><span> </span><span id="PProxyDatum"><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier hs-var">PProxyDatum</span></a></span></span><span> </span><span id="local-6989586621679197788"><span class="annot"><a href="#local-6989586621679197788"><span class="hs-identifier hs-type">s</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="PProxyDatum"><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier hs-var">PProxyDatum</span></a></span></span><span>
+</span><span id="line-114"></span><span class="hs-keyword">data</span><span> </span><span id="PProxyDatum"><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier hs-var">PProxyDatum</span></a></span></span><span> </span><span id="local-6989586621679197730"><span class="annot"><a href="#local-6989586621679197730"><span class="hs-identifier hs-type">s</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="PProxyDatum"><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier hs-var">PProxyDatum</span></a></span></span><span>
 </span><span id="line-115"></span><span>  </span><span class="hs-special">{</span><span> </span><span id="%24sel%3AreceiverScript%3APProxyDatum"><span class="annot"><span class="annottext">forall (s :: S). PProxyDatum s -&gt; Term s (PAsData PScriptHash)
-</span><a href="Agora.Proxy.html#%24sel%3AreceiverScript%3APProxyDatum"><span class="hs-identifier hs-var hs-var">receiverScript</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679197788"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PAsData</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PScriptHash</span></span><span class="hs-special">)</span><span>
+</span><a href="Agora.Proxy.html#%24sel%3AreceiverScript%3APProxyDatum"><span class="hs-identifier hs-var hs-var">receiverScript</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679197730"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PAsData</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PScriptHash</span></span><span class="hs-special">)</span><span>
 </span><span id="line-116"></span><span>  </span><span class="hs-special">,</span><span> </span><span id="%24sel%3AdatumHash%3APProxyDatum"><span class="annot"><span class="annottext">forall (s :: S). PProxyDatum s -&gt; Term s (PAsData PDatumHash)
-</span><a href="Agora.Proxy.html#%24sel%3AdatumHash%3APProxyDatum"><span class="hs-identifier hs-var hs-var">datumHash</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679197788"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PAsData</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PDatumHash</span></span><span class="hs-special">)</span><span>
+</span><a href="Agora.Proxy.html#%24sel%3AdatumHash%3APProxyDatum"><span class="hs-identifier hs-var hs-var">datumHash</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679197730"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PAsData</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PDatumHash</span></span><span class="hs-special">)</span><span>
 </span><span id="line-117"></span><span>  </span><span class="hs-special">}</span><span>
-</span><span id="line-118"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679198174"><span id="local-6989586621679198176"><span class="annot"><span class="annottext">(forall x. PProxyDatum s -&gt; Rep (PProxyDatum s) x)
+</span><span id="line-118"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679198116"><span id="local-6989586621679198118"><span class="annot"><span class="annottext">(forall x. PProxyDatum s -&gt; Rep (PProxyDatum s) x)
 -&gt; (forall x. Rep (PProxyDatum s) x -&gt; PProxyDatum s)
 -&gt; Generic (PProxyDatum s)
 forall x. Rep (PProxyDatum s) x -&gt; PProxyDatum s
@@ -238,7 +238,7 @@ from :: forall x. PProxyDatum s -&gt; Rep (PProxyDatum s) x
 $cto :: forall (s :: S) x. Rep (PProxyDatum s) x -&gt; PProxyDatum s
 to :: forall x. Rep (PProxyDatum s) x -&gt; PProxyDatum s
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Generics.html#Generic"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">GHC.Generic</span></a></span></span></span><span class="hs-special">)</span><span>
-</span><span id="line-119"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">anyclass</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679198182"><span id="local-6989586621679198191"><span class="annot"><span class="annottext">All @[Type] (SListI @Type) (Code (PProxyDatum s))
+</span><span id="line-119"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">anyclass</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679198124"><span id="local-6989586621679198133"><span class="annot"><span class="annottext">All @[Type] (SListI @Type) (Code (PProxyDatum s))
 All @[Type] (SListI @Type) (Code (PProxyDatum s)) =&gt;
 (PProxyDatum s -&gt; Rep (PProxyDatum s))
 -&gt; (Rep (PProxyDatum s) -&gt; PProxyDatum s)
@@ -255,7 +255,7 @@ $cfrom :: forall (s :: S). PProxyDatum s -&gt; Rep (PProxyDatum s)
 from :: PProxyDatum s -&gt; Rep (PProxyDatum s)
 $cto :: forall (s :: S). Rep (PProxyDatum s) -&gt; PProxyDatum s
 to :: Rep (PProxyDatum s) -&gt; PProxyDatum s
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var">SOP.Generic</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679198217"><span class="annot"><span class="annottext">(forall (s :: S).
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var">SOP.Generic</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679198159"><span class="annot"><span class="annottext">(forall (s :: S).
  Term s PProxyDatum -&gt; Term s PProxyDatum -&gt; Term s PBool)
 -&gt; PEq PProxyDatum
 forall (s :: S).
@@ -266,7 +266,7 @@ $c#== :: forall (s :: S).
 Term s PProxyDatum -&gt; Term s PProxyDatum -&gt; Term s PBool
 #== :: forall (s :: S).
 Term s PProxyDatum -&gt; Term s PProxyDatum -&gt; Term s PBool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">PEq</span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679198236"><span id="local-6989586621679198242"><span class="annot"><span class="annottext">(forall (s :: S).
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">PEq</span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679198178"><span id="local-6989586621679198184"><span class="annot"><span class="annottext">(forall (s :: S).
  Term s (PAsData PProxyDatum) -&gt; Term s PProxyDatum)
 -&gt; (forall (s :: S). Term s PProxyDatum -&gt; Term s PData)
 -&gt; PIsData PProxyDatum
@@ -280,7 +280,7 @@ pfromDataImpl :: forall (s :: S). Term s (PAsData PProxyDatum) -&gt; Term s PPro
 $cpdataImpl :: forall (s :: S). Term s PProxyDatum -&gt; Term s PData
 pdataImpl :: forall (s :: S). Term s PProxyDatum -&gt; Term s PData
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">PIsData</span></span></span></span><span class="hs-special">)</span><span>
-</span><span id="line-120"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679198249"><span id="local-6989586621679198262"><span class="annot"><span class="annottext">(forall (s :: S). PProxyDatum s -&gt; Term s (PInner PProxyDatum))
+</span><span id="line-120"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679198191"><span id="local-6989586621679198204"><span class="annot"><span class="annottext">(forall (s :: S). PProxyDatum s -&gt; Term s (PInner PProxyDatum))
 -&gt; (forall (s :: S) (b :: PType).
     Term s (PInner PProxyDatum)
     -&gt; (PProxyDatum s -&gt; Term s b) -&gt; Term s b)
@@ -304,10 +304,10 @@ Term s (PInner PProxyDatum)
 -&gt; (PProxyDatum s -&gt; Term s b) -&gt; Term s b
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">PlutusType</span></span></span></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">via</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">DeriveAsDataRec</span></span><span> </span><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier hs-type">PProxyDatum</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-121"></span><span>
-</span><span id="line-122"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679198315"><span class="annot"><span class="hs-identifier hs-type">PTryFrom</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PData</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PAsData</span></span><span> </span><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier hs-type">PProxyDatum</span></a></span><span class="hs-special">)</span></span><span>
+</span><span id="line-122"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679198257"><span class="annot"><span class="hs-identifier hs-type">PTryFrom</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PData</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PAsData</span></span><span> </span><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier hs-type">PProxyDatum</span></a></span><span class="hs-special">)</span></span><span>
 </span><span id="line-123"></span><span>
 </span><span id="line-124"></span><span class="annot"><span class="hs-comment">-- | @since WIP</span></span><span>
-</span><span id="line-125"></span><span class="annot"><a href="Agora.Proxy.html#proxyScript"><span class="hs-identifier hs-type">proxyScript</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="hs-keyword">forall</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679197853"><span class="annot"><a href="#local-6989586621679197853"><span class="hs-identifier hs-type">s</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">S</span></span><span class="hs-special">)</span><span class="hs-operator">.</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679197853"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PAsData</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PCurrencySymbol</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">:--&gt;</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PAsData</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PScriptContext</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">:--&gt;</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PUnit</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-125"></span><span class="annot"><a href="Agora.Proxy.html#proxyScript"><span class="hs-identifier hs-type">proxyScript</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="hs-keyword">forall</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679197795"><span class="annot"><a href="#local-6989586621679197795"><span class="hs-identifier hs-type">s</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">S</span></span><span class="hs-special">)</span><span class="hs-operator">.</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679197795"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PAsData</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PCurrencySymbol</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">:--&gt;</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PAsData</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PScriptContext</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">:--&gt;</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PUnit</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-126"></span><span id="proxyScript"><span class="annot"><span class="annottext">proxyScript :: forall (s :: S).
 Term
   s
@@ -335,13 +335,13 @@ HasCallStack =&gt;
      s
      (PAsData PCurrencySymbol :--&gt; (PAsData PScriptContext :--&gt; PUnit))
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679198554"><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
-</span><a href="#local-6989586621679198554"><span class="hs-identifier hs-var">authSymbol'</span></a></span></span><span> </span><span id="local-6989586621679198555"><span class="annot"><span class="annottext">Term s (PAsData PScriptContext)
-</span><a href="#local-6989586621679198555"><span class="hs-identifier hs-var">ctx</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
-</span><span id="line-127"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">PScriptContext</span></span><span> </span><span id="local-6989586621679198556"><span class="annot"><span class="annottext">Term s PTxInfo
-</span><a href="#local-6989586621679198556"><span class="hs-identifier hs-var">txInfo</span></a></span></span><span> </span><span id="local-6989586621679198557"><span class="annot"><span class="annottext">Term s PRedeemer
-</span><a href="#local-6989586621679198557"><span class="hs-identifier hs-var">_redeemer</span></a></span></span><span> </span><span id="local-6989586621679198558"><span class="annot"><span class="annottext">Term s PScriptInfo
-</span><a href="#local-6989586621679198558"><span class="hs-identifier hs-var">scriptInfo</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s PScriptContext
+</span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679198481"><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
+</span><a href="#local-6989586621679198481"><span class="hs-identifier hs-var">authSymbol'</span></a></span></span><span> </span><span id="local-6989586621679198482"><span class="annot"><span class="annottext">Term s (PAsData PScriptContext)
+</span><a href="#local-6989586621679198482"><span class="hs-identifier hs-var">ctx</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
+</span><span id="line-127"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">PScriptContext</span></span><span> </span><span id="local-6989586621679198483"><span class="annot"><span class="annottext">Term s PTxInfo
+</span><a href="#local-6989586621679198483"><span class="hs-identifier hs-var">txInfo</span></a></span></span><span> </span><span id="local-6989586621679198484"><span class="annot"><span class="annottext">Term s PRedeemer
+</span><a href="#local-6989586621679198484"><span class="hs-identifier hs-var">_redeemer</span></a></span></span><span> </span><span id="local-6989586621679198485"><span class="annot"><span class="annottext">Term s PScriptInfo
+</span><a href="#local-6989586621679198485"><span class="hs-identifier hs-var">scriptInfo</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s PScriptContext
 -&gt; (PScriptContext s -&gt; Term s PUnit) -&gt; Term s PUnit
 forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
@@ -357,16 +357,31 @@ forall (a :: PType) (s :: S).
 PIsData a =&gt;
 Term s (PAsData a) -&gt; Term s a
 </span><span class="hs-identifier hs-var">pfromData</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptContext)
-</span><a href="#local-6989586621679198555"><span class="hs-identifier hs-var">ctx</span></a></span><span>
+</span><a href="#local-6989586621679198482"><span class="hs-identifier hs-var">ctx</span></a></span><span>
 </span><span id="line-128"></span><span>
-</span><span id="line-129"></span><span>  </span><span class="hs-comment">-- When this script runs also V2 GAT gets burned so that guarantees that no V3 thing happens</span><span>
-</span><span id="line-130"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">PTxInfo</span></span><span> </span><span id="local-6989586621679198559"><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PTxInInfo)))
-</span><a href="#local-6989586621679198559"><span class="hs-identifier hs-var">inputs</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PTxInInfo)))
-</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679198560"><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PTxOut)))
-</span><a href="#local-6989586621679198560"><span class="hs-identifier hs-var">outputs</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PLovelace)
-</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679198561"><span class="annot"><span class="annottext">Term s (PAsData (PValue 'Sorted 'NonZero))
-</span><a href="#local-6989586621679198561"><span class="hs-identifier hs-var">mint'</span></a></span></span><span> </span><span id="local-6989586621679198562"><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PTxCert)))
-</span><a href="#local-6989586621679198562"><span class="hs-identifier hs-var">txCerts</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PMap 'Unsorted PCredential PLovelace))
+</span><span id="line-129"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198486"><span class="annot"><span class="annottext">valid :: Term s PBool
+</span><a href="#local-6989586621679198486"><span class="hs-identifier hs-var hs-var">valid</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-130"></span><span>        </span><span class="annot"><span class="annottext">Term s PScriptInfo
+-&gt; (PScriptInfo s -&gt; Term s PBool) -&gt; Term s PBool
+forall (a :: PType) (s :: S) (b :: PType).
+PlutusType a =&gt;
+Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
+</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s PScriptInfo
+</span><a href="#local-6989586621679198485"><span class="hs-identifier hs-var">scriptInfo</span></a></span><span> </span><span class="annot"><span class="annottext">((PScriptInfo s -&gt; Term s PBool) -&gt; Term s PBool)
+-&gt; (PScriptInfo s -&gt; Term s PBool) -&gt; Term s PBool
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-131"></span><span>          </span><span class="annot"><span class="hs-identifier hs-type">PSpendingScript</span></span><span> </span><span id="local-6989586621679198487"><span class="annot"><span class="annottext">Term s PTxOutRef
+</span><a href="#local-6989586621679198487"><span class="hs-identifier hs-var">_txOutRef</span></a></span></span><span> </span><span id="local-6989586621679198488"><span class="annot"><span class="annottext">Term s (PMaybeData PDatum)
+</span><a href="#local-6989586621679198488"><span class="hs-identifier hs-var">mayDatum</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
+</span><span id="line-132"></span><span>            </span><span class="hs-comment">-- When this script runs also V2 GAT gets burned so that guarantees that no V3 thing happens</span><span>
+</span><span id="line-133"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PTxInfo</span></span><span> </span><span id="local-6989586621679198489"><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PTxInInfo)))
+</span><a href="#local-6989586621679198489"><span class="hs-identifier hs-var">inputs</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PTxInInfo)))
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679198490"><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PTxOut)))
+</span><a href="#local-6989586621679198490"><span class="hs-identifier hs-var">outputs</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PLovelace)
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679198491"><span class="annot"><span class="annottext">Term s (PAsData (PValue 'Sorted 'NonZero))
+</span><a href="#local-6989586621679198491"><span class="hs-identifier hs-var">mint</span></a></span></span><span> </span><span id="local-6989586621679198492"><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PTxCert)))
+</span><a href="#local-6989586621679198492"><span class="hs-identifier hs-var">txCerts</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PMap 'Unsorted PCredential PLovelace))
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PInterval PPosixTime)
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PPubKeyHash)))
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PMap 'Unsorted PScriptPurpose PRedeemer))
@@ -379,408 +394,23 @@ Term s (PAsData a) -&gt; Term s a
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PProposalProcedure)))
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PLovelace)
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PLovelace)
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s PTxInfo -&gt; (PTxInfo s -&gt; Term s PUnit) -&gt; Term s PUnit
+</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s PTxInfo -&gt; (PTxInfo s -&gt; Term s PBool) -&gt; Term s PBool
 forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
 Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 </span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s PTxInfo
-</span><a href="#local-6989586621679198556"><span class="hs-identifier hs-var">txInfo</span></a></span><span>
-</span><span id="line-131"></span><span>
-</span><span id="line-132"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198563"><span class="annot"><span class="annottext">mint :: Term s (PValue 'Sorted 'NonZero)
-</span><a href="#local-6989586621679198563"><span class="hs-identifier hs-var hs-var">mint</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PValue 'Sorted 'NonZero))
--&gt; Term s (PValue 'Sorted 'NonZero)
-forall (a :: PType) (s :: S).
-PIsData a =&gt;
-Term s (PAsData a) -&gt; Term s a
-</span><span class="hs-identifier hs-var">pfromData</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PValue 'Sorted 'NonZero))
-</span><a href="#local-6989586621679198561"><span class="hs-identifier hs-var">mint'</span></a></span><span>
-</span><span id="line-133"></span><span>  </span><span class="hs-comment">-- Pattern matching asserts that there are only two symbols minted and `mintCheck`</span><span>
-</span><span id="line-134"></span><span>  </span><span class="hs-comment">-- asserts that they are V2 and V3 gats.</span><span>
-</span><span id="line-135"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">PValue</span></span><span> </span><span id="local-6989586621679198564"><span class="annot"><span class="annottext">Term
-  s (PMap 'Sorted PCurrencySymbol (PMap 'Sorted PTokenName PInteger))
-</span><a href="#local-6989586621679198564"><span class="hs-identifier hs-var">mintAssetMap</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s (PValue 'Sorted 'NonZero)
--&gt; (PValue 'Sorted 'NonZero s -&gt; Term s PUnit) -&gt; Term s PUnit
-forall (a :: PType) (s :: S) (b :: PType).
-PlutusType a =&gt;
-Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
-</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s (PValue 'Sorted 'NonZero)
-</span><a href="#local-6989586621679198563"><span class="hs-identifier hs-var">mint</span></a></span><span>
-</span><span id="line-136"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">PMap</span></span><span> </span><span id="local-6989586621679198565"><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair
-        (PAsData PCurrencySymbol)
-        (PAsData (PMap 'Sorted PTokenName PInteger))))
-</span><a href="#local-6989586621679198565"><span class="hs-identifier hs-var">mintAssetList</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
-  s (PMap 'Sorted PCurrencySymbol (PMap 'Sorted PTokenName PInteger))
--&gt; (PMap
-      'Sorted PCurrencySymbol (PMap 'Sorted PTokenName PInteger) s
-    -&gt; Term s PUnit)
--&gt; Term s PUnit
-forall (a :: PType) (s :: S) (b :: PType).
-PlutusType a =&gt;
-Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
-</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s (PMap 'Sorted PCurrencySymbol (PMap 'Sorted PTokenName PInteger))
-</span><a href="#local-6989586621679198564"><span class="hs-identifier hs-var">mintAssetMap</span></a></span><span>
-</span><span id="line-137"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">PCons</span></span><span> </span><span id="local-6989586621679198566"><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair
-     (PAsData PCurrencySymbol)
-     (PAsData (PMap 'Sorted PTokenName PInteger)))
-</span><a href="#local-6989586621679198566"><span class="hs-identifier hs-var">mintAssetPair1</span></a></span></span><span> </span><span id="local-6989586621679198567"><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair
-        (PAsData PCurrencySymbol)
-        (PAsData (PMap 'Sorted PTokenName PInteger))))
-</span><a href="#local-6989586621679198567"><span class="hs-identifier hs-var">mintAssetListRest1</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair
-        (PAsData PCurrencySymbol)
-        (PAsData (PMap 'Sorted PTokenName PInteger))))
--&gt; (PBuiltinList
-      (PBuiltinPair
-         (PAsData PCurrencySymbol)
-         (PAsData (PMap 'Sorted PTokenName PInteger)))
-      s
-    -&gt; Term s PUnit)
--&gt; Term s PUnit
-forall (a :: PType) (s :: S) (b :: PType).
-PlutusType a =&gt;
-Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
-</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair
-        (PAsData PCurrencySymbol)
-        (PAsData (PMap 'Sorted PTokenName PInteger))))
-</span><a href="#local-6989586621679198565"><span class="hs-identifier hs-var">mintAssetList</span></a></span><span>
-</span><span id="line-138"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">PCons</span></span><span> </span><span id="local-6989586621679198568"><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair
-     (PAsData PCurrencySymbol)
-     (PAsData (PMap 'Sorted PTokenName PInteger)))
-</span><a href="#local-6989586621679198568"><span class="hs-identifier hs-var">mintAssetPair2</span></a></span></span><span> </span><span id="local-6989586621679198569"><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair
-        (PAsData PCurrencySymbol)
-        (PAsData (PMap 'Sorted PTokenName PInteger))))
-</span><a href="#local-6989586621679198569"><span class="hs-identifier hs-var">mintAssetListRest2</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair
-        (PAsData PCurrencySymbol)
-        (PAsData (PMap 'Sorted PTokenName PInteger))))
--&gt; (PBuiltinList
-      (PBuiltinPair
-         (PAsData PCurrencySymbol)
-         (PAsData (PMap 'Sorted PTokenName PInteger)))
-      s
-    -&gt; Term s PUnit)
--&gt; Term s PUnit
-forall (a :: PType) (s :: S) (b :: PType).
-PlutusType a =&gt;
-Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
-</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair
-        (PAsData PCurrencySymbol)
-        (PAsData (PMap 'Sorted PTokenName PInteger))))
-</span><a href="#local-6989586621679198567"><span class="hs-identifier hs-var">mintAssetListRest1</span></a></span><span>
-</span><span id="line-139"></span><span>  </span><span class="annot"><span class="annottext">PBuiltinList
-  (PBuiltinPair
-     (PAsData PCurrencySymbol)
-     (PAsData (PMap 'Sorted PTokenName PInteger)))
-  s
-</span><span class="hs-identifier hs-var">PNil</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair
-        (PAsData PCurrencySymbol)
-        (PAsData (PMap 'Sorted PTokenName PInteger))))
--&gt; (PBuiltinList
-      (PBuiltinPair
-         (PAsData PCurrencySymbol)
-         (PAsData (PMap 'Sorted PTokenName PInteger)))
-      s
-    -&gt; Term s PUnit)
--&gt; Term s PUnit
-forall (a :: PType) (s :: S) (b :: PType).
-PlutusType a =&gt;
-Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
-</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair
-        (PAsData PCurrencySymbol)
-        (PAsData (PMap 'Sorted PTokenName PInteger))))
-</span><a href="#local-6989586621679198569"><span class="hs-identifier hs-var">mintAssetListRest2</span></a></span><span>
-</span><span id="line-140"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198570"><span class="annot"><span class="annottext">mintCs1 :: Term s (PAsData PCurrencySymbol)
-</span><a href="#local-6989586621679198570"><span class="hs-identifier hs-var hs-var">mintCs1</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair
-     (PAsData PCurrencySymbol)
-     (PAsData (PMap 'Sorted PTokenName PInteger))
-   :--&gt; PAsData PCurrencySymbol)
-forall (s :: S) (a :: PType) (b :: PType).
-Term s (PBuiltinPair a b :--&gt; a)
-</span><span class="hs-identifier hs-var">pfstBuiltin</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair
-     (PAsData PCurrencySymbol)
-     (PAsData (PMap 'Sorted PTokenName PInteger))
-   :--&gt; PAsData PCurrencySymbol)
--&gt; Term
-     s
-     (PBuiltinPair
-        (PAsData PCurrencySymbol)
-        (PAsData (PMap 'Sorted PTokenName PInteger)))
--&gt; Term s (PAsData PCurrencySymbol)
-forall (s :: S) (a :: PType) (b :: PType).
-Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
-</span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair
-     (PAsData PCurrencySymbol)
-     (PAsData (PMap 'Sorted PTokenName PInteger)))
-</span><a href="#local-6989586621679198566"><span class="hs-identifier hs-var">mintAssetPair1</span></a></span><span>
-</span><span id="line-141"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">PMap</span></span><span> </span><span id="local-6989586621679198571"><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
-</span><a href="#local-6989586621679198571"><span class="hs-identifier hs-var">mintTokens1</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s (PMap 'Sorted PTokenName PInteger)
--&gt; (PMap 'Sorted PTokenName PInteger s -&gt; Term s PUnit)
--&gt; Term s PUnit
-forall (a :: PType) (s :: S) (b :: PType).
-PlutusType a =&gt;
-Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
-</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">(Term s (PMap 'Sorted PTokenName PInteger)
- -&gt; (PMap 'Sorted PTokenName PInteger s -&gt; Term s PUnit)
- -&gt; Term s PUnit)
--&gt; Term s (PMap 'Sorted PTokenName PInteger)
--&gt; (PMap 'Sorted PTokenName PInteger s -&gt; Term s PUnit)
--&gt; Term s PUnit
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PMap 'Sorted PTokenName PInteger))
--&gt; Term s (PMap 'Sorted PTokenName PInteger)
-forall (a :: PType) (s :: S).
-PIsData a =&gt;
-Term s (PAsData a) -&gt; Term s a
-</span><span class="hs-identifier hs-var">pfromData</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair
-     (PAsData PCurrencySymbol)
-     (PAsData (PMap 'Sorted PTokenName PInteger))
-   :--&gt; PAsData (PMap 'Sorted PTokenName PInteger))
-forall (s :: S) (a :: PType) (b :: PType).
-Term s (PBuiltinPair a b :--&gt; b)
-</span><span class="hs-identifier hs-var">psndBuiltin</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair
-     (PAsData PCurrencySymbol)
-     (PAsData (PMap 'Sorted PTokenName PInteger))
-   :--&gt; PAsData (PMap 'Sorted PTokenName PInteger))
--&gt; Term
-     s
-     (PBuiltinPair
-        (PAsData PCurrencySymbol)
-        (PAsData (PMap 'Sorted PTokenName PInteger)))
--&gt; Term s (PAsData (PMap 'Sorted PTokenName PInteger))
-forall (s :: S) (a :: PType) (b :: PType).
-Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
-</span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair
-     (PAsData PCurrencySymbol)
-     (PAsData (PMap 'Sorted PTokenName PInteger)))
-</span><a href="#local-6989586621679198566"><span class="hs-identifier hs-var">mintAssetPair1</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-142"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">PCons</span></span><span> </span><span id="local-6989586621679198572"><span class="annot"><span class="annottext">Term s (PBuiltinPair (PAsData PTokenName) (PAsData PInteger))
-</span><a href="#local-6989586621679198572"><span class="hs-identifier hs-var">mintTokenPair1</span></a></span></span><span> </span><span id="local-6989586621679198573"><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
-</span><a href="#local-6989586621679198573"><span class="hs-identifier hs-var">mintTokens1Rest</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
--&gt; (PBuiltinList
-      (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)) s
-    -&gt; Term s PUnit)
--&gt; Term s PUnit
-forall (a :: PType) (s :: S) (b :: PType).
-PlutusType a =&gt;
-Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
-</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
-</span><a href="#local-6989586621679198571"><span class="hs-identifier hs-var">mintTokens1</span></a></span><span>
-</span><span id="line-143"></span><span>  </span><span class="annot"><span class="annottext">PBuiltinList
-  (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)) s
-</span><span class="hs-identifier hs-var">PNil</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
--&gt; (PBuiltinList
-      (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)) s
-    -&gt; Term s PUnit)
--&gt; Term s PUnit
-forall (a :: PType) (s :: S) (b :: PType).
-PlutusType a =&gt;
-Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
-</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
-</span><a href="#local-6989586621679198573"><span class="hs-identifier hs-var">mintTokens1Rest</span></a></span><span>
-</span><span id="line-144"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198574"><span class="annot"><span class="annottext">mintCs2 :: Term s (PAsData PCurrencySymbol)
-</span><a href="#local-6989586621679198574"><span class="hs-identifier hs-var hs-var">mintCs2</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair
-     (PAsData PCurrencySymbol)
-     (PAsData (PMap 'Sorted PTokenName PInteger))
-   :--&gt; PAsData PCurrencySymbol)
-forall (s :: S) (a :: PType) (b :: PType).
-Term s (PBuiltinPair a b :--&gt; a)
-</span><span class="hs-identifier hs-var">pfstBuiltin</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair
-     (PAsData PCurrencySymbol)
-     (PAsData (PMap 'Sorted PTokenName PInteger))
-   :--&gt; PAsData PCurrencySymbol)
--&gt; Term
-     s
-     (PBuiltinPair
-        (PAsData PCurrencySymbol)
-        (PAsData (PMap 'Sorted PTokenName PInteger)))
--&gt; Term s (PAsData PCurrencySymbol)
-forall (s :: S) (a :: PType) (b :: PType).
-Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
-</span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair
-     (PAsData PCurrencySymbol)
-     (PAsData (PMap 'Sorted PTokenName PInteger)))
-</span><a href="#local-6989586621679198568"><span class="hs-identifier hs-var">mintAssetPair2</span></a></span><span>
-</span><span id="line-145"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">PMap</span></span><span> </span><span id="local-6989586621679198575"><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
-</span><a href="#local-6989586621679198575"><span class="hs-identifier hs-var">mintTokens2</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s (PMap 'Sorted PTokenName PInteger)
--&gt; (PMap 'Sorted PTokenName PInteger s -&gt; Term s PUnit)
--&gt; Term s PUnit
-forall (a :: PType) (s :: S) (b :: PType).
-PlutusType a =&gt;
-Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
-</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">(Term s (PMap 'Sorted PTokenName PInteger)
- -&gt; (PMap 'Sorted PTokenName PInteger s -&gt; Term s PUnit)
- -&gt; Term s PUnit)
--&gt; Term s (PMap 'Sorted PTokenName PInteger)
--&gt; (PMap 'Sorted PTokenName PInteger s -&gt; Term s PUnit)
--&gt; Term s PUnit
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PMap 'Sorted PTokenName PInteger))
--&gt; Term s (PMap 'Sorted PTokenName PInteger)
-forall (a :: PType) (s :: S).
-PIsData a =&gt;
-Term s (PAsData a) -&gt; Term s a
-</span><span class="hs-identifier hs-var">pfromData</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair
-     (PAsData PCurrencySymbol)
-     (PAsData (PMap 'Sorted PTokenName PInteger))
-   :--&gt; PAsData (PMap 'Sorted PTokenName PInteger))
-forall (s :: S) (a :: PType) (b :: PType).
-Term s (PBuiltinPair a b :--&gt; b)
-</span><span class="hs-identifier hs-var">psndBuiltin</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair
-     (PAsData PCurrencySymbol)
-     (PAsData (PMap 'Sorted PTokenName PInteger))
-   :--&gt; PAsData (PMap 'Sorted PTokenName PInteger))
--&gt; Term
-     s
-     (PBuiltinPair
-        (PAsData PCurrencySymbol)
-        (PAsData (PMap 'Sorted PTokenName PInteger)))
--&gt; Term s (PAsData (PMap 'Sorted PTokenName PInteger))
-forall (s :: S) (a :: PType) (b :: PType).
-Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
-</span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair
-     (PAsData PCurrencySymbol)
-     (PAsData (PMap 'Sorted PTokenName PInteger)))
-</span><a href="#local-6989586621679198568"><span class="hs-identifier hs-var">mintAssetPair2</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-146"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">PCons</span></span><span> </span><span id="local-6989586621679198576"><span class="annot"><span class="annottext">Term s (PBuiltinPair (PAsData PTokenName) (PAsData PInteger))
-</span><a href="#local-6989586621679198576"><span class="hs-identifier hs-var">mintTokenPair2</span></a></span></span><span> </span><span id="local-6989586621679198577"><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
-</span><a href="#local-6989586621679198577"><span class="hs-identifier hs-var">mintTokens2Rest</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
--&gt; (PBuiltinList
-      (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)) s
-    -&gt; Term s PUnit)
--&gt; Term s PUnit
-forall (a :: PType) (s :: S) (b :: PType).
-PlutusType a =&gt;
-Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
-</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
-</span><a href="#local-6989586621679198575"><span class="hs-identifier hs-var">mintTokens2</span></a></span><span>
-</span><span id="line-147"></span><span>  </span><span class="annot"><span class="annottext">PBuiltinList
-  (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)) s
-</span><span class="hs-identifier hs-var">PNil</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
--&gt; (PBuiltinList
-      (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)) s
-    -&gt; Term s PUnit)
--&gt; Term s PUnit
-forall (a :: PType) (s :: S) (b :: PType).
-PlutusType a =&gt;
-Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
-</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinList
-     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
-</span><a href="#local-6989586621679198577"><span class="hs-identifier hs-var">mintTokens2Rest</span></a></span><span>
-</span><span id="line-148"></span><span>
-</span><span id="line-149"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198578"><span class="annot"><span class="annottext">valid :: Term s PBool
-</span><a href="#local-6989586621679198578"><span class="hs-identifier hs-var hs-var">valid</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-150"></span><span>        </span><span class="annot"><span class="annottext">Term s PScriptInfo
--&gt; (PScriptInfo s -&gt; Term s PBool) -&gt; Term s PBool
-forall (a :: PType) (s :: S) (b :: PType).
-PlutusType a =&gt;
-Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
-</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s PScriptInfo
-</span><a href="#local-6989586621679198558"><span class="hs-identifier hs-var">scriptInfo</span></a></span><span> </span><span class="annot"><span class="annottext">((PScriptInfo s -&gt; Term s PBool) -&gt; Term s PBool)
--&gt; (PScriptInfo s -&gt; Term s PBool) -&gt; Term s PBool
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-151"></span><span>          </span><span class="annot"><span class="hs-identifier hs-type">PSpendingScript</span></span><span> </span><span id="local-6989586621679198579"><span class="annot"><span class="annottext">Term s PTxOutRef
-</span><a href="#local-6989586621679198579"><span class="hs-identifier hs-var">_txOutRef</span></a></span></span><span> </span><span id="local-6989586621679198580"><span class="annot"><span class="annottext">Term s (PMaybeData PDatum)
-</span><a href="#local-6989586621679198580"><span class="hs-identifier hs-var">mayDatum</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
-</span><span id="line-152"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PDJust</span></span><span> </span><span id="local-6989586621679198581"><span class="annot"><span class="annottext">Term s (PAsData PDatum)
-</span><a href="#local-6989586621679198581"><span class="hs-identifier hs-var">datum</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PDatum)
+</span><a href="#local-6989586621679198483"><span class="hs-identifier hs-var">txInfo</span></a></span><span>
+</span><span id="line-134"></span><span>
+</span><span id="line-135"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PDJust</span></span><span> </span><span id="local-6989586621679198493"><span class="annot"><span class="annottext">Term s (PAsData PDatum)
+</span><a href="#local-6989586621679198493"><span class="hs-identifier hs-var">datum</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PDatum)
 -&gt; (PMaybeData PDatum s -&gt; Term s PBool) -&gt; Term s PBool
 forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
 Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 </span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PDatum)
-</span><a href="#local-6989586621679198580"><span class="hs-identifier hs-var">mayDatum</span></a></span><span>
-</span><span id="line-153"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PDatum</span></span><span> </span><span id="local-6989586621679198582"><span class="annot"><span class="annottext">Term s PData
-</span><a href="#local-6989586621679198582"><span class="hs-identifier hs-var">rawDatum</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s PDatum -&gt; (PDatum s -&gt; Term s PBool) -&gt; Term s PBool
+</span><a href="#local-6989586621679198488"><span class="hs-identifier hs-var">mayDatum</span></a></span><span>
+</span><span id="line-136"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PDatum</span></span><span> </span><span id="local-6989586621679198494"><span class="annot"><span class="annottext">Term s PData
+</span><a href="#local-6989586621679198494"><span class="hs-identifier hs-var">rawDatum</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s PDatum -&gt; (PDatum s -&gt; Term s PBool) -&gt; Term s PBool
 forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
 Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
@@ -789,10 +419,10 @@ forall (a :: PType) (s :: S).
 PIsData a =&gt;
 Term s (PAsData a) -&gt; Term s a
 </span><span class="hs-identifier hs-var">pfromData</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PDatum)
-</span><a href="#local-6989586621679198581"><span class="hs-identifier hs-var">datum</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-154"></span><span>
-</span><span id="line-155"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198583"><span class="annot"><span class="annottext">rawProxyDatum :: Term s (PAsData PProxyDatum)
-</span><a href="#local-6989586621679198583"><span class="hs-identifier hs-var hs-var">rawProxyDatum</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">TermCont @(PAsData PProxyDatum) s (Term s (PAsData PProxyDatum))
+</span><a href="#local-6989586621679198493"><span class="hs-identifier hs-var">datum</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-137"></span><span>
+</span><span id="line-138"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198495"><span class="annot"><span class="annottext">rawProxyDatum :: Term s (PAsData PProxyDatum)
+</span><a href="#local-6989586621679198495"><span class="hs-identifier hs-var hs-var">rawProxyDatum</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">TermCont @(PAsData PProxyDatum) s (Term s (PAsData PProxyDatum))
 -&gt; Term s (PAsData PProxyDatum)
 forall (a :: PType) (s :: S). TermCont @a s (Term s a) -&gt; Term s a
 </span><span class="hs-identifier hs-var">unTermCont</span></span><span> </span><span class="annot"><span class="annottext">(TermCont @(PAsData PProxyDatum) s (Term s (PAsData PProxyDatum))
@@ -821,10 +451,10 @@ Term s a
 -&gt; ((Term s b, Reduce (PTryFromExcess a b s)) -&gt; Term s r)
 -&gt; Term s r
 </span><span class="hs-identifier hs-var">ptryFrom</span></span><span> </span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PAsData</span></span><span> </span><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier hs-type">PProxyDatum</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term s PData
-</span><a href="#local-6989586621679198582"><span class="hs-identifier hs-var">rawDatum</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-156"></span><span>            </span><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier hs-type">PProxyDatum</span></a></span><span> </span><span id="local-6989586621679198585"><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
-</span><a href="#local-6989586621679198585"><span class="hs-identifier hs-var">receiverScript</span></a></span></span><span> </span><span id="local-6989586621679198586"><span class="annot"><span class="annottext">Term s (PAsData PDatumHash)
-</span><a href="#local-6989586621679198586"><span class="hs-identifier hs-var">datumHash</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s PProxyDatum
+</span><a href="#local-6989586621679198494"><span class="hs-identifier hs-var">rawDatum</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-139"></span><span>            </span><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier hs-type">PProxyDatum</span></a></span><span> </span><span id="local-6989586621679198497"><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
+</span><a href="#local-6989586621679198497"><span class="hs-identifier hs-var">receiverScript</span></a></span></span><span> </span><span id="local-6989586621679198498"><span class="annot"><span class="annottext">Term s (PAsData PDatumHash)
+</span><a href="#local-6989586621679198498"><span class="hs-identifier hs-var">datumHash</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s PProxyDatum
 -&gt; (PProxyDatum s -&gt; Term s PBool) -&gt; Term s PBool
 forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
@@ -840,11 +470,11 @@ forall (a :: PType) (s :: S).
 PIsData a =&gt;
 Term s (PAsData a) -&gt; Term s a
 </span><span class="hs-identifier hs-var">pfromData</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PProxyDatum)
-</span><a href="#local-6989586621679198583"><span class="hs-identifier hs-var">rawProxyDatum</span></a></span><span>
-</span><span id="line-157"></span><span>
-</span><span id="line-158"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198587"><span class="annot"><span class="annottext">receiverScriptAddr :: Term s PAddress
-</span><a href="#local-6989586621679198587"><span class="hs-identifier hs-var hs-var">receiverScriptAddr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-159"></span><span>                  </span><span class="annot"><span class="annottext">PAddress s -&gt; Term s PAddress
+</span><a href="#local-6989586621679198495"><span class="hs-identifier hs-var">rawProxyDatum</span></a></span><span>
+</span><span id="line-140"></span><span>
+</span><span id="line-141"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198499"><span class="annot"><span class="annottext">receiverScriptAddr :: Term s PAddress
+</span><a href="#local-6989586621679198499"><span class="hs-identifier hs-var hs-var">receiverScriptAddr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-142"></span><span>                  </span><span class="annot"><span class="annottext">PAddress s -&gt; Term s PAddress
 forall (a :: PType) (s :: S). PlutusType a =&gt; a s -&gt; Term s a
 </span><span class="hs-identifier hs-var">pcon</span></span><span> </span><span class="annot"><span class="annottext">(PAddress s -&gt; Term s PAddress) -&gt; PAddress s -&gt; Term s PAddress
 forall a b. (a -&gt; b) -&gt; a -&gt; b
@@ -861,7 +491,7 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash) -&gt; PCredential s
 forall (s :: S). Term s (PAsData PScriptHash) -&gt; PCredential s
 </span><span class="hs-identifier hs-var">PScriptCredential</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
-</span><a href="#local-6989586621679198585"><span class="hs-identifier hs-var">receiverScript</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsHaskell (PMaybeData PStakingCredential)
+</span><a href="#local-6989586621679198497"><span class="hs-identifier hs-var">receiverScript</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsHaskell (PMaybeData PStakingCredential)
 -&gt; Term s (PMaybeData PStakingCredential)
 forall (a :: PType) (s :: S).
 PLiftable a =&gt;
@@ -870,10 +500,10 @@ AsHaskell a -&gt; Term s a
 AsHaskell (PMaybeData PStakingCredential)
 forall a. Maybe a
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-160"></span><span>
-</span><span id="line-161"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198588"><span class="annot"><span class="annottext">outputsAtReceiver :: Term s PInteger
-</span><a href="#local-6989586621679198588"><span class="hs-identifier hs-var hs-var">outputsAtReceiver</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-162"></span><span>                  </span><span class="annot"><span class="annottext">Term
+</span><span id="line-143"></span><span>
+</span><span id="line-144"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198500"><span class="annot"><span class="annottext">outputsAtReceiver :: Term s PInteger
+</span><a href="#local-6989586621679198500"><span class="hs-identifier hs-var hs-var">outputsAtReceiver</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-145"></span><span>                  </span><span class="annot"><span class="annottext">Term
   s
   ((PAsData PTxOut :--&gt; (PInteger :--&gt; PInteger))
    :--&gt; (PInteger :--&gt; (PBuiltinList (PAsData PTxOut) :--&gt; PInteger)))
@@ -883,46 +513,46 @@ Term s ((a :--&gt; (b :--&gt; b)) :--&gt; (b :--&gt; (list a :--&gt; b)))
 </span><span class="hs-identifier hs-var">pfoldr</span></span><span class="hs-cpp">
                     # plam
 </span><span>                      </span><span class="hs-special">(</span><span> </span><span class="hs-glyph">\</span><span class="hs-identifier">output</span><span> </span><span class="hs-identifier">v</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
-</span><span id="line-165"></span><span>                          </span><span class="hs-identifier">PTxOut</span><span> </span><span class="hs-identifier">address</span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">outputDatum</span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="hs-identifier">pmatch</span><span> </span><span class="hs-special">(</span><span class="hs-identifier">pfromData</span><span> </span><span class="hs-identifier">output</span><span class="hs-special">)</span><span>
-</span><span id="line-166"></span><span>                          </span><span class="hs-identifier">pif</span><span>
-</span><span id="line-167"></span><span>                            </span><span class="hs-special">(</span><span class="hs-identifier">address</span><span> </span><span class="hs-operator">#==</span><span> </span><span class="hs-identifier">receiverScriptAddr</span><span class="hs-special">)</span><span>
-</span><span id="line-168"></span><span>                            </span><span class="hs-special">(</span><span> </span><span class="hs-keyword">P.do</span><span>
-</span><span id="line-169"></span><span>                                </span><span class="hs-identifier">POutputDatumHash</span><span> </span><span class="hs-identifier">datumHash'</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="hs-identifier">pmatch</span><span> </span><span class="hs-identifier">outputDatum</span><span>
-</span><span id="line-170"></span><span>
-</span><span id="line-171"></span><span>                                </span><span class="hs-identifier">pif</span><span>
-</span><span id="line-172"></span><span>                                  </span><span class="hs-special">(</span><span class="hs-identifier">datumHash'</span><span> </span><span class="hs-operator">#==</span><span> </span><span class="hs-identifier">datumHash</span><span class="hs-special">)</span><span>
-</span><span id="line-173"></span><span>                                  </span><span class="hs-special">(</span><span class="hs-identifier">v</span><span> </span><span class="hs-operator">+</span><span> </span><span class="hs-number">1</span><span class="hs-special">)</span><span>
-</span><span id="line-174"></span><span>                                  </span><span class="hs-special">(</span><span class="hs-identifier">P.fail</span><span> </span><span class="hs-string">&quot;While counting outputs at receiver address: datum hash invalid.&quot;</span><span class="hs-special">)</span><span>
-</span><span id="line-175"></span><span>                            </span><span class="hs-special">)</span><span>
-</span><span id="line-176"></span><span>                            </span><span class="hs-identifier">v</span><span>
-</span><span id="line-177"></span><span>                      </span><span class="hs-special">)</span><span class="hs-cpp">
+</span><span id="line-148"></span><span>                          </span><span class="hs-identifier">PTxOut</span><span> </span><span class="hs-identifier">address</span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">outputDatum</span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="hs-identifier">pmatch</span><span> </span><span class="hs-special">(</span><span class="hs-identifier">pfromData</span><span> </span><span class="hs-identifier">output</span><span class="hs-special">)</span><span>
+</span><span id="line-149"></span><span>                          </span><span class="hs-identifier">pif</span><span>
+</span><span id="line-150"></span><span>                            </span><span class="hs-special">(</span><span class="hs-identifier">address</span><span> </span><span class="hs-operator">#==</span><span> </span><span class="hs-identifier">receiverScriptAddr</span><span class="hs-special">)</span><span>
+</span><span id="line-151"></span><span>                            </span><span class="hs-special">(</span><span> </span><span class="hs-keyword">P.do</span><span>
+</span><span id="line-152"></span><span>                                </span><span class="hs-identifier">POutputDatumHash</span><span> </span><span class="hs-identifier">datumHash'</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="hs-identifier">pmatch</span><span> </span><span class="hs-identifier">outputDatum</span><span>
+</span><span id="line-153"></span><span>
+</span><span id="line-154"></span><span>                                </span><span class="hs-identifier">pif</span><span>
+</span><span id="line-155"></span><span>                                  </span><span class="hs-special">(</span><span class="hs-identifier">datumHash'</span><span> </span><span class="hs-operator">#==</span><span> </span><span class="hs-identifier">datumHash</span><span class="hs-special">)</span><span>
+</span><span id="line-156"></span><span>                                  </span><span class="hs-special">(</span><span class="hs-identifier">v</span><span> </span><span class="hs-operator">+</span><span> </span><span class="hs-number">1</span><span class="hs-special">)</span><span>
+</span><span id="line-157"></span><span>                                  </span><span class="hs-special">(</span><span class="hs-identifier">P.fail</span><span> </span><span class="hs-string">&quot;While counting outputs at receiver address: datum hash invalid.&quot;</span><span class="hs-special">)</span><span>
+</span><span id="line-158"></span><span>                            </span><span class="hs-special">)</span><span>
+</span><span id="line-159"></span><span>                            </span><span class="hs-identifier">v</span><span>
+</span><span id="line-160"></span><span>                      </span><span class="hs-special">)</span><span class="hs-cpp">
                     # (0 :: Term _ PInteger)
 </span><span class="hs-cpp">                    # pfromData outputs
 </span><span>            </span><span class="hs-comment">-- Spending Condition 3: Transaction creates a UTxO at address of</span><span>
-</span><span id="line-181"></span><span>            </span><span class="hs-comment">-- receiverScript with empty staking part and reference datum</span><span>
-</span><span id="line-182"></span><span>            </span><span class="hs-comment">-- with hash equal to datumHash.</span><span>
-</span><span id="line-183"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198598"><span class="annot"><span class="annottext">singleOutputWithDatum :: Term s PBool
-</span><a href="#local-6989586621679198598"><span class="hs-identifier hs-var hs-var">singleOutputWithDatum</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-184"></span><span>                  </span><span class="annot"><span class="annottext">Term s PString -&gt; Term s PBool -&gt; Term s PBool
+</span><span id="line-164"></span><span>            </span><span class="hs-comment">-- receiverScript with empty staking part and reference datum</span><span>
+</span><span id="line-165"></span><span>            </span><span class="hs-comment">-- with hash equal to datumHash.</span><span>
+</span><span id="line-166"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198510"><span class="annot"><span class="annottext">singleOutputWithDatum :: Term s PBool
+</span><a href="#local-6989586621679198510"><span class="hs-identifier hs-var hs-var">singleOutputWithDatum</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-167"></span><span>                  </span><span class="annot"><span class="annottext">Term s PString -&gt; Term s PBool -&gt; Term s PBool
 forall (s :: S). Term s PString -&gt; Term s PBool -&gt; Term s PBool
 </span><span class="hs-identifier hs-var">ptraceInfoIfFalse</span></span><span> </span><span class="annot"><span class="annottext">Term s PString
 </span><span class="hs-string">&quot;Exactly one output at the receiver script address should exist with datum hash defined in ProxyDatum.&quot;</span></span><span> </span><span class="annot"><span class="annottext">(Term s PBool -&gt; Term s PBool) -&gt; Term s PBool -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span>
-</span><span id="line-185"></span><span>                    </span><span class="annot"><span class="annottext">Term s PInteger
-</span><a href="#local-6989586621679198588"><span class="hs-identifier hs-var">outputsAtReceiver</span></a></span><span> </span><span class="annot"><span class="annottext">Term s PInteger -&gt; Term s PInteger -&gt; Term s PBool
+</span><span id="line-168"></span><span>                    </span><span class="annot"><span class="annottext">Term s PInteger
+</span><a href="#local-6989586621679198500"><span class="hs-identifier hs-var">outputsAtReceiver</span></a></span><span> </span><span class="annot"><span class="annottext">Term s PInteger -&gt; Term s PInteger -&gt; Term s PBool
 forall (s :: S). Term s PInteger -&gt; Term s PInteger -&gt; Term s PBool
 forall (t :: PType) (s :: S).
 PEq t =&gt;
 Term s t -&gt; Term s t -&gt; Term s PBool
 </span><span class="hs-operator hs-var">#==</span></span><span> </span><span class="annot"><span class="annottext">Term s PInteger
 </span><span class="hs-number">1</span></span><span>
-</span><span id="line-186"></span><span>
-</span><span id="line-187"></span><span>            </span><span class="hs-comment">-- If there is only one script input and we are running that means that we are that input</span><span>
-</span><span id="line-188"></span><span>            </span><span class="hs-comment">-- so no need to check explicitly</span><span>
-</span><span id="line-189"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198599"><span class="annot"><span class="annottext">scriptInputs :: Term s (PMaybe (PAsData PScriptHash))
-</span><a href="#local-6989586621679198599"><span class="hs-identifier hs-var hs-var">scriptInputs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-190"></span><span>                  </span><span class="annot"><span class="annottext">(Term
+</span><span id="line-169"></span><span>
+</span><span id="line-170"></span><span>            </span><span class="hs-comment">-- If there is only one script input and we are running that means that we are that input</span><span>
+</span><span id="line-171"></span><span>            </span><span class="hs-comment">-- so no need to check explicitly</span><span>
+</span><span id="line-172"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198511"><span class="annot"><span class="annottext">scriptInputs :: Term s (PMaybe (PAsData PScriptHash))
+</span><a href="#local-6989586621679198511"><span class="hs-identifier hs-var hs-var">scriptInputs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-173"></span><span>                  </span><span class="annot"><span class="annottext">(Term
    s
    (PBuiltinList (PAsData PTxInInfo)
     :--&gt; PMaybe (PAsData PScriptHash))
@@ -943,13 +573,13 @@ PIsListLike list a =&gt;
 (Term s (list a :--&gt; r) -&gt; Term s a -&gt; Term s (list a) -&gt; Term s r)
 -&gt; (Term s (list a :--&gt; r) -&gt; Term s r) -&gt; Term s (list a :--&gt; r)
 </span><span class="hs-identifier hs-var">precList</span></span><span>
-</span><span id="line-191"></span><span>                    </span><span class="hs-special">(</span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679198600"><span class="annot"><span class="annottext">Term
+</span><span id="line-174"></span><span>                    </span><span class="hs-special">(</span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679198512"><span class="annot"><span class="annottext">Term
   s
   (PBuiltinList (PAsData PTxInInfo)
    :--&gt; PMaybe (PAsData PScriptHash))
-</span><a href="#local-6989586621679198600"><span class="hs-identifier hs-var">self</span></a></span></span><span> </span><span id="local-6989586621679198601"><span class="annot"><span class="annottext">Term s (PAsData PTxInInfo)
-</span><a href="#local-6989586621679198601"><span class="hs-identifier hs-var">input</span></a></span></span><span> </span><span id="local-6989586621679198602"><span class="annot"><span class="annottext">Term s (PBuiltinList (PAsData PTxInInfo))
-</span><a href="#local-6989586621679198602"><span class="hs-identifier hs-var">rest</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Term s PTxInInfo
+</span><a href="#local-6989586621679198512"><span class="hs-identifier hs-var">self</span></a></span></span><span> </span><span id="local-6989586621679198513"><span class="annot"><span class="annottext">Term s (PAsData PTxInInfo)
+</span><a href="#local-6989586621679198513"><span class="hs-identifier hs-var">input</span></a></span></span><span> </span><span id="local-6989586621679198514"><span class="annot"><span class="annottext">Term s (PBuiltinList (PAsData PTxInInfo))
+</span><a href="#local-6989586621679198514"><span class="hs-identifier hs-var">rest</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Term s PTxInInfo
 -&gt; (PTxInInfo s -&gt; Term s (PMaybe (PAsData PScriptHash)))
 -&gt; Term s (PMaybe (PAsData PScriptHash))
 forall (a :: PType) (s :: S) (b :: PType).
@@ -960,17 +590,17 @@ forall (a :: PType) (s :: S).
 PIsData a =&gt;
 Term s (PAsData a) -&gt; Term s a
 </span><span class="hs-identifier hs-var">pfromData</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PTxInInfo)
-</span><a href="#local-6989586621679198601"><span class="hs-identifier hs-var">input</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">((PTxInInfo s -&gt; Term s (PMaybe (PAsData PScriptHash)))
+</span><a href="#local-6989586621679198513"><span class="hs-identifier hs-var">input</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">((PTxInInfo s -&gt; Term s (PMaybe (PAsData PScriptHash)))
  -&gt; Term s (PMaybe (PAsData PScriptHash)))
 -&gt; (PTxInInfo s -&gt; Term s (PMaybe (PAsData PScriptHash)))
 -&gt; Term s (PMaybe (PAsData PScriptHash))
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-192"></span><span>                        </span><span class="annot"><span class="hs-identifier hs-type">PTxInInfo</span></span><span> </span><span class="annot"><span class="annottext">Term s PTxOutRef
-</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679198603"><span class="annot"><span class="annottext">Term s PTxOut
-</span><a href="#local-6989586621679198603"><span class="hs-identifier hs-var">resolved</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
-</span><span id="line-193"></span><span>                          </span><span class="annot"><span class="hs-identifier hs-type">PTxOut</span></span><span> </span><span id="local-6989586621679198604"><span class="annot"><span class="annottext">Term s PAddress
-</span><a href="#local-6989586621679198604"><span class="hs-identifier hs-var">addr</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PValue 'Sorted 'Positive))
+</span><span id="line-175"></span><span>                        </span><span class="annot"><span class="hs-identifier hs-type">PTxInInfo</span></span><span> </span><span class="annot"><span class="annottext">Term s PTxOutRef
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679198515"><span class="annot"><span class="annottext">Term s PTxOut
+</span><a href="#local-6989586621679198515"><span class="hs-identifier hs-var">resolved</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
+</span><span id="line-176"></span><span>                          </span><span class="annot"><span class="hs-identifier hs-type">PTxOut</span></span><span> </span><span id="local-6989586621679198516"><span class="annot"><span class="annottext">Term s PAddress
+</span><a href="#local-6989586621679198516"><span class="hs-identifier hs-var">addr</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PValue 'Sorted 'Positive))
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s POutputDatum
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PScriptHash)
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s PTxOut
@@ -980,9 +610,9 @@ forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
 Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 </span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s PTxOut
-</span><a href="#local-6989586621679198603"><span class="hs-identifier hs-var">resolved</span></a></span><span>
-</span><span id="line-194"></span><span>                          </span><span class="annot"><span class="hs-identifier hs-type">PAddress</span></span><span> </span><span id="local-6989586621679198605"><span class="annot"><span class="annottext">Term s PCredential
-</span><a href="#local-6989586621679198605"><span class="hs-identifier hs-var">cred</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PStakingCredential)
+</span><a href="#local-6989586621679198515"><span class="hs-identifier hs-var">resolved</span></a></span><span>
+</span><span id="line-177"></span><span>                          </span><span class="annot"><span class="hs-identifier hs-type">PAddress</span></span><span> </span><span id="local-6989586621679198517"><span class="annot"><span class="annottext">Term s PCredential
+</span><a href="#local-6989586621679198517"><span class="hs-identifier hs-var">cred</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PStakingCredential)
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s PAddress
 -&gt; (PAddress s -&gt; Term s (PMaybe (PAsData PScriptHash)))
 -&gt; Term s (PMaybe (PAsData PScriptHash))
@@ -990,22 +620,22 @@ forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
 Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 </span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s PAddress
-</span><a href="#local-6989586621679198604"><span class="hs-identifier hs-var">addr</span></a></span><span>
-</span><span id="line-195"></span><span>                          </span><span class="annot"><span class="annottext">Term s PCredential
+</span><a href="#local-6989586621679198516"><span class="hs-identifier hs-var">addr</span></a></span><span>
+</span><span id="line-178"></span><span>                          </span><span class="annot"><span class="annottext">Term s PCredential
 -&gt; (PCredential s -&gt; Term s (PMaybe (PAsData PScriptHash)))
 -&gt; Term s (PMaybe (PAsData PScriptHash))
 forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
 Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 </span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s PCredential
-</span><a href="#local-6989586621679198605"><span class="hs-identifier hs-var">cred</span></a></span><span> </span><span class="annot"><span class="annottext">((PCredential s -&gt; Term s (PMaybe (PAsData PScriptHash)))
+</span><a href="#local-6989586621679198517"><span class="hs-identifier hs-var">cred</span></a></span><span> </span><span class="annot"><span class="annottext">((PCredential s -&gt; Term s (PMaybe (PAsData PScriptHash)))
  -&gt; Term s (PMaybe (PAsData PScriptHash)))
 -&gt; (PCredential s -&gt; Term s (PMaybe (PAsData PScriptHash)))
 -&gt; Term s (PMaybe (PAsData PScriptHash))
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-196"></span><span>                            </span><span class="annot"><span class="hs-identifier hs-type">PScriptCredential</span></span><span> </span><span id="local-6989586621679198606"><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
-</span><a href="#local-6989586621679198606"><span class="hs-identifier hs-var">hash</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Term s (PMaybe (PAsData PScriptHash))
+</span><span id="line-179"></span><span>                            </span><span class="annot"><span class="hs-identifier hs-type">PScriptCredential</span></span><span> </span><span id="local-6989586621679198518"><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
+</span><a href="#local-6989586621679198518"><span class="hs-identifier hs-var">hash</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Term s (PMaybe (PAsData PScriptHash))
 -&gt; (PMaybe (PAsData PScriptHash) s
     -&gt; Term s (PMaybe (PAsData PScriptHash)))
 -&gt; Term s (PMaybe (PAsData PScriptHash))
@@ -1016,7 +646,7 @@ Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
   s
   (PBuiltinList (PAsData PTxInInfo)
    :--&gt; PMaybe (PAsData PScriptHash))
-</span><a href="#local-6989586621679198600"><span class="hs-identifier hs-var">self</span></a></span><span> </span><span class="annot"><span class="annottext">Term
+</span><a href="#local-6989586621679198512"><span class="hs-identifier hs-var">self</span></a></span><span> </span><span class="annot"><span class="annottext">Term
   s
   (PBuiltinList (PAsData PTxInInfo)
    :--&gt; PMaybe (PAsData PScriptHash))
@@ -1025,7 +655,7 @@ Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 forall (s :: S) (a :: PType) (b :: PType).
 Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
 </span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term s (PBuiltinList (PAsData PTxInInfo))
-</span><a href="#local-6989586621679198602"><span class="hs-identifier hs-var">rest</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">((PMaybe (PAsData PScriptHash) s
+</span><a href="#local-6989586621679198514"><span class="hs-identifier hs-var">rest</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">((PMaybe (PAsData PScriptHash) s
   -&gt; Term s (PMaybe (PAsData PScriptHash)))
  -&gt; Term s (PMaybe (PAsData PScriptHash)))
 -&gt; (PMaybe (PAsData PScriptHash) s
@@ -1033,7 +663,7 @@ Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
 -&gt; Term s (PMaybe (PAsData PScriptHash))
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-197"></span><span>                              </span><span class="annot"><span class="annottext">PMaybe (PAsData PScriptHash) s
+</span><span id="line-180"></span><span>                              </span><span class="annot"><span class="annottext">PMaybe (PAsData PScriptHash) s
 </span><span class="hs-identifier hs-var">PNothing</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash :--&gt; PMaybe (PAsData PScriptHash))
 forall (a :: PType) (s :: S). Term s (a :--&gt; PMaybe a)
 </span><span class="hs-identifier hs-var">pjust</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash :--&gt; PMaybe (PAsData PScriptHash))
@@ -1042,17 +672,17 @@ forall (a :: PType) (s :: S). Term s (a :--&gt; PMaybe a)
 forall (s :: S) (a :: PType) (b :: PType).
 Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
 </span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
-</span><a href="#local-6989586621679198606"><span class="hs-identifier hs-var">hash</span></a></span><span>
-</span><span id="line-198"></span><span>                              </span><span class="annot"><span class="hs-identifier hs-type">PJust</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
+</span><a href="#local-6989586621679198518"><span class="hs-identifier hs-var">hash</span></a></span><span>
+</span><span id="line-181"></span><span>                              </span><span class="annot"><span class="hs-identifier hs-type">PJust</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Term s (PMaybe (PAsData PScriptHash))
 forall (s :: S) (a :: PType). Term s a
 </span><span class="hs-identifier hs-var">perror</span></span><span>
-</span><span id="line-199"></span><span>                            </span><span class="annot"><span class="annottext">PCredential s
+</span><span id="line-182"></span><span>                            </span><span class="annot"><span class="annottext">PCredential s
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Term
   s
   (PBuiltinList (PAsData PTxInInfo)
    :--&gt; PMaybe (PAsData PScriptHash))
-</span><a href="#local-6989586621679198600"><span class="hs-identifier hs-var">self</span></a></span><span> </span><span class="annot"><span class="annottext">Term
+</span><a href="#local-6989586621679198512"><span class="hs-identifier hs-var">self</span></a></span><span> </span><span class="annot"><span class="annottext">Term
   s
   (PBuiltinList (PAsData PTxInInfo)
    :--&gt; PMaybe (PAsData PScriptHash))
@@ -1061,9 +691,9 @@ forall (s :: S) (a :: PType). Term s a
 forall (s :: S) (a :: PType) (b :: PType).
 Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
 </span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term s (PBuiltinList (PAsData PTxInInfo))
-</span><a href="#local-6989586621679198602"><span class="hs-identifier hs-var">rest</span></a></span><span>
-</span><span id="line-200"></span><span>                    </span><span class="hs-special">)</span><span>
-</span><span id="line-201"></span><span>                    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term s (PMaybe (PAsData PScriptHash))
+</span><a href="#local-6989586621679198514"><span class="hs-identifier hs-var">rest</span></a></span><span>
+</span><span id="line-183"></span><span>                    </span><span class="hs-special">)</span><span>
+</span><span id="line-184"></span><span>                    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term s (PMaybe (PAsData PScriptHash))
 -&gt; Term
      s
      (PBuiltinList (PAsData PTxInInfo)
@@ -1079,17 +709,17 @@ forall a. Maybe a
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-cpp">
                     # pfromData inputs
 </span><span>
-</span><span id="line-204"></span><span>            </span><span class="hs-comment">-- Spending condition 6: Transaction does not include script inputs other than own input.</span><span>
-</span><span id="line-205"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PJust</span></span><span> </span><span id="local-6989586621679198607"><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
-</span><a href="#local-6989586621679198607"><span class="hs-identifier hs-var">ownScriptHash</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s (PMaybe (PAsData PScriptHash))
+</span><span id="line-187"></span><span>            </span><span class="hs-comment">-- Spending condition 6: Transaction does not include script inputs other than own input.</span><span>
+</span><span id="line-188"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PJust</span></span><span> </span><span id="local-6989586621679198519"><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
+</span><a href="#local-6989586621679198519"><span class="hs-identifier hs-var">ownScriptHash</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s (PMaybe (PAsData PScriptHash))
 -&gt; (PMaybe (PAsData PScriptHash) s -&gt; Term s PBool) -&gt; Term s PBool
 forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
 Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 </span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s (PMaybe (PAsData PScriptHash))
-</span><a href="#local-6989586621679198599"><span class="hs-identifier hs-var">scriptInputs</span></a></span><span>
-</span><span id="line-206"></span><span>            </span><span id="local-6989586621679198608"><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
-</span><a href="#local-6989586621679198608"><span class="hs-identifier hs-var">ownCurrencySymbol</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
+</span><a href="#local-6989586621679198511"><span class="hs-identifier hs-var">scriptInputs</span></a></span><span>
+</span><span id="line-189"></span><span>            </span><span id="local-6989586621679198520"><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
+</span><a href="#local-6989586621679198520"><span class="hs-identifier hs-var">ownCurrencySymbol</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
 -&gt; (Term s (PAsData PCurrencySymbol) -&gt; Term s PBool)
 -&gt; Term s PBool
 forall (s :: S) (a :: PType) (b :: PType).
@@ -1105,27 +735,394 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 forall (s :: S).
 Term s (PAsData PScriptHash) -&gt; Term s (PAsData PCurrencySymbol)
 </span><a href="Agora.Utils.html#pscriptHashToCurrencySymbol"><span class="hs-identifier hs-var">pscriptHashToCurrencySymbol</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
-</span><a href="#local-6989586621679198607"><span class="hs-identifier hs-var">ownScriptHash</span></a></span><span>
-</span><span id="line-207"></span><span>
-</span><span id="line-208"></span><span>            </span><span class="hs-comment">-- Spending Condition 1: Transaction burns one GAT (symbol is known from script parameter)</span><span>
-</span><span id="line-209"></span><span>            </span><span class="hs-comment">-- Spending Condition 2: Spent UTxO contains GAT</span><span>
-</span><span id="line-210"></span><span>            </span><span class="hs-comment">-- Spending condition 4: Transaction does not mint or burn any tokens other than V2 and V3 GATs.</span><span>
-</span><span id="line-211"></span><span>
-</span><span id="line-212"></span><span>            </span><span class="hs-comment">-- There is a bit to unpack here:</span><span>
-</span><span id="line-213"></span><span>            </span><span class="hs-comment">-- Fact that we are burning a V2 GAT combined with Condition 6 ensures that there is a</span><span>
-</span><span id="line-214"></span><span>            </span><span class="hs-comment">-- V2 GAT in the inputs. There is only one script input so it either comes from the</span><span>
-</span><span id="line-215"></span><span>            </span><span class="hs-comment">-- currently validated input OR that there is a pubkey address that had V2 GAT.</span><span>
-</span><span id="line-216"></span><span>            </span><span class="hs-comment">-- If it is the latter that means that the whole setup is already compromised so it</span><span>
-</span><span id="line-217"></span><span>            </span><span class="hs-comment">-- does not matter what happens here anyway.</span><span>
-</span><span id="line-218"></span><span>            </span><span class="hs-comment">-- No need to check for name of V2 token as GAT policy enforces that</span><span>
-</span><span id="line-219"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198609"><span class="annot"><span class="annottext">mintCheck :: Term s PBool
-</span><a href="#local-6989586621679198609"><span class="hs-identifier hs-var hs-var">mintCheck</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-220"></span><span>                  </span><span class="annot"><span class="annottext">Term s PBool -&gt; Term s PBool -&gt; Term s PBool -&gt; Term s PBool
+</span><a href="#local-6989586621679198519"><span class="hs-identifier hs-var">ownScriptHash</span></a></span><span>
+</span><span id="line-190"></span><span>
+</span><span id="line-191"></span><span>            </span><span class="hs-comment">-- Spending Condition 1: Transaction burns one GAT (symbol is known from script parameter)</span><span>
+</span><span id="line-192"></span><span>            </span><span class="hs-comment">-- Spending Condition 2: Spent UTxO contains GAT</span><span>
+</span><span id="line-193"></span><span>            </span><span class="hs-comment">-- Spending condition 4: Transaction does not mint or burn any tokens other than V2 and V3 GATs.</span><span>
+</span><span id="line-194"></span><span>
+</span><span id="line-195"></span><span>            </span><span class="hs-comment">-- There is a bit to unpack here:</span><span>
+</span><span id="line-196"></span><span>            </span><span class="hs-comment">-- Fact that we are burning a V2 GAT combined with Condition 6 ensures that there is a</span><span>
+</span><span id="line-197"></span><span>            </span><span class="hs-comment">-- V2 GAT in the inputs. There is only one script input so it either comes from the</span><span>
+</span><span id="line-198"></span><span>            </span><span class="hs-comment">-- currently validated input OR that there is a pubkey address that had V2 GAT.</span><span>
+</span><span id="line-199"></span><span>            </span><span class="hs-comment">-- If it is the latter that means that the whole setup is already compromised so it</span><span>
+</span><span id="line-200"></span><span>            </span><span class="hs-comment">-- does not matter what happens here anyway.</span><span>
+</span><span id="line-201"></span><span>            </span><span class="hs-comment">-- No need to check for name of V2 token as GAT policy enforces that</span><span>
+</span><span id="line-202"></span><span>            </span><span class="hs-comment">-- Pattern matching asserts that there are only two symbols minted and `mintCheck`</span><span>
+</span><span id="line-203"></span><span>            </span><span class="hs-comment">-- asserts that they are V2 and V3 gats.</span><span>
+</span><span id="line-204"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PValue</span></span><span> </span><span id="local-6989586621679198521"><span class="annot"><span class="annottext">Term
+  s (PMap 'Sorted PCurrencySymbol (PMap 'Sorted PTokenName PInteger))
+</span><a href="#local-6989586621679198521"><span class="hs-identifier hs-var">mintAssetMap</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s (PValue 'Sorted 'NonZero)
+-&gt; (PValue 'Sorted 'NonZero s -&gt; Term s PBool) -&gt; Term s PBool
+forall (a :: PType) (s :: S) (b :: PType).
+PlutusType a =&gt;
+Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
+</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term s (PAsData (PValue 'Sorted 'NonZero))
+-&gt; Term s (PValue 'Sorted 'NonZero)
+forall (a :: PType) (s :: S).
+PIsData a =&gt;
+Term s (PAsData a) -&gt; Term s a
+</span><span class="hs-identifier hs-var">pfromData</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PValue 'Sorted 'NonZero))
+</span><a href="#local-6989586621679198491"><span class="hs-identifier hs-var">mint</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-205"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PMap</span></span><span> </span><span id="local-6989586621679198522"><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair
+        (PAsData PCurrencySymbol)
+        (PAsData (PMap 'Sorted PTokenName PInteger))))
+</span><a href="#local-6989586621679198522"><span class="hs-identifier hs-var">mintAssetList</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
+  s (PMap 'Sorted PCurrencySymbol (PMap 'Sorted PTokenName PInteger))
+-&gt; (PMap
+      'Sorted PCurrencySymbol (PMap 'Sorted PTokenName PInteger) s
+    -&gt; Term s PBool)
+-&gt; Term s PBool
+forall (a :: PType) (s :: S) (b :: PType).
+PlutusType a =&gt;
+Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
+</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s (PMap 'Sorted PCurrencySymbol (PMap 'Sorted PTokenName PInteger))
+</span><a href="#local-6989586621679198521"><span class="hs-identifier hs-var">mintAssetMap</span></a></span><span>
+</span><span id="line-206"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PCons</span></span><span> </span><span id="local-6989586621679198523"><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinPair
+     (PAsData PCurrencySymbol)
+     (PAsData (PMap 'Sorted PTokenName PInteger)))
+</span><a href="#local-6989586621679198523"><span class="hs-identifier hs-var">mintAssetPair1</span></a></span></span><span> </span><span id="local-6989586621679198524"><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair
+        (PAsData PCurrencySymbol)
+        (PAsData (PMap 'Sorted PTokenName PInteger))))
+</span><a href="#local-6989586621679198524"><span class="hs-identifier hs-var">mintAssetListRest1</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair
+        (PAsData PCurrencySymbol)
+        (PAsData (PMap 'Sorted PTokenName PInteger))))
+-&gt; (PBuiltinList
+      (PBuiltinPair
+         (PAsData PCurrencySymbol)
+         (PAsData (PMap 'Sorted PTokenName PInteger)))
+      s
+    -&gt; Term s PBool)
+-&gt; Term s PBool
+forall (a :: PType) (s :: S) (b :: PType).
+PlutusType a =&gt;
+Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
+</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair
+        (PAsData PCurrencySymbol)
+        (PAsData (PMap 'Sorted PTokenName PInteger))))
+</span><a href="#local-6989586621679198522"><span class="hs-identifier hs-var">mintAssetList</span></a></span><span>
+</span><span id="line-207"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PCons</span></span><span> </span><span id="local-6989586621679198525"><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinPair
+     (PAsData PCurrencySymbol)
+     (PAsData (PMap 'Sorted PTokenName PInteger)))
+</span><a href="#local-6989586621679198525"><span class="hs-identifier hs-var">mintAssetPair2</span></a></span></span><span> </span><span id="local-6989586621679198526"><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair
+        (PAsData PCurrencySymbol)
+        (PAsData (PMap 'Sorted PTokenName PInteger))))
+</span><a href="#local-6989586621679198526"><span class="hs-identifier hs-var">mintAssetListRest2</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair
+        (PAsData PCurrencySymbol)
+        (PAsData (PMap 'Sorted PTokenName PInteger))))
+-&gt; (PBuiltinList
+      (PBuiltinPair
+         (PAsData PCurrencySymbol)
+         (PAsData (PMap 'Sorted PTokenName PInteger)))
+      s
+    -&gt; Term s PBool)
+-&gt; Term s PBool
+forall (a :: PType) (s :: S) (b :: PType).
+PlutusType a =&gt;
+Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
+</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair
+        (PAsData PCurrencySymbol)
+        (PAsData (PMap 'Sorted PTokenName PInteger))))
+</span><a href="#local-6989586621679198524"><span class="hs-identifier hs-var">mintAssetListRest1</span></a></span><span>
+</span><span id="line-208"></span><span>            </span><span class="annot"><span class="annottext">PBuiltinList
+  (PBuiltinPair
+     (PAsData PCurrencySymbol)
+     (PAsData (PMap 'Sorted PTokenName PInteger)))
+  s
+</span><span class="hs-identifier hs-var">PNil</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair
+        (PAsData PCurrencySymbol)
+        (PAsData (PMap 'Sorted PTokenName PInteger))))
+-&gt; (PBuiltinList
+      (PBuiltinPair
+         (PAsData PCurrencySymbol)
+         (PAsData (PMap 'Sorted PTokenName PInteger)))
+      s
+    -&gt; Term s PBool)
+-&gt; Term s PBool
+forall (a :: PType) (s :: S) (b :: PType).
+PlutusType a =&gt;
+Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
+</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair
+        (PAsData PCurrencySymbol)
+        (PAsData (PMap 'Sorted PTokenName PInteger))))
+</span><a href="#local-6989586621679198526"><span class="hs-identifier hs-var">mintAssetListRest2</span></a></span><span>
+</span><span id="line-209"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198527"><span class="annot"><span class="annottext">mintCs1 :: Term s (PAsData PCurrencySymbol)
+</span><a href="#local-6989586621679198527"><span class="hs-identifier hs-var hs-var">mintCs1</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinPair
+     (PAsData PCurrencySymbol)
+     (PAsData (PMap 'Sorted PTokenName PInteger))
+   :--&gt; PAsData PCurrencySymbol)
+forall (s :: S) (a :: PType) (b :: PType).
+Term s (PBuiltinPair a b :--&gt; a)
+</span><span class="hs-identifier hs-var">pfstBuiltin</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinPair
+     (PAsData PCurrencySymbol)
+     (PAsData (PMap 'Sorted PTokenName PInteger))
+   :--&gt; PAsData PCurrencySymbol)
+-&gt; Term
+     s
+     (PBuiltinPair
+        (PAsData PCurrencySymbol)
+        (PAsData (PMap 'Sorted PTokenName PInteger)))
+-&gt; Term s (PAsData PCurrencySymbol)
+forall (s :: S) (a :: PType) (b :: PType).
+Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
+</span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinPair
+     (PAsData PCurrencySymbol)
+     (PAsData (PMap 'Sorted PTokenName PInteger)))
+</span><a href="#local-6989586621679198523"><span class="hs-identifier hs-var">mintAssetPair1</span></a></span><span>
+</span><span id="line-210"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PMap</span></span><span> </span><span id="local-6989586621679198528"><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
+</span><a href="#local-6989586621679198528"><span class="hs-identifier hs-var">mintTokens1</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s (PMap 'Sorted PTokenName PInteger)
+-&gt; (PMap 'Sorted PTokenName PInteger s -&gt; Term s PBool)
+-&gt; Term s PBool
+forall (a :: PType) (s :: S) (b :: PType).
+PlutusType a =&gt;
+Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
+</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">(Term s (PMap 'Sorted PTokenName PInteger)
+ -&gt; (PMap 'Sorted PTokenName PInteger s -&gt; Term s PBool)
+ -&gt; Term s PBool)
+-&gt; Term s (PMap 'Sorted PTokenName PInteger)
+-&gt; (PMap 'Sorted PTokenName PInteger s -&gt; Term s PBool)
+-&gt; Term s PBool
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PMap 'Sorted PTokenName PInteger))
+-&gt; Term s (PMap 'Sorted PTokenName PInteger)
+forall (a :: PType) (s :: S).
+PIsData a =&gt;
+Term s (PAsData a) -&gt; Term s a
+</span><span class="hs-identifier hs-var">pfromData</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinPair
+     (PAsData PCurrencySymbol)
+     (PAsData (PMap 'Sorted PTokenName PInteger))
+   :--&gt; PAsData (PMap 'Sorted PTokenName PInteger))
+forall (s :: S) (a :: PType) (b :: PType).
+Term s (PBuiltinPair a b :--&gt; b)
+</span><span class="hs-identifier hs-var">psndBuiltin</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinPair
+     (PAsData PCurrencySymbol)
+     (PAsData (PMap 'Sorted PTokenName PInteger))
+   :--&gt; PAsData (PMap 'Sorted PTokenName PInteger))
+-&gt; Term
+     s
+     (PBuiltinPair
+        (PAsData PCurrencySymbol)
+        (PAsData (PMap 'Sorted PTokenName PInteger)))
+-&gt; Term s (PAsData (PMap 'Sorted PTokenName PInteger))
+forall (s :: S) (a :: PType) (b :: PType).
+Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
+</span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinPair
+     (PAsData PCurrencySymbol)
+     (PAsData (PMap 'Sorted PTokenName PInteger)))
+</span><a href="#local-6989586621679198523"><span class="hs-identifier hs-var">mintAssetPair1</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-211"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PCons</span></span><span> </span><span id="local-6989586621679198529"><span class="annot"><span class="annottext">Term s (PBuiltinPair (PAsData PTokenName) (PAsData PInteger))
+</span><a href="#local-6989586621679198529"><span class="hs-identifier hs-var">mintTokenPair1</span></a></span></span><span> </span><span id="local-6989586621679198530"><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
+</span><a href="#local-6989586621679198530"><span class="hs-identifier hs-var">mintTokens1Rest</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
+-&gt; (PBuiltinList
+      (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)) s
+    -&gt; Term s PBool)
+-&gt; Term s PBool
+forall (a :: PType) (s :: S) (b :: PType).
+PlutusType a =&gt;
+Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
+</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
+</span><a href="#local-6989586621679198528"><span class="hs-identifier hs-var">mintTokens1</span></a></span><span>
+</span><span id="line-212"></span><span>            </span><span class="annot"><span class="annottext">PBuiltinList
+  (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)) s
+</span><span class="hs-identifier hs-var">PNil</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
+-&gt; (PBuiltinList
+      (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)) s
+    -&gt; Term s PBool)
+-&gt; Term s PBool
+forall (a :: PType) (s :: S) (b :: PType).
+PlutusType a =&gt;
+Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
+</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
+</span><a href="#local-6989586621679198530"><span class="hs-identifier hs-var">mintTokens1Rest</span></a></span><span>
+</span><span id="line-213"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198531"><span class="annot"><span class="annottext">mintCs2 :: Term s (PAsData PCurrencySymbol)
+</span><a href="#local-6989586621679198531"><span class="hs-identifier hs-var hs-var">mintCs2</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinPair
+     (PAsData PCurrencySymbol)
+     (PAsData (PMap 'Sorted PTokenName PInteger))
+   :--&gt; PAsData PCurrencySymbol)
+forall (s :: S) (a :: PType) (b :: PType).
+Term s (PBuiltinPair a b :--&gt; a)
+</span><span class="hs-identifier hs-var">pfstBuiltin</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinPair
+     (PAsData PCurrencySymbol)
+     (PAsData (PMap 'Sorted PTokenName PInteger))
+   :--&gt; PAsData PCurrencySymbol)
+-&gt; Term
+     s
+     (PBuiltinPair
+        (PAsData PCurrencySymbol)
+        (PAsData (PMap 'Sorted PTokenName PInteger)))
+-&gt; Term s (PAsData PCurrencySymbol)
+forall (s :: S) (a :: PType) (b :: PType).
+Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
+</span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinPair
+     (PAsData PCurrencySymbol)
+     (PAsData (PMap 'Sorted PTokenName PInteger)))
+</span><a href="#local-6989586621679198525"><span class="hs-identifier hs-var">mintAssetPair2</span></a></span><span>
+</span><span id="line-214"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PMap</span></span><span> </span><span id="local-6989586621679198532"><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
+</span><a href="#local-6989586621679198532"><span class="hs-identifier hs-var">mintTokens2</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s (PMap 'Sorted PTokenName PInteger)
+-&gt; (PMap 'Sorted PTokenName PInteger s -&gt; Term s PBool)
+-&gt; Term s PBool
+forall (a :: PType) (s :: S) (b :: PType).
+PlutusType a =&gt;
+Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
+</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">(Term s (PMap 'Sorted PTokenName PInteger)
+ -&gt; (PMap 'Sorted PTokenName PInteger s -&gt; Term s PBool)
+ -&gt; Term s PBool)
+-&gt; Term s (PMap 'Sorted PTokenName PInteger)
+-&gt; (PMap 'Sorted PTokenName PInteger s -&gt; Term s PBool)
+-&gt; Term s PBool
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PMap 'Sorted PTokenName PInteger))
+-&gt; Term s (PMap 'Sorted PTokenName PInteger)
+forall (a :: PType) (s :: S).
+PIsData a =&gt;
+Term s (PAsData a) -&gt; Term s a
+</span><span class="hs-identifier hs-var">pfromData</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinPair
+     (PAsData PCurrencySymbol)
+     (PAsData (PMap 'Sorted PTokenName PInteger))
+   :--&gt; PAsData (PMap 'Sorted PTokenName PInteger))
+forall (s :: S) (a :: PType) (b :: PType).
+Term s (PBuiltinPair a b :--&gt; b)
+</span><span class="hs-identifier hs-var">psndBuiltin</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinPair
+     (PAsData PCurrencySymbol)
+     (PAsData (PMap 'Sorted PTokenName PInteger))
+   :--&gt; PAsData (PMap 'Sorted PTokenName PInteger))
+-&gt; Term
+     s
+     (PBuiltinPair
+        (PAsData PCurrencySymbol)
+        (PAsData (PMap 'Sorted PTokenName PInteger)))
+-&gt; Term s (PAsData (PMap 'Sorted PTokenName PInteger))
+forall (s :: S) (a :: PType) (b :: PType).
+Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
+</span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinPair
+     (PAsData PCurrencySymbol)
+     (PAsData (PMap 'Sorted PTokenName PInteger)))
+</span><a href="#local-6989586621679198525"><span class="hs-identifier hs-var">mintAssetPair2</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-215"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PCons</span></span><span> </span><span id="local-6989586621679198533"><span class="annot"><span class="annottext">Term s (PBuiltinPair (PAsData PTokenName) (PAsData PInteger))
+</span><a href="#local-6989586621679198533"><span class="hs-identifier hs-var">mintTokenPair2</span></a></span></span><span> </span><span id="local-6989586621679198534"><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
+</span><a href="#local-6989586621679198534"><span class="hs-identifier hs-var">mintTokens2Rest</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
+-&gt; (PBuiltinList
+      (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)) s
+    -&gt; Term s PBool)
+-&gt; Term s PBool
+forall (a :: PType) (s :: S) (b :: PType).
+PlutusType a =&gt;
+Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
+</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
+</span><a href="#local-6989586621679198532"><span class="hs-identifier hs-var">mintTokens2</span></a></span><span>
+</span><span id="line-216"></span><span>            </span><span class="annot"><span class="annottext">PBuiltinList
+  (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)) s
+</span><span class="hs-identifier hs-var">PNil</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
+-&gt; (PBuiltinList
+      (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)) s
+    -&gt; Term s PBool)
+-&gt; Term s PBool
+forall (a :: PType) (s :: S) (b :: PType).
+PlutusType a =&gt;
+Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
+</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PBuiltinList
+     (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)))
+</span><a href="#local-6989586621679198534"><span class="hs-identifier hs-var">mintTokens2Rest</span></a></span><span>
+</span><span id="line-217"></span><span>
+</span><span id="line-218"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198535"><span class="annot"><span class="annottext">mintCheck :: Term s PBool
+</span><a href="#local-6989586621679198535"><span class="hs-identifier hs-var hs-var">mintCheck</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-219"></span><span>                  </span><span class="annot"><span class="annottext">Term s PBool -&gt; Term s PBool -&gt; Term s PBool -&gt; Term s PBool
 forall (a :: PType) (s :: S).
 Term s PBool -&gt; Term s a -&gt; Term s a -&gt; Term s a
 </span><span class="hs-identifier hs-var">pif</span></span><span>
-</span><span id="line-221"></span><span>                    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
-</span><a href="#local-6989586621679198570"><span class="hs-identifier hs-var">mintCs1</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
+</span><span id="line-220"></span><span>                    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
+</span><a href="#local-6989586621679198527"><span class="hs-identifier hs-var">mintCs1</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
 -&gt; Term s (PAsData PCurrencySymbol) -&gt; Term s PBool
 forall (s :: S).
 Term s (PAsData PCurrencySymbol)
@@ -1134,8 +1131,8 @@ forall (t :: PType) (s :: S).
 PEq t =&gt;
 Term s t -&gt; Term s t -&gt; Term s PBool
 </span><span class="hs-operator hs-var">#==</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
-</span><a href="#local-6989586621679198608"><span class="hs-identifier hs-var">ownCurrencySymbol</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-222"></span><span>                    </span><span class="hs-special">(</span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term
+</span><a href="#local-6989586621679198520"><span class="hs-identifier hs-var">ownCurrencySymbol</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-221"></span><span>                    </span><span class="hs-special">(</span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term
   s
   (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)
    :--&gt; PAsData PTokenName)
@@ -1150,7 +1147,7 @@ Term s (PBuiltinPair a b :--&gt; a)
 forall (s :: S) (a :: PType) (b :: PType).
 Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
 </span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term s (PBuiltinPair (PAsData PTokenName) (PAsData PInteger))
-</span><a href="#local-6989586621679198572"><span class="hs-identifier hs-var">mintTokenPair1</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PTokenName)
+</span><a href="#local-6989586621679198529"><span class="hs-identifier hs-var">mintTokenPair1</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PTokenName)
 -&gt; Term s (PAsData PTokenName) -&gt; Term s PBool
 forall (s :: S).
 Term s (PAsData PTokenName)
@@ -1169,7 +1166,7 @@ TokenName
 </span><span class="hs-cpp">                        #&amp;&amp; (mintCs2 #== authSymbol')
 </span><span class="hs-cpp">                        #&amp;&amp; (pfromData (psndBuiltin # mintTokenPair2) #== pconstant (-1))
 </span><span>                    </span><span class="hs-special">)</span><span>
-</span><span id="line-227"></span><span>                    </span><span class="hs-special">(</span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term
+</span><span id="line-226"></span><span>                    </span><span class="hs-special">(</span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term
   s
   (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)
    :--&gt; PAsData PTokenName)
@@ -1184,7 +1181,7 @@ Term s (PBuiltinPair a b :--&gt; a)
 forall (s :: S) (a :: PType) (b :: PType).
 Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
 </span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term s (PBuiltinPair (PAsData PTokenName) (PAsData PInteger))
-</span><a href="#local-6989586621679198576"><span class="hs-identifier hs-var">mintTokenPair2</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PTokenName)
+</span><a href="#local-6989586621679198533"><span class="hs-identifier hs-var">mintTokenPair2</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PTokenName)
 -&gt; Term s (PAsData PTokenName) -&gt; Term s PBool
 forall (s :: S).
 Term s (PAsData PTokenName)
@@ -1204,9 +1201,9 @@ TokenName
 </span><span class="hs-cpp">                        #&amp;&amp; (mintCs1 #== authSymbol')
 </span><span class="hs-cpp">                        #&amp;&amp; (pfromData (psndBuiltin # mintTokenPair1) #== pconstant (-1))
 </span><span>                    </span><span class="hs-special">)</span><span>
-</span><span id="line-233"></span><span>
-</span><span id="line-234"></span><span>            </span><span class="hs-comment">-- Spending condition 5: Transaction does not include any certificates</span><span>
-</span><span id="line-235"></span><span>            </span><span class="annot"><span class="annottext">PBuiltinList (PAsData PTxCert) s
+</span><span id="line-232"></span><span>
+</span><span id="line-233"></span><span>            </span><span class="hs-comment">-- Spending condition 5: Transaction does not include any certificates</span><span>
+</span><span id="line-234"></span><span>            </span><span class="annot"><span class="annottext">PBuiltinList (PAsData PTxCert) s
 </span><span class="hs-identifier hs-var">PNil</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s (PBuiltinList (PAsData PTxCert))
 -&gt; (PBuiltinList (PAsData PTxCert) s -&gt; Term s PBool)
 -&gt; Term s PBool
@@ -1219,28 +1216,55 @@ forall (a :: PType) (s :: S).
 PIsData a =&gt;
 Term s (PAsData a) -&gt; Term s a
 </span><span class="hs-identifier hs-var">pfromData</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PTxCert)))
-</span><a href="#local-6989586621679198562"><span class="hs-identifier hs-var">txCerts</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-236"></span><span>
-</span><span id="line-237"></span><span>            </span><span class="annot"><span class="annottext">(Term s PBool -&gt; Term s PBool -&gt; Term s PBool)
+</span><a href="#local-6989586621679198492"><span class="hs-identifier hs-var">txCerts</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-235"></span><span>
+</span><span id="line-236"></span><span>            </span><span class="annot"><span class="annottext">(Term s PBool -&gt; Term s PBool -&gt; Term s PBool)
 -&gt; [Term s PBool] -&gt; Term s PBool
 forall a. (a -&gt; a -&gt; a) -&gt; [a] -&gt; a
 forall (t :: Type -&gt; Type) a.
 Foldable t =&gt;
 (a -&gt; a -&gt; a) -&gt; t a -&gt; a
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/Data.Foldable.html#foldr1"><span class="hs-identifier hs-var">foldr1</span></a></span><span>
-</span><span id="line-238"></span><span>              </span><span class="annot"><span class="annottext">Term s PBool -&gt; Term s PBool -&gt; Term s PBool
+</span><span id="line-237"></span><span>              </span><span class="annot"><span class="annottext">Term s PBool -&gt; Term s PBool -&gt; Term s PBool
 forall (s :: S). Term s PBool -&gt; Term s PBool -&gt; Term s PBool
 </span><span class="hs-operator hs-var">(#&amp;&amp;)</span></span><span>
-</span><span id="line-239"></span><span>              </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Term s PBool
-</span><a href="#local-6989586621679198598"><span class="hs-identifier hs-var">singleOutputWithDatum</span></a></span><span>
-</span><span id="line-240"></span><span>              </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Term s PBool
-</span><a href="#local-6989586621679198609"><span class="hs-identifier hs-var">mintCheck</span></a></span><span>
-</span><span id="line-241"></span><span>              </span><span class="hs-special">]</span><span>
-</span><span id="line-242"></span><span>          </span><span class="annot"><span class="hs-identifier hs-type">PMintingScript</span></span><span> </span><span id="local-6989586621679198611"><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
-</span><a href="#local-6989586621679198611"><span class="hs-identifier hs-var">currencySymbol</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
-</span><span id="line-243"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198612"><span class="annot"><span class="annottext">isValidatorInput :: Term s (PAsData PTxInInfo :--&gt; PBool)
-</span><a href="#local-6989586621679198612"><span class="hs-identifier hs-var hs-var">isValidatorInput</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-244"></span><span>                  </span><span class="annot"><span class="annottext">(Term s (PAsData PTxInInfo) -&gt; Term s PBool)
+</span><span id="line-238"></span><span>              </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Term s PBool
+</span><a href="#local-6989586621679198510"><span class="hs-identifier hs-var">singleOutputWithDatum</span></a></span><span>
+</span><span id="line-239"></span><span>              </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Term s PBool
+</span><a href="#local-6989586621679198535"><span class="hs-identifier hs-var">mintCheck</span></a></span><span>
+</span><span id="line-240"></span><span>              </span><span class="hs-special">]</span><span>
+</span><span id="line-241"></span><span>          </span><span class="annot"><span class="hs-identifier hs-type">PMintingScript</span></span><span> </span><span id="local-6989586621679198537"><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
+</span><a href="#local-6989586621679198537"><span class="hs-identifier hs-var">currencySymbol</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
+</span><span id="line-242"></span><span>            </span><span class="hs-comment">-- When this script runs also V2 GAT gets burned so that guarantees that no V3 thing happens</span><span>
+</span><span id="line-243"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">PTxInfo</span></span><span> </span><span id="local-6989586621679198538"><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PTxInInfo)))
+</span><a href="#local-6989586621679198538"><span class="hs-identifier hs-var">inputs</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PTxInInfo)))
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PTxOut)))
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PLovelace)
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PValue 'Sorted 'NonZero))
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PTxCert)))
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PMap 'Unsorted PCredential PLovelace))
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PInterval PPosixTime)
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PPubKeyHash)))
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PMap 'Unsorted PScriptPurpose PRedeemer))
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PMap 'Unsorted PDatumHash PDatum))
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PTxId)
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term
+  s
+  (PAsData
+     (PMap 'Unsorted PVoter (PMap 'Unsorted PGovernanceActionId PVote)))
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PProposalProcedure)))
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PLovelace)
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PLovelace)
+</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s PTxInfo -&gt; (PTxInfo s -&gt; Term s PBool) -&gt; Term s PBool
+forall (a :: PType) (s :: S) (b :: PType).
+PlutusType a =&gt;
+Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
+</span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s PTxInfo
+</span><a href="#local-6989586621679198483"><span class="hs-identifier hs-var">txInfo</span></a></span><span>
+</span><span id="line-244"></span><span>
+</span><span id="line-245"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198539"><span class="annot"><span class="annottext">isValidatorInput :: Term s (PAsData PTxInInfo :--&gt; PBool)
+</span><a href="#local-6989586621679198539"><span class="hs-identifier hs-var hs-var">isValidatorInput</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-246"></span><span>                  </span><span class="annot"><span class="annottext">(Term s (PAsData PTxInInfo) -&gt; Term s PBool)
 -&gt; Term s (PAsData PTxInInfo :--&gt; PBool)
 forall a (b :: PType) (s :: S) (c :: PType).
 (PLamN a b s, HasCallStack) =&gt;
@@ -1249,8 +1273,8 @@ forall (c :: PType).
 HasCallStack =&gt;
 (Term s c -&gt; Term s PBool) -&gt; Term s (c :--&gt; PBool)
 </span><span class="hs-identifier hs-var">plam</span></span><span>
-</span><span id="line-245"></span><span>                    </span><span class="hs-special">(</span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679198613"><span class="annot"><span class="annottext">Term s (PAsData PTxInInfo)
-</span><a href="#local-6989586621679198613"><span class="hs-identifier hs-var">input</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Term s PTxInInfo -&gt; (PTxInInfo s -&gt; Term s PBool) -&gt; Term s PBool
+</span><span id="line-247"></span><span>                    </span><span class="hs-special">(</span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679198540"><span class="annot"><span class="annottext">Term s (PAsData PTxInInfo)
+</span><a href="#local-6989586621679198540"><span class="hs-identifier hs-var">input</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Term s PTxInInfo -&gt; (PTxInInfo s -&gt; Term s PBool) -&gt; Term s PBool
 forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
 Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
@@ -1259,15 +1283,15 @@ forall (a :: PType) (s :: S).
 PIsData a =&gt;
 Term s (PAsData a) -&gt; Term s a
 </span><span class="hs-identifier hs-var">pfromData</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PTxInInfo)
-</span><a href="#local-6989586621679198613"><span class="hs-identifier hs-var">input</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">((PTxInInfo s -&gt; Term s PBool) -&gt; Term s PBool)
+</span><a href="#local-6989586621679198540"><span class="hs-identifier hs-var">input</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">((PTxInInfo s -&gt; Term s PBool) -&gt; Term s PBool)
 -&gt; (PTxInInfo s -&gt; Term s PBool) -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-246"></span><span>                        </span><span class="annot"><span class="hs-identifier hs-type">PTxInInfo</span></span><span> </span><span class="annot"><span class="annottext">Term s PTxOutRef
-</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679198614"><span class="annot"><span class="annottext">Term s PTxOut
-</span><a href="#local-6989586621679198614"><span class="hs-identifier hs-var">resolved</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
-</span><span id="line-247"></span><span>                          </span><span class="annot"><span class="hs-identifier hs-type">PTxOut</span></span><span> </span><span id="local-6989586621679198615"><span class="annot"><span class="annottext">Term s PAddress
-</span><a href="#local-6989586621679198615"><span class="hs-identifier hs-var">addr</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PValue 'Sorted 'Positive))
+</span><span id="line-248"></span><span>                        </span><span class="annot"><span class="hs-identifier hs-type">PTxInInfo</span></span><span> </span><span class="annot"><span class="annottext">Term s PTxOutRef
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679198541"><span class="annot"><span class="annottext">Term s PTxOut
+</span><a href="#local-6989586621679198541"><span class="hs-identifier hs-var">resolved</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
+</span><span id="line-249"></span><span>                          </span><span class="annot"><span class="hs-identifier hs-type">PTxOut</span></span><span> </span><span id="local-6989586621679198542"><span class="annot"><span class="annottext">Term s PAddress
+</span><a href="#local-6989586621679198542"><span class="hs-identifier hs-var">addr</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PValue 'Sorted 'Positive))
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s POutputDatum
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PScriptHash)
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s PTxOut -&gt; (PTxOut s -&gt; Term s PBool) -&gt; Term s PBool
@@ -1275,29 +1299,29 @@ forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
 Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 </span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s PTxOut
-</span><a href="#local-6989586621679198614"><span class="hs-identifier hs-var">resolved</span></a></span><span>
-</span><span id="line-248"></span><span>                          </span><span class="annot"><span class="hs-identifier hs-type">PAddress</span></span><span> </span><span id="local-6989586621679198616"><span class="annot"><span class="annottext">Term s PCredential
-</span><a href="#local-6989586621679198616"><span class="hs-identifier hs-var">cred</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PStakingCredential)
+</span><a href="#local-6989586621679198541"><span class="hs-identifier hs-var">resolved</span></a></span><span>
+</span><span id="line-250"></span><span>                          </span><span class="annot"><span class="hs-identifier hs-type">PAddress</span></span><span> </span><span id="local-6989586621679198543"><span class="annot"><span class="annottext">Term s PCredential
+</span><a href="#local-6989586621679198543"><span class="hs-identifier hs-var">cred</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PStakingCredential)
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s PAddress -&gt; (PAddress s -&gt; Term s PBool) -&gt; Term s PBool
 forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
 Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 </span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s PAddress
-</span><a href="#local-6989586621679198615"><span class="hs-identifier hs-var">addr</span></a></span><span>
-</span><span id="line-249"></span><span>                          </span><span class="annot"><span class="annottext">Term s PCredential
+</span><a href="#local-6989586621679198542"><span class="hs-identifier hs-var">addr</span></a></span><span>
+</span><span id="line-251"></span><span>                          </span><span class="annot"><span class="annottext">Term s PCredential
 -&gt; (PCredential s -&gt; Term s PBool) -&gt; Term s PBool
 forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
 Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 </span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s PCredential
-</span><a href="#local-6989586621679198616"><span class="hs-identifier hs-var">cred</span></a></span><span> </span><span class="annot"><span class="annottext">((PCredential s -&gt; Term s PBool) -&gt; Term s PBool)
+</span><a href="#local-6989586621679198543"><span class="hs-identifier hs-var">cred</span></a></span><span> </span><span class="annot"><span class="annottext">((PCredential s -&gt; Term s PBool) -&gt; Term s PBool)
 -&gt; (PCredential s -&gt; Term s PBool) -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-250"></span><span>                            </span><span class="annot"><span class="hs-identifier hs-type">PScriptCredential</span></span><span> </span><span id="local-6989586621679198617"><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
-</span><a href="#local-6989586621679198617"><span class="hs-identifier hs-var">scriptHash</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
-</span><span id="line-251"></span><span>                              </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
-</span><a href="#local-6989586621679198617"><span class="hs-identifier hs-var">scriptHash</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
+</span><span id="line-252"></span><span>                            </span><span class="annot"><span class="hs-identifier hs-type">PScriptCredential</span></span><span> </span><span id="local-6989586621679198544"><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
+</span><a href="#local-6989586621679198544"><span class="hs-identifier hs-var">scriptHash</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-253"></span><span>                              </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
+</span><a href="#local-6989586621679198544"><span class="hs-identifier hs-var">scriptHash</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
 -&gt; Term s (PAsData PScriptHash) -&gt; Term s PBool
 forall (s :: S).
 Term s (PAsData PScriptHash)
@@ -1309,25 +1333,23 @@ Term s t -&gt; Term s t -&gt; Term s PBool
 forall (s :: S).
 Term s (PAsData PCurrencySymbol) -&gt; Term s (PAsData PScriptHash)
 </span><a href="Agora.Utils.html#pcurrencySymbolToScriptHash"><span class="hs-identifier hs-var">pcurrencySymbolToScriptHash</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
-</span><a href="#local-6989586621679198611"><span class="hs-identifier hs-var">currencySymbol</span></a></span><span>
-</span><span id="line-252"></span><span>                            </span><span class="annot"><span class="annottext">PCredential s
+</span><a href="#local-6989586621679198537"><span class="hs-identifier hs-var">currencySymbol</span></a></span><span>
+</span><span id="line-254"></span><span>                            </span><span class="annot"><span class="annottext">PCredential s
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PBool s -&gt; Term s PBool
 forall (a :: PType) (s :: S). PlutusType a =&gt; a s -&gt; Term s a
 </span><span class="hs-identifier hs-var">pcon</span></span><span> </span><span class="annot"><span class="annottext">PBool s
 forall (s :: S). PBool s
 </span><span class="hs-identifier hs-var">PFalse</span></span><span>
-</span><span id="line-253"></span><span>                    </span><span class="hs-special">)</span><span>
-</span><span id="line-254"></span><span>
-</span><span id="line-255"></span><span>            </span><span class="hs-comment">-- Spending Condition 1: Transaction contains an input from Proxy Spending Validator.</span><span>
-</span><span id="line-256"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198618"><span class="annot"><span class="annottext">hasProxyValidatorInput :: Term s PBool
-</span><a href="#local-6989586621679198618"><span class="hs-identifier hs-var hs-var">hasProxyValidatorInput</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-257"></span><span>                  </span><span class="annot"><span class="annottext">Term s PString -&gt; Term s PBool -&gt; Term s PBool
+</span><span id="line-255"></span><span>                    </span><span class="hs-special">)</span><span>
+</span><span id="line-256"></span><span>
+</span><span id="line-257"></span><span>            </span><span class="hs-comment">-- Spending Condition 1: Transaction contains an input from Proxy Spending Validator.</span><span>
+</span><span id="line-258"></span><span>            </span><span class="annot"><span class="annottext">Term s PString -&gt; Term s PBool -&gt; Term s PBool
 forall (s :: S). Term s PString -&gt; Term s PBool -&gt; Term s PBool
 </span><span class="hs-identifier hs-var">ptraceInfoIfFalse</span></span><span> </span><span class="annot"><span class="annottext">Term s PString
 </span><span class="hs-string">&quot;Transaction must contain an input from Proxy Validator.&quot;</span></span><span> </span><span class="annot"><span class="annottext">(Term s PBool -&gt; Term s PBool) -&gt; Term s PBool -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span>
-</span><span id="line-258"></span><span>                    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term
+</span><span id="line-259"></span><span>              </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term
   s
   ((PAsData PTxInInfo :--&gt; PBool)
    :--&gt; (PBuiltinList (PAsData PTxInInfo) :--&gt; PInteger))
@@ -1343,7 +1365,7 @@ Term s ((a :--&gt; PBool) :--&gt; (list a :--&gt; PInteger))
 forall (s :: S) (a :: PType) (b :: PType).
 Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
 </span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PTxInInfo :--&gt; PBool)
-</span><a href="#local-6989586621679198612"><span class="hs-identifier hs-var">isValidatorInput</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PBuiltinList (PAsData PTxInInfo) :--&gt; PInteger)
+</span><a href="#local-6989586621679198539"><span class="hs-identifier hs-var">isValidatorInput</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PBuiltinList (PAsData PTxInInfo) :--&gt; PInteger)
 -&gt; Term s (PBuiltinList (PAsData PTxInInfo)) -&gt; Term s PInteger
 forall (s :: S) (a :: PType) (b :: PType).
 Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
@@ -1353,109 +1375,27 @@ forall (a :: PType) (s :: S).
 PIsData a =&gt;
 Term s (PAsData a) -&gt; Term s a
 </span><span class="hs-identifier hs-var">pfromData</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PBuiltinList (PAsData PTxInInfo)))
-</span><a href="#local-6989586621679198559"><span class="hs-identifier hs-var">inputs</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term s PInteger -&gt; Term s PInteger -&gt; Term s PBool
+</span><a href="#local-6989586621679198538"><span class="hs-identifier hs-var">inputs</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term s PInteger -&gt; Term s PInteger -&gt; Term s PBool
 forall (s :: S). Term s PInteger -&gt; Term s PInteger -&gt; Term s PBool
 forall (t :: PType) (s :: S).
 PEq t =&gt;
 Term s t -&gt; Term s t -&gt; Term s PBool
 </span><span class="hs-operator hs-var">#==</span></span><span> </span><span class="annot"><span class="annottext">Term s PInteger
 </span><span class="hs-number">1</span></span><span>
-</span><span id="line-259"></span><span>
-</span><span id="line-260"></span><span>            </span><span class="hs-comment">-- Spending Condition 2: Transaction mints only one token with currency symbol equal to own hash.</span><span>
-</span><span id="line-261"></span><span>            </span><span class="hs-comment">-- Spending Condition 3: Minted token has empty token name.</span><span>
-</span><span id="line-262"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679198619"><span class="annot"><span class="annottext">mintCheck :: Term s PBool
-</span><a href="#local-6989586621679198619"><span class="hs-identifier hs-var hs-var">mintCheck</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-263"></span><span>                  </span><span class="annot"><span class="annottext">Term s PBool -&gt; Term s PBool -&gt; Term s PBool -&gt; Term s PBool
-forall (a :: PType) (s :: S).
-Term s PBool -&gt; Term s a -&gt; Term s a -&gt; Term s a
-</span><span class="hs-identifier hs-var">pif</span></span><span>
-</span><span id="line-264"></span><span>                    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
-</span><a href="#local-6989586621679198570"><span class="hs-identifier hs-var">mintCs1</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
--&gt; Term s (PAsData PCurrencySymbol) -&gt; Term s PBool
-forall (s :: S).
-Term s (PAsData PCurrencySymbol)
--&gt; Term s (PAsData PCurrencySymbol) -&gt; Term s PBool
-forall (t :: PType) (s :: S).
-PEq t =&gt;
-Term s t -&gt; Term s t -&gt; Term s PBool
-</span><span class="hs-operator hs-var">#==</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
-</span><a href="#local-6989586621679198611"><span class="hs-identifier hs-var">currencySymbol</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-265"></span><span>                    </span><span class="hs-special">(</span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)
-   :--&gt; PAsData PTokenName)
-forall (s :: S) (a :: PType) (b :: PType).
-Term s (PBuiltinPair a b :--&gt; a)
-</span><span class="hs-identifier hs-var">pfstBuiltin</span></span><span> </span><span class="annot"><span class="annottext">Term
-  s
-  (PBuiltinPair (PAsData PTokenName) (PAsData PInteger)
-   :--&gt; PAsData PTokenName)
--&gt; Term s (PBuiltinPair (PAsData PTokenName) (PAsData PInteger))
--&gt; Term s (PAsData PTokenName)
-forall (s :: S) (a :: PType) (b :: PType).
-Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
-</span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term s (PBuiltinPair (PAsData PTokenName) (PAsData PInteger))
-</span><a href="#local-6989586621679198572"><span class="hs-identifier hs-var">mintTokenPair1</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PTokenName)
--&gt; Term s (PAsData PTokenName) -&gt; Term s PBool
-forall (s :: S).
-Term s (PAsData PTokenName)
--&gt; Term s (PAsData PTokenName) -&gt; Term s PBool
-forall (t :: PType) (s :: S).
-PEq t =&gt;
-Term s t -&gt; Term s t -&gt; Term s PBool
-</span><span class="hs-operator hs-var">#==</span></span><span> </span><span class="annot"><span class="annottext">AsHaskell (PAsData PTokenName) -&gt; Term s (PAsData PTokenName)
-forall (a :: PType) (s :: S).
-PLiftable a =&gt;
-AsHaskell a -&gt; Term s a
-</span><span class="hs-identifier hs-var">pconstant</span></span><span> </span><span class="annot"><span class="annottext">AsHaskell (PAsData PTokenName)
-TokenName
-</span><span class="hs-identifier hs-var">adaToken</span></span><span class="hs-special">)</span><span class="hs-cpp">
-                        #&amp;&amp; (pfromData (psndBuiltin # mintTokenPair1) #== pconstant 1)
-</span><span>                    </span><span class="hs-special">)</span><span>
-</span><span id="line-268"></span><span>                    </span><span class="hs-special">(</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
-</span><a href="#local-6989586621679198574"><span class="hs-identifier hs-var">mintCs2</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
--&gt; Term s (PAsData PCurrencySymbol) -&gt; Term s PBool
-forall (s :: S).
-Term s (PAsData PCurrencySymbol)
--&gt; Term s (PAsData PCurrencySymbol) -&gt; Term s PBool
-forall (t :: PType) (s :: S).
-PEq t =&gt;
-Term s t -&gt; Term s t -&gt; Term s PBool
-</span><span class="hs-operator hs-var">#==</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
-</span><a href="#local-6989586621679198611"><span class="hs-identifier hs-var">currencySymbol</span></a></span><span class="hs-special">)</span><span class="hs-cpp">
-                        #&amp;&amp; (pfromData (psndBuiltin # mintTokenPair2) #== pconstant 1)
-</span><span class="hs-cpp">                        #&amp;&amp; ((pfstBuiltin # mintTokenPair2) #== pconstant adaToken)
-</span><span>                    </span><span class="hs-special">)</span><span>
-</span><span id="line-272"></span><span>
-</span><span id="line-273"></span><span>            </span><span class="annot"><span class="annottext">(Term s PBool -&gt; Term s PBool -&gt; Term s PBool)
--&gt; [Term s PBool] -&gt; Term s PBool
-forall a. (a -&gt; a -&gt; a) -&gt; [a] -&gt; a
-forall (t :: Type -&gt; Type) a.
-Foldable t =&gt;
-(a -&gt; a -&gt; a) -&gt; t a -&gt; a
-</span><a href="file:///nix/store/mgiv4pnzlw7qy8y32dnrab704q6rbm9i-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/Data.Foldable.html#foldr1"><span class="hs-identifier hs-var">foldr1</span></a></span><span>
-</span><span id="line-274"></span><span>              </span><span class="annot"><span class="annottext">Term s PBool -&gt; Term s PBool -&gt; Term s PBool
-forall (s :: S). Term s PBool -&gt; Term s PBool -&gt; Term s PBool
-</span><span class="hs-operator hs-var">(#&amp;&amp;)</span></span><span>
-</span><span id="line-275"></span><span>              </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Term s PBool
-</span><a href="#local-6989586621679198618"><span class="hs-identifier hs-var">hasProxyValidatorInput</span></a></span><span>
-</span><span id="line-276"></span><span>              </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Term s PBool
-</span><a href="#local-6989586621679198619"><span class="hs-identifier hs-var">mintCheck</span></a></span><span>
-</span><span id="line-277"></span><span>              </span><span class="hs-special">]</span><span>
-</span><span id="line-278"></span><span>          </span><span class="annot"><span class="annottext">PScriptInfo s
+</span><span id="line-260"></span><span>          </span><span class="annot"><span class="annottext">PScriptInfo s
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Term s PBool
 forall (s :: S) (a :: PType). Term s a
 </span><span class="hs-identifier hs-var">perror</span></span><span>
-</span><span id="line-279"></span><span>
-</span><span id="line-280"></span><span>  </span><span class="annot"><span class="annottext">Term s PBool -&gt; Term s PUnit -&gt; Term s PUnit -&gt; Term s PUnit
+</span><span id="line-261"></span><span>
+</span><span id="line-262"></span><span>  </span><span class="annot"><span class="annottext">Term s PBool -&gt; Term s PUnit -&gt; Term s PUnit -&gt; Term s PUnit
 forall (a :: PType) (s :: S).
 Term s PBool -&gt; Term s a -&gt; Term s a -&gt; Term s a
 </span><span class="hs-identifier hs-var">pif</span></span><span> </span><span class="annot"><span class="annottext">Term s PBool
-</span><a href="#local-6989586621679198578"><span class="hs-identifier hs-var">valid</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PUnit s -&gt; Term s PUnit
+</span><a href="#local-6989586621679198486"><span class="hs-identifier hs-var">valid</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PUnit s -&gt; Term s PUnit
 forall (a :: PType) (s :: S). PlutusType a =&gt; a s -&gt; Term s a
 </span><span class="hs-identifier hs-var">pcon</span></span><span> </span><span class="annot"><span class="annottext">PUnit s
 forall (s :: S). PUnit s
 </span><span class="hs-identifier hs-var">PUnit</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term s PUnit
 forall (s :: S) (a :: PType). Term s a
 </span><span class="hs-identifier hs-var">perror</span></span><span>
-</span><span id="line-281"></span></pre></body></html>
+</span><span id="line-263"></span></pre></body></html>
