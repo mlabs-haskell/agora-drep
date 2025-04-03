@@ -2,6 +2,9 @@ module Spec.Effects.Voting.Context (
   certifyingContextSpec,
   votingContextSpec,
   spendingContextSpec,
+  validCert,
+  validSpend,
+  validVote,
 ) where
 
 import Agora.Effects.Voting (VotingDatum (VotingDatum, vdGovernanceActionId, vdVote))

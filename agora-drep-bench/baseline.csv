@@ -1,3 +1,6 @@
 name,cpu,mem,size
 Benchmarks.GAT V2 Spend,33054770,86203,1564
 Benchmarks.GAT V3 Mint,16169750,41332,1404
+Benchmarks.Voting Effect Certify,10780740,36515,1453
+Benchmarks.Voting Effect Spend,30979112,92027,1458
+Benchmarks.Voting Effect Vote,22642614,63230,1451
