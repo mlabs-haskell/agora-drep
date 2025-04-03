@@ -126,29 +126,12 @@ proxyScript :: (forall (s :: S). Term s (PAsData PCurrencySymbol :--> PAsData PS
 proxyScript = plam $ \authSymbol' ctx -> P.do
   PScriptContext txInfo _redeemer scriptInfo <- pmatch $ pfromData ctx
 
-  -- When this script runs also V2 GAT gets burned so that guarantees that no V3 thing happens
-  PTxInfo inputs _ outputs _ mint' txCerts _ _ _ _ _ _ _ _ _ _ <- pmatch txInfo
-
-  let mint = pfromData mint'
-  -- Pattern matching asserts that there are only two symbols minted and `mintCheck`
-  -- asserts that they are V2 and V3 gats.
-  PValue mintAssetMap <- pmatch mint
-  PMap mintAssetList <- pmatch mintAssetMap
-  PCons mintAssetPair1 mintAssetListRest1 <- pmatch mintAssetList
-  PCons mintAssetPair2 mintAssetListRest2 <- pmatch mintAssetListRest1
-  PNil <- pmatch mintAssetListRest2
-  let mintCs1 = pfstBuiltin # mintAssetPair1
-  PMap mintTokens1 <- pmatch $ pfromData (psndBuiltin # mintAssetPair1)
-  PCons mintTokenPair1 mintTokens1Rest <- pmatch mintTokens1
-  PNil <- pmatch mintTokens1Rest
-  let mintCs2 = pfstBuiltin # mintAssetPair2
-  PMap mintTokens2 <- pmatch $ pfromData (psndBuiltin # mintAssetPair2)
-  PCons mintTokenPair2 mintTokens2Rest <- pmatch mintTokens2
-  PNil <- pmatch mintTokens2Rest
-
   let valid =
         pmatch scriptInfo $ \case
           PSpendingScript _txOutRef mayDatum -> P.do
+            -- When this script runs also V2 GAT gets burned so that guarantees that no V3 thing happens
+            PTxInfo inputs _ outputs _ mint txCerts _ _ _ _ _ _ _ _ _ _ <- pmatch txInfo
+
             PDJust datum <- pmatch mayDatum
             PDatum rawDatum <- pmatch (pfromData datum)
 
@@ -216,6 +199,22 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
             -- If it is the latter that means that the whole setup is already compromised so it
             -- does not matter what happens here anyway.
             -- No need to check for name of V2 token as GAT policy enforces that
+            -- Pattern matching asserts that there are only two symbols minted and `mintCheck`
+            -- asserts that they are V2 and V3 gats.
+            PValue mintAssetMap <- pmatch (pfromData mint)
+            PMap mintAssetList <- pmatch mintAssetMap
+            PCons mintAssetPair1 mintAssetListRest1 <- pmatch mintAssetList
+            PCons mintAssetPair2 mintAssetListRest2 <- pmatch mintAssetListRest1
+            PNil <- pmatch mintAssetListRest2
+            let mintCs1 = pfstBuiltin # mintAssetPair1
+            PMap mintTokens1 <- pmatch $ pfromData (psndBuiltin # mintAssetPair1)
+            PCons mintTokenPair1 mintTokens1Rest <- pmatch mintTokens1
+            PNil <- pmatch mintTokens1Rest
+            let mintCs2 = pfstBuiltin # mintAssetPair2
+            PMap mintTokens2 <- pmatch $ pfromData (psndBuiltin # mintAssetPair2)
+            PCons mintTokenPair2 mintTokens2Rest <- pmatch mintTokens2
+            PNil <- pmatch mintTokens2Rest
+
             let mintCheck =
                   pif
                     (mintCs1 #== ownCurrencySymbol)
@@ -240,6 +239,9 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
               , mintCheck
               ]
           PMintingScript currencySymbol -> P.do
+            -- When this script runs also V2 GAT gets burned so that guarantees that no V3 thing happens
+            PTxInfo inputs _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <- pmatch txInfo
+
             let isValidatorInput =
                   plam
                     ( \input -> pmatch (pfromData input) $ \case
@@ -253,28 +255,8 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                     )
 
             -- Spending Condition 1: Transaction contains an input from Proxy Spending Validator.
-            let hasProxyValidatorInput =
-                  ptraceInfoIfFalse "Transaction must contain an input from Proxy Validator." $
-                    (pcountIf # isValidatorInput # pfromData inputs) #== 1
-
-            -- Spending Condition 2: Transaction mints only one token with currency symbol equal to own hash.
-            -- Spending Condition 3: Minted token has empty token name.
-            let mintCheck =
-                  pif
-                    (mintCs1 #== currencySymbol)
-                    ( ((pfstBuiltin # mintTokenPair1) #== pconstant adaToken)
-                        #&& (pfromData (psndBuiltin # mintTokenPair1) #== pconstant 1)
-                    )
-                    ( (mintCs2 #== currencySymbol)
-                        #&& (pfromData (psndBuiltin # mintTokenPair2) #== pconstant 1)
-                        #&& ((pfstBuiltin # mintTokenPair2) #== pconstant adaToken)
-                    )
-
-            foldr1
-              (#&&)
-              [ hasProxyValidatorInput
-              , mintCheck
-              ]
+            ptraceInfoIfFalse "Transaction must contain an input from Proxy Validator." $
+              (pcountIf # isValidatorInput # pfromData inputs) #== 1
           _ -> perror
 
   pif valid (pcon PUnit) perror
