@@ -97,10 +97,18 @@ library
     , plutus-ledger-api
     , plutus-tx
 
-executable agora-drep
+executable agora-drep-script-export
   import:         lang
   main-is:        Main.hs
-  build-depends:  agora-drep
+  build-depends:
+    , agora-drep
+    , bytestring
+    , cardano-binary
+    , directory
+    , plutarch
+    , plutarch-ledger-api
+    , plutus-ledger-api
+
   hs-source-dirs: agora-drep-script-export
   other-modules:
 
