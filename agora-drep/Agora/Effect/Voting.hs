@@ -1,4 +1,4 @@
-module Agora.Effects.Voting (votingEffectScript, VotingDatum (..)) where
+module Agora.Effect.Voting (votingEffectScript, VotingDatum (..)) where
 
 import Agora.AuthorityToken (singleAuthorityTokenBurned)
 import Data.Kind (Type)

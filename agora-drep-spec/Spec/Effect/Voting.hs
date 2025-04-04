@@ -1,9 +1,9 @@
-module Spec.Effects.Voting (spec) where
+module Spec.Effect.Voting (spec) where
 
-import Agora.Effects.Voting (votingEffectScript)
+import Agora.Effect.Voting (votingEffectScript)
 import Data.Text qualified as Text
 import Plutarch.Internal.Term qualified as Term
-import Spec.Effects.Voting.Context (certifyingContextSpec, spendingContextSpec, votingContextSpec)
+import Spec.Effect.Voting.Context (certifyingContextSpec, spendingContextSpec, votingContextSpec)
 import Test.Tasty (TestTree, adjustOption, testGroup)
 import Test.Tasty.QuickCheck (QuickCheckTests)
 

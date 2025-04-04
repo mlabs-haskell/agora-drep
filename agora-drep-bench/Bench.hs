@@ -1,6 +1,6 @@
 module Main (main) where
 
-import Agora.Effects.Voting (votingEffectScript)
+import Agora.Effect.Voting (votingEffectScript)
 import Agora.Proxy (proxyScript)
 import Data.Kind (Type)
 import Plutarch.Internal.Term (
@@ -14,7 +14,7 @@ import Plutarch.Internal.Term (
 import Plutarch.Script (Script (Script))
 import Plutarch.Test.Bench (bench, defaultMain)
 import PlutusLedgerApi.V3 (CurrencySymbol (CurrencySymbol), ScriptContext)
-import Spec.Effects.Voting.Context qualified as Voting
+import Spec.Effect.Voting.Context qualified as Voting
 import Spec.Proxy.Context qualified as Proxy
 import Spec.Utils (TestConfig (testConfigFromScript), uncheckedApplyDataToScript)
 import Test.Tasty (TestName, TestTree, testGroup)
