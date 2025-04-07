@@ -2,5 +2,6 @@
 /.pre-commit-config.yaml
 /.zed
 /dist-newstyle
+/result
 
 /scripts
