@@ -32,7 +32,7 @@ writeScriptToFile fp script = do
   compiledRelease <- compileAndSerialise NoTracing script
   ByteString.writeFile (fp <> ".bin") compiledRelease
 
-  compiledDebug <- compileAndSerialise (Tracing LogInfo DoTracing) script
+  compiledDebug <- compileAndSerialise (Tracing LogDebug DoTracingAndBinds) script
   ByteString.writeFile (fp <> ".debug.bin") compiledDebug
 
   putStrLn " done"
