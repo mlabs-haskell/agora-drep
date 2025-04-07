@@ -7,8 +7,8 @@ import Data.ByteString (ByteString)
 import Data.ByteString qualified as ByteString
 import Plutarch.Internal.Term (
   Config (NoTracing, Tracing),
-  LogLevel (LogInfo),
-  TracingMode (DoTracing),
+  LogLevel (LogDebug),
+  TracingMode (DoTracingAndBinds),
   compile,
  )
 import Plutarch.Prelude (ClosedTerm)
