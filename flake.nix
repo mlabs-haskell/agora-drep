@@ -125,6 +125,7 @@
               } --baseline ${./agora-drep-bench/baseline.csv} --fail-if-bigger 100 --fail-if-smaller 0.001 --fail-if-more-cpu 100 --fail-if-less-cpu 0.001 --fail-if-more-mem 100 --fail-if-less-mem 0.001
               touch $out
             '';
+
           };
       }
     );
