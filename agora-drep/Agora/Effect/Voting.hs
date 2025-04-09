@@ -1,10 +1,9 @@
-module Agora.Effects.Voting (votingEffectValidator, VotingDatum (..)) where
+module Agora.Effect.Voting (votingEffectScript, VotingDatum (..)) where
 
 import Agora.AuthorityToken (singleAuthorityTokenBurned)
 import Data.Kind (Type)
 import GHC.Generics qualified as GHC
 import Generics.SOP qualified as SOP
-import Plutarch.LedgerApi.AssocMap qualified as AssocMap
 import Plutarch.LedgerApi.V3 (
   PAddress (PAddress),
   PCredential (PScriptCredential),
@@ -31,12 +30,11 @@ import Plutarch.Monadic qualified as P
 import Plutarch.Prelude (
   ClosedTerm,
   PAsData,
-  PBool (PFalse),
+  PBool (PFalse, PTrue),
   PBuiltinList (PCons, PNil),
   PData,
   PEq ((#==)),
   PIsData,
-  PListLike (pnull),
   PMaybe (PJust, PNothing),
   PTryFrom,
   PUnit (PUnit),
@@ -50,7 +48,6 @@ import Plutarch.Prelude (
   pfstBuiltin,
   pif,
   plam,
-  plength,
   pmatch,
   precList,
   psndBuiltin,
@@ -62,7 +59,6 @@ import Plutarch.Prelude (
   (:-->),
  )
 import Plutarch.Repr.Data (DeriveAsDataRec (DeriveAsDataRec))
-import Plutarch.Trace (ptraceInfoIfFalse)
 import PlutusLedgerApi.V3 (
   FromData (fromBuiltinData),
   GovernanceActionId,
@@ -117,8 +113,8 @@ data PVotingDatum s = PVotingDatum
 
 instance PTryFrom PData (PAsData PVotingDatum)
 
-votingEffectValidator :: ClosedTerm (PAsData PCurrencySymbol :--> PAsData PScriptContext :--> PUnit)
-votingEffectValidator = plam $ \authSymbol' ctx -> P.do
+votingEffectScript :: ClosedTerm (PAsData PCurrencySymbol :--> PAsData PScriptContext :--> PUnit)
+votingEffectScript = plam $ \authSymbol' ctx -> P.do
   PScriptContext txInfo _redeemer scriptInfo <- pmatch $ pfromData ctx
 
   PTxInfo inputs _ _outputs _ mint' txCerts' _ _ _ _ datums' _ votes' pprocs' _ trDonations <- pmatch txInfo
@@ -169,29 +165,34 @@ votingEffectValidator = plam $ \authSymbol' ctx -> P.do
           PCertifyingScript _ txCert -> P.do
             let votes = pfromData votes'
 
-            let hasNoVotes =
-                  ptraceInfoIfFalse "Transaction must not contain any votes." $ AssocMap.pnull # votes
+            -- Transaction must not contain any votes.
+            PMap votesList <- pmatch votes
+            PNil <- pmatch votesList
 
-            let noProposalProcedures =
-                  ptraceInfoIfFalse "Transaction must not contain any proposal procedures." $ pnull # pprocs
+            -- Transaction must not contain any proposal procedures.
+            PNil <- pmatch pprocs
 
-            let noTrDonations =
-                  ptraceInfoIfFalse "Transaction must not contain any treasury donations." $ trDonations #== pcon PDNothing
+            -- Transaction must not contain any treasury donations.
+            PDNothing <- pmatch trDonations
 
+            -- Transaction must contain exactly 1 transaction certificate.
             PCons _txCert txCerts' <- pmatch txCerts
             PNil <- pmatch txCerts'
 
+            -- Transaction certificate must be a DRep registration
             PTxCertRegDRep _ _ <- pmatch txCert
 
-            hasNoVotes #&& noProposalProcedures #&& noTrDonations
+            pcon PTrue
           PVotingScript _voter -> P.do
-            let noProposalProcedures =
-                  ptraceInfoIfFalse "Transaction must not contain any proposal procedures." $ pnull # pprocs
+            -- Transaction must not contain any proposal procedures.
+            PNil <- pmatch pprocs
 
-            let noTrDonations =
-                  ptraceInfoIfFalse "Transaction must not contain any treasury donations." $ trDonations #== pcon PDNothing
+            -- Transaction must not contain any treasury donations.
+            PDNothing <- pmatch trDonations
 
             -- The spending script ensures that there is only one script input
+            -- The spending input will contain a datum, and we don't allow any
+            -- more datums in the transaction
             PJust datumHash <-
               pmatch $
                 precList
@@ -209,6 +210,8 @@ votingEffectValidator = plam $ \authSymbol' ctx -> P.do
                   (const (pconstant @(PMaybe (PAsData PDatumHash)) Nothing))
                   # pfromData inputs
 
+            -- There must be exactly 1 vote. As we're in a Voting context, this is guaranteed
+            -- to be the vote with the current script as DRep voter
             PMap voteList <- pmatch votes
             PCons votePair voteList' <- pmatch voteList
             PNil <- pmatch voteList'
@@ -231,22 +234,13 @@ votingEffectValidator = plam $ \authSymbol' ctx -> P.do
             let rawVotingDatum = unTermCont $ fst <$> tcont (ptryFrom @(PAsData PVotingDatum) rawDatum)
             PVotingDatum govActionId' vote' <- pmatch $ pfromData rawVotingDatum
 
-            let datumCheck =
-                  (datumHash #== datumHash')
-                    #&& (govActionId #== govActionId')
-                    #&& (vote #== vote')
+            -- Transaction must not contain transaction certificate.
+            PNil <- pmatch txCerts
 
-            let hasNoCerts =
-                  ptraceInfoIfFalse "Transaction must contain exactly 1 transaction certificate." $
-                    (plength # txCerts) #== 0
-
-            foldr1
-              (#&&)
-              [ datumCheck
-              , hasNoCerts
-              , noProposalProcedures
-              , noTrDonations
-              ]
+            -- Governance Action Id and Vote must match the values in the datum
+            (datumHash #== datumHash')
+              #&& (govActionId #== govActionId')
+              #&& (vote #== vote')
           _ -> pcon PFalse
 
   pif valid (pcon PUnit) perror

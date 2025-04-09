@@ -1,10 +1,13 @@
-module Spec.Effects.Voting.Context (
+module Spec.Effect.Voting.Context (
   certifyingContextSpec,
   votingContextSpec,
   spendingContextSpec,
+  validCert,
+  validSpend,
+  validVote,
 ) where
 
-import Agora.Effects.Voting (VotingDatum (VotingDatum, vdGovernanceActionId, vdVote))
+import Agora.Effect.Voting (VotingDatum (VotingDatum, vdGovernanceActionId, vdVote))
 import Plutarch.LedgerApi.V3 (scriptHash)
 import Plutarch.Script (Script)
 import Plutarch.Test.Program (ScriptResult (ScriptFailure, ScriptSuccess))
