@@ -1,7 +1,12 @@
 { inputs, ... }:
 {
   perSystem =
-    { simpleHaskellNix, ... }:
+    {
+      simpleHaskellNix,
+      pkgs,
+      self',
+      ...
+    }:
     let
       agora-drep = simpleHaskellNix.mkPackage {
         name = "agora-drep";
@@ -22,8 +27,22 @@
       };
     in
     {
-      inherit (agora-drep) checks packages apps;
+      inherit (agora-drep) checks apps;
 
       devShells.agora-drep = agora-drep.devShell;
+
+      packages = agora-drep.packages // {
+        compiled-scripts =
+          pkgs.runCommand "compiled-scripts"
+            {
+              nativeBuildInputs = [
+                self'.packages."agora-drep:exe:agora-drep-script-export"
+              ];
+            }
+            ''
+              agora-drep-script-export
+              mv scripts $out
+            '';
+      };
     };
 }
