@@ -1,7 +1,7 @@
 -- | @since WIP
 module Agora.Proxy (proxyScript, PProxyDatum (..), ProxyDatum (..)) where
 
-import Agora.Utils (pcountIf, pcurrencySymbolToScriptHash, pscriptHashToCurrencySymbol)
+import Agora.Utils (pcountIf, pcurrencySymbolToScriptHash, pscriptHashToCurrencySymbol, psymbolValueOf)
 import Data.Kind (Type)
 import GHC.Generics qualified as GHC
 import Generics.SOP qualified as SOP
@@ -56,6 +56,7 @@ import Plutarch.Prelude (
   unTermCont,
   (#),
   (#&&),
+  (#||),
   (:-->),
  )
 import Plutarch.Repr.Data (DeriveAsDataRec (DeriveAsDataRec))
@@ -240,7 +241,7 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
               ]
           PMintingScript currencySymbol -> P.do
             -- When this script runs also V2 GAT gets burned so that guarantees that no V3 thing happens
-            PTxInfo inputs _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <- pmatch txInfo
+            PTxInfo inputs _ _ _ mint _ _ _ _ _ _ _ _ _ _ _ <- pmatch txInfo
 
             let isValidatorInput =
                   plam
@@ -254,9 +255,15 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                             _ -> pcon PFalse
                     )
 
+            let minted = psymbolValueOf # pfromData currencySymbol # pfromData mint
+
             -- Spending Condition 1: Transaction contains an input from Proxy Spending Validator.
-            ptraceInfoIfFalse "Transaction must contain an input from Proxy Validator." $
-              (pcountIf # isValidatorInput # pfromData inputs) #== 1
+            (minted #== -1)
+              #|| ptraceInfoIfFalse
+                "Transaction must contain an input from Proxy Validator."
+                ( (pcountIf # isValidatorInput # pfromData inputs)
+                    #== 1
+                )
           _ -> perror
 
   pif valid (pcon PUnit) perror

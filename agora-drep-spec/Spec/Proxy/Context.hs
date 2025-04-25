@@ -87,6 +87,7 @@ mintingContextSpec gat3Script =
     testGroup
       "Minting Context tests"
       [ mkTest' "OK case: Valid GAT3 mint" validGAT3Mint ScriptSuccess
+      , mkTest' "OK case: Valid GAT3 burn" validGAT3Burn ScriptSuccess
       , mkTest' "Fail case: Minting without spending own input" mintWithoutSpend ScriptFailure
       ]
 
@@ -202,6 +203,14 @@ validGAT3Mint config =
       , input (gat2Utxo config)
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
       , mint (Value.singleton gat2CurSym (TokenName "") (-1))
+      ]
+
+validGAT3Burn :: TestConfigProxy -> ScriptContext
+validGAT3Burn config =
+  buildMinting' $
+    mconcat
+      [ withMinting (gat3CurSym config)
+      , mint (Value.singleton (gat3CurSym config) (TokenName "") (-1))
       ]
 
 mintWithoutSpend :: TestConfigProxy -> ScriptContext
