@@ -2,8 +2,8 @@
 </span><span id="line-2"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Agora.Proxy</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Agora.Proxy.html#proxyScript"><span class="hs-identifier">proxyScript</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier">PProxyDatum</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Agora.Proxy.html#ProxyDatum"><span class="hs-identifier">ProxyDatum</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-3"></span><span>
 </span><span id="line-4"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Agora.Utils.html"><span class="hs-identifier">Agora.Utils</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Agora.Utils.html#pcountIf"><span class="hs-identifier">pcountIf</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Agora.Utils.html#pcurrencySymbolToScriptHash"><span class="hs-identifier">pcurrencySymbolToScriptHash</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Agora.Utils.html#pscriptHashToCurrencySymbol"><span class="hs-identifier">pscriptHashToCurrencySymbol</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-5"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/Data.Kind.html"><span class="hs-identifier">Data.Kind</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/ghc-prim-0.10.0/src/GHC.Types.html#Type"><span class="hs-identifier">Type</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-6"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Generics.html"><span class="hs-identifier">GHC.Generics</span></a></span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">GHC</span></span><span>
+</span><span id="line-5"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/Data.Kind.html"><span class="hs-identifier">Data.Kind</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/ghc-prim-0.10.0/src/GHC.Types.html#Type"><span class="hs-identifier">Type</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-6"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Generics.html"><span class="hs-identifier">GHC.Generics</span></a></span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">GHC</span></span><span>
 </span><span id="line-7"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Generics.SOP</span></span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">SOP</span></span><span>
 </span><span id="line-8"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Plutarch.Internal.Term</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Term</span></span><span class="hs-special">)</span><span>
 </span><span id="line-9"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Plutarch.LedgerApi.Utils</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">PMaybeData</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">PDJust</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
@@ -91,7 +91,7 @@ $cshow :: ProxyDatum -&gt; String
 show :: ProxyDatum -&gt; String
 $cshowList :: [ProxyDatum] -&gt; ShowS
 showList :: [ProxyDatum] -&gt; ShowS
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Show.html#Show"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Show.html#Show"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span>
 </span><span id="line-78"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-comment">-- | @since WIP</span></span><span>
 </span><span id="line-79"></span><span>      </span><span id="local-6989586621679198533"><span id="local-6989586621679198535"><span class="annot"><span class="annottext">(forall x. ProxyDatum -&gt; Rep ProxyDatum x)
 -&gt; (forall x. Rep ProxyDatum x -&gt; ProxyDatum) -&gt; Generic ProxyDatum
@@ -103,7 +103,7 @@ $cfrom :: forall x. ProxyDatum -&gt; Rep ProxyDatum x
 from :: forall x. ProxyDatum -&gt; Rep ProxyDatum x
 $cto :: forall x. Rep ProxyDatum x -&gt; ProxyDatum
 to :: forall x. Rep ProxyDatum x -&gt; ProxyDatum
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Generics.html#Generic"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">GHC.Generic</span></a></span></span></span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Generics.html#Generic"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">GHC.Generic</span></a></span></span></span><span>
 </span><span id="line-80"></span><span>    </span><span class="hs-special">)</span><span>
 </span><span id="line-81"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">anyclass</span></span><span>
 </span><span id="line-82"></span><span>    </span><span class="hs-special">(</span><span> </span><span class="annot"><span class="hs-comment">-- | @since WIP</span></span><span>
@@ -143,14 +143,14 @@ forall a. BuiltinData -&gt; a -&gt; a -&gt; a -&gt; a -&gt; a -&gt; a
 </span><a href="#local-6989586621679198602"><span class="hs-identifier hs-var">d</span></a></span><span>
 </span><span id="line-92"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Maybe ProxyDatum -&gt; BuiltinData -&gt; Maybe ProxyDatum
 forall a b. a -&gt; b -&gt; a
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#const"><span class="hs-identifier hs-var">const</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe ProxyDatum
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#const"><span class="hs-identifier hs-var">const</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe ProxyDatum
 forall a. Maybe a
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-93"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Maybe ProxyDatum -&gt; BuiltinData -&gt; Maybe ProxyDatum
 forall a b. a -&gt; b -&gt; a
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#const"><span class="hs-identifier hs-var">const</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe ProxyDatum
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#const"><span class="hs-identifier hs-var">const</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe ProxyDatum
 forall a. Maybe a
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-94"></span><span>      </span><span class="hs-special">(</span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679198604"><span class="annot"><span class="annottext">BuiltinData
 </span><a href="#local-6989586621679198604"><span class="hs-identifier hs-var">d'</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-95"></span><span>          </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">BuiltinData -&gt; [BuiltinData]
@@ -164,7 +164,7 @@ forall a. Maybe a
 </span><span id="line-98"></span><span>                </span><span class="annot"><span class="annottext">(ScriptHash -&gt; DatumHash -&gt; ProxyDatum)
 -&gt; Maybe ScriptHash -&gt; Maybe (DatumHash -&gt; ProxyDatum)
 forall (f :: Type -&gt; Type) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/Data.Functor.html#%3C%24%3E"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">BuiltinData -&gt; Maybe ScriptHash
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/Data.Functor.html#%3C%24%3E"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">BuiltinData -&gt; Maybe ScriptHash
 forall a. FromData a =&gt; BuiltinData -&gt; Maybe a
 </span><span class="hs-identifier hs-var">fromBuiltinData</span></span><span> </span><span class="annot"><span class="annottext">BuiltinData
 </span><a href="#local-6989586621679198605"><span class="hs-identifier hs-var">receiverScript</span></a></span><span>
@@ -174,25 +174,25 @@ forall a b. Maybe (a -&gt; b) -&gt; Maybe a -&gt; Maybe b
 forall (f :: Type -&gt; Type) a b.
 Applicative f =&gt;
 f (a -&gt; b) -&gt; f a -&gt; f b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%3C%2A%3E"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">BuiltinData -&gt; Maybe DatumHash
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%3C%2A%3E"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">BuiltinData -&gt; Maybe DatumHash
 forall a. FromData a =&gt; BuiltinData -&gt; Maybe a
 </span><span class="hs-identifier hs-var">fromBuiltinData</span></span><span> </span><span class="annot"><span class="annottext">BuiltinData
 </span><a href="#local-6989586621679198606"><span class="hs-identifier hs-var">datumHash</span></a></span><span>
 </span><span id="line-100"></span><span>            </span><span class="annot"><span class="annottext">[BuiltinData]
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe ProxyDatum
 forall a. Maybe a
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span>
 </span><span id="line-101"></span><span>      </span><span class="hs-special">)</span><span>
 </span><span id="line-102"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Maybe ProxyDatum -&gt; BuiltinData -&gt; Maybe ProxyDatum
 forall a b. a -&gt; b -&gt; a
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#const"><span class="hs-identifier hs-var">const</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe ProxyDatum
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#const"><span class="hs-identifier hs-var">const</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe ProxyDatum
 forall a. Maybe a
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-103"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Maybe ProxyDatum -&gt; BuiltinData -&gt; Maybe ProxyDatum
 forall a b. a -&gt; b -&gt; a
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#const"><span class="hs-identifier hs-var">const</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe ProxyDatum
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#const"><span class="hs-identifier hs-var">const</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe ProxyDatum
 forall a. Maybe a
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-104"></span><span>      </span><span class="annot"><span class="annottext">BuiltinData
 </span><a href="#local-6989586621679198602"><span class="hs-identifier hs-var">d</span></a></span><span>
 </span><span id="line-105"></span><span>
@@ -207,7 +207,7 @@ forall a. Maybe a
 forall a. HasToBuiltin a =&gt; a -&gt; ToBuiltin a
 </span><span class="hs-identifier hs-var">toBuiltin</span></span><span> </span><span class="annot"><span class="annottext">(Data -&gt; ToBuiltin Data) -&gt; Data -&gt; ToBuiltin Data
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">[Data] -&gt; Data
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">[Data] -&gt; Data
 </span><span class="hs-identifier hs-var">PlutusTx.List</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">ScriptHash -&gt; Data
 forall a. ToData a =&gt; a -&gt; Data
 </span><span class="hs-identifier hs-var">toData</span></span><span> </span><span class="annot"><span class="annottext">ScriptHash
@@ -217,7 +217,7 @@ forall a. ToData a =&gt; a -&gt; Data
 </span><a href="#local-6989586621679198619"><span class="hs-identifier hs-var">datumHash</span></a></span><span class="hs-special">]</span><span>
 </span><span id="line-111"></span><span>
 </span><span id="line-112"></span><span class="annot"><span class="hs-comment">-- | @since WIP</span></span><span>
-</span><span id="line-113"></span><span class="hs-keyword">type</span><span> </span><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier hs-type">PProxyDatum</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">S</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/ghc-prim-0.10.0/src/GHC.Types.html#Type"><span class="hs-identifier hs-type">Type</span></a></span><span>
+</span><span id="line-113"></span><span class="hs-keyword">type</span><span> </span><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier hs-type">PProxyDatum</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">S</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/ghc-prim-0.10.0/src/GHC.Types.html#Type"><span class="hs-identifier hs-type">Type</span></a></span><span>
 </span><span id="line-114"></span><span class="hs-keyword">data</span><span> </span><span id="PProxyDatum"><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier hs-var">PProxyDatum</span></a></span></span><span> </span><span id="local-6989586621679198239"><span class="annot"><a href="#local-6989586621679198239"><span class="hs-identifier hs-type">s</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="PProxyDatum"><span class="annot"><a href="Agora.Proxy.html#PProxyDatum"><span class="hs-identifier hs-var">PProxyDatum</span></a></span></span><span>
 </span><span id="line-115"></span><span>  </span><span class="hs-special">{</span><span> </span><span id="%24sel%3AreceiverScript%3APProxyDatum"><span class="annot"><span class="annottext">forall (s :: S). PProxyDatum s -&gt; Term s (PAsData PScriptHash)
 </span><a href="Agora.Proxy.html#%24sel%3AreceiverScript%3APProxyDatum"><span class="hs-identifier hs-var hs-var">receiverScript</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679198239"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PAsData</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PScriptHash</span></span><span class="hs-special">)</span><span>
@@ -237,7 +237,7 @@ $cfrom :: forall (s :: S) x. PProxyDatum s -&gt; Rep (PProxyDatum s) x
 from :: forall x. PProxyDatum s -&gt; Rep (PProxyDatum s) x
 $cto :: forall (s :: S) x. Rep (PProxyDatum s) x -&gt; PProxyDatum s
 to :: forall x. Rep (PProxyDatum s) x -&gt; PProxyDatum s
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Generics.html#Generic"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">GHC.Generic</span></a></span></span></span><span class="hs-special">)</span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Generics.html#Generic"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">GHC.Generic</span></a></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-119"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">anyclass</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679198633"><span id="local-6989586621679198642"><span class="annot"><span class="annottext">All @[Type] (SListI @Type) (Code (PProxyDatum s))
 All @[Type] (SListI @Type) (Code (PProxyDatum s)) =&gt;
 (PProxyDatum s -&gt; Rep (PProxyDatum s))
@@ -335,7 +335,7 @@ HasCallStack =&gt;
      s
      (PAsData PCurrencySymbol :--&gt; (PAsData PScriptContext :--&gt; PUnit))
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679198990"><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679198990"><span class="annot"><span class="annottext">Term s (PAsData PCurrencySymbol)
 </span><a href="#local-6989586621679198990"><span class="hs-identifier hs-var">authSymbol'</span></a></span></span><span> </span><span id="local-6989586621679198991"><span class="annot"><span class="annottext">Term s (PAsData PScriptContext)
 </span><a href="#local-6989586621679198991"><span class="hs-identifier hs-var">ctx</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
 </span><span id="line-127"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">PScriptContext</span></span><span> </span><span id="local-6989586621679198992"><span class="annot"><span class="annottext">Term s PTxInfo
@@ -352,7 +352,7 @@ Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 -&gt; (PScriptContext s -&gt; Term s PUnit)
 -&gt; Term s PUnit
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptContext) -&gt; Term s PScriptContext
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptContext) -&gt; Term s PScriptContext
 forall (a :: PType) (s :: S).
 PIsData a =&gt;
 Term s (PAsData a) -&gt; Term s a
@@ -370,7 +370,7 @@ Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 </span><a href="#local-6989586621679198994"><span class="hs-identifier hs-var">scriptInfo</span></a></span><span> </span><span class="annot"><span class="annottext">((PScriptInfo s -&gt; Term s PBool) -&gt; Term s PBool)
 -&gt; (PScriptInfo s -&gt; Term s PBool) -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
 </span><span id="line-131"></span><span>          </span><span class="annot"><span class="hs-identifier hs-type">PSpendingScript</span></span><span> </span><span id="local-6989586621679198996"><span class="annot"><span class="annottext">Term s PTxOutRef
 </span><a href="#local-6989586621679198996"><span class="hs-identifier hs-var">_txOutRef</span></a></span></span><span> </span><span id="local-6989586621679198997"><span class="annot"><span class="annottext">Term s (PMaybeData PDatum)
 </span><a href="#local-6989586621679198997"><span class="hs-identifier hs-var">mayDatum</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
@@ -430,15 +430,15 @@ forall (a :: PType) (s :: S). TermCont @a s (Term s a) -&gt; Term s a
 -&gt; TermCont @(PAsData PProxyDatum) s (Term s (PAsData PProxyDatum))
 -&gt; Term s (PAsData PProxyDatum)
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">(Term s (PAsData PProxyDatum), ()) -&gt; Term s (PAsData PProxyDatum)
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">(Term s (PAsData PProxyDatum), ()) -&gt; Term s (PAsData PProxyDatum)
 forall a b. (a, b) -&gt; a
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/Data.Tuple.html#fst"><span class="hs-identifier hs-var">fst</span></a></span><span> </span><span class="annot"><span class="annottext">((Term s (PAsData PProxyDatum), ())
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/Data.Tuple.html#fst"><span class="hs-identifier hs-var">fst</span></a></span><span> </span><span class="annot"><span class="annottext">((Term s (PAsData PProxyDatum), ())
  -&gt; Term s (PAsData PProxyDatum))
 -&gt; TermCont
      @(PAsData PProxyDatum) s (Term s (PAsData PProxyDatum), ())
 -&gt; TermCont @(PAsData PProxyDatum) s (Term s (PAsData PProxyDatum))
 forall (f :: Type -&gt; Type) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/Data.Functor.html#%3C%24%3E"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">(((Term s (PAsData PProxyDatum), ())
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/Data.Functor.html#%3C%24%3E"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">(((Term s (PAsData PProxyDatum), ())
   -&gt; Term s (PAsData PProxyDatum))
  -&gt; Term s (PAsData PProxyDatum))
 -&gt; TermCont
@@ -465,7 +465,7 @@ Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 -&gt; (PProxyDatum s -&gt; Term s PBool)
 -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PProxyDatum) -&gt; Term s PProxyDatum
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PProxyDatum) -&gt; Term s PProxyDatum
 forall (a :: PType) (s :: S).
 PIsData a =&gt;
 Term s (PAsData a) -&gt; Term s a
@@ -478,7 +478,7 @@ Term s (PAsData a) -&gt; Term s a
 forall (a :: PType) (s :: S). PlutusType a =&gt; a s -&gt; Term s a
 </span><span class="hs-identifier hs-var">pcon</span></span><span> </span><span class="annot"><span class="annottext">(PAddress s -&gt; Term s PAddress) -&gt; PAddress s -&gt; Term s PAddress
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s PCredential
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s PCredential
 -&gt; Term s (PMaybeData PStakingCredential) -&gt; PAddress s
 forall (s :: S).
 Term s PCredential
@@ -488,7 +488,7 @@ forall (a :: PType) (s :: S). PlutusType a =&gt; a s -&gt; Term s a
 </span><span class="hs-identifier hs-var">pcon</span></span><span> </span><span class="annot"><span class="annottext">(PCredential s -&gt; Term s PCredential)
 -&gt; PCredential s -&gt; Term s PCredential
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash) -&gt; PCredential s
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash) -&gt; PCredential s
 forall (s :: S). Term s (PAsData PScriptHash) -&gt; PCredential s
 </span><span class="hs-identifier hs-var">PScriptCredential</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
 </span><a href="#local-6989586621679199006"><span class="hs-identifier hs-var">receiverScript</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsHaskell (PMaybeData PStakingCredential)
@@ -499,7 +499,7 @@ AsHaskell a -&gt; Term s a
 </span><span class="hs-identifier hs-var">pconstant</span></span><span> </span><span class="annot"><span class="annottext">Maybe StakingCredential
 AsHaskell (PMaybeData PStakingCredential)
 forall a. Maybe a
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-143"></span><span>
 </span><span id="line-144"></span><span>            </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679199009"><span class="annot"><span class="annottext">outputsAtReceiver :: Term s PInteger
 </span><a href="#local-6989586621679199009"><span class="hs-identifier hs-var hs-var">outputsAtReceiver</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
@@ -538,7 +538,7 @@ forall (s :: S). Term s PString -&gt; Term s PBool -&gt; Term s PBool
 </span><span class="hs-identifier hs-var">ptraceInfoIfFalse</span></span><span> </span><span class="annot"><span class="annottext">Term s PString
 </span><span class="hs-string">&quot;Exactly one output at the receiver script address should exist with datum hash defined in ProxyDatum.&quot;</span></span><span> </span><span class="annot"><span class="annottext">(Term s PBool -&gt; Term s PBool) -&gt; Term s PBool -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span>
 </span><span id="line-168"></span><span>                    </span><span class="annot"><span class="annottext">Term s PInteger
 </span><a href="#local-6989586621679199009"><span class="hs-identifier hs-var">outputsAtReceiver</span></a></span><span> </span><span class="annot"><span class="annottext">Term s PInteger -&gt; Term s PInteger -&gt; Term s PBool
 forall (s :: S). Term s PInteger -&gt; Term s PInteger -&gt; Term s PBool
@@ -595,7 +595,7 @@ Term s (PAsData a) -&gt; Term s a
 -&gt; (PTxInInfo s -&gt; Term s (PMaybe (PAsData PScriptHash)))
 -&gt; Term s (PMaybe (PAsData PScriptHash))
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
 </span><span id="line-175"></span><span>                        </span><span class="annot"><span class="hs-identifier hs-type">PTxInInfo</span></span><span> </span><span class="annot"><span class="annottext">Term s PTxOutRef
 </span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679199024"><span class="annot"><span class="annottext">Term s PTxOut
 </span><a href="#local-6989586621679199024"><span class="hs-identifier hs-var">resolved</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
@@ -633,7 +633,7 @@ Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 -&gt; (PCredential s -&gt; Term s (PMaybe (PAsData PScriptHash)))
 -&gt; Term s (PMaybe (PAsData PScriptHash))
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
 </span><span id="line-179"></span><span>                            </span><span class="annot"><span class="hs-identifier hs-type">PScriptCredential</span></span><span> </span><span id="local-6989586621679199027"><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
 </span><a href="#local-6989586621679199027"><span class="hs-identifier hs-var">hash</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Term s (PMaybe (PAsData PScriptHash))
 -&gt; (PMaybe (PAsData PScriptHash) s
@@ -662,7 +662,7 @@ Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
     -&gt; Term s (PMaybe (PAsData PScriptHash)))
 -&gt; Term s (PMaybe (PAsData PScriptHash))
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
 </span><span id="line-180"></span><span>                              </span><span class="annot"><span class="annottext">PMaybe (PAsData PScriptHash) s
 </span><span class="hs-identifier hs-var">PNothing</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash :--&gt; PMaybe (PAsData PScriptHash))
 forall (a :: PType) (s :: S). Term s (a :--&gt; PMaybe a)
@@ -700,13 +700,13 @@ Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
       :--&gt; PMaybe (PAsData PScriptHash))
 -&gt; Term s (PMaybe (PAsData PScriptHash))
 forall a b. a -&gt; b -&gt; a
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#const"><span class="hs-identifier hs-var">const</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">forall (a :: PType) (s :: S).
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#const"><span class="hs-identifier hs-var">const</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">forall (a :: PType) (s :: S).
 PLiftable a =&gt;
 AsHaskell a -&gt; Term s a
 </span><span class="hs-identifier hs-var">pconstant</span></span><span> </span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PMaybe</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PAsData</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PScriptHash</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Maybe ScriptHash
 AsHaskell (PMaybe (PAsData PScriptHash))
 forall a. Maybe a
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-cpp">
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-cpp">
                     # pfromData inputs
 </span><span>
 </span><span id="line-187"></span><span>            </span><span class="hs-comment">-- Spending condition 6: Transaction does not include script inputs other than own input.</span><span>
@@ -731,7 +731,7 @@ Term s a -&gt; (Term s a -&gt; Term s b) -&gt; Term s b
 -&gt; (Term s (PAsData PCurrencySymbol) -&gt; Term s PBool)
 -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash) -&gt; Term s (PAsData PCurrencySymbol)
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash) -&gt; Term s (PAsData PCurrencySymbol)
 forall (s :: S).
 Term s (PAsData PScriptHash) -&gt; Term s (PAsData PCurrencySymbol)
 </span><a href="Agora.Utils.html#pscriptHashToCurrencySymbol"><span class="hs-identifier hs-var">pscriptHashToCurrencySymbol</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
@@ -924,7 +924,7 @@ Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 -&gt; (PMap 'Sorted PTokenName PInteger s -&gt; Term s PBool)
 -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PMap 'Sorted PTokenName PInteger))
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PMap 'Sorted PTokenName PInteger))
 -&gt; Term s (PMap 'Sorted PTokenName PInteger)
 forall (a :: PType) (s :: S).
 PIsData a =&gt;
@@ -1042,7 +1042,7 @@ Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 -&gt; (PMap 'Sorted PTokenName PInteger s -&gt; Term s PBool)
 -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PMap 'Sorted PTokenName PInteger))
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PMap 'Sorted PTokenName PInteger))
 -&gt; Term s (PMap 'Sorted PTokenName PInteger)
 forall (a :: PType) (s :: S).
 PIsData a =&gt;
@@ -1224,7 +1224,7 @@ forall a. (a -&gt; a -&gt; a) -&gt; [a] -&gt; a
 forall (t :: Type -&gt; Type) a.
 Foldable t =&gt;
 (a -&gt; a -&gt; a) -&gt; t a -&gt; a
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/Data.Foldable.html#foldr1"><span class="hs-identifier hs-var">foldr1</span></a></span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/Data.Foldable.html#foldr1"><span class="hs-identifier hs-var">foldr1</span></a></span><span>
 </span><span id="line-237"></span><span>              </span><span class="annot"><span class="annottext">Term s PBool -&gt; Term s PBool -&gt; Term s PBool
 forall (s :: S). Term s PBool -&gt; Term s PBool -&gt; Term s PBool
 </span><span class="hs-operator hs-var">(#&amp;&amp;)</span></span><span>
@@ -1286,7 +1286,7 @@ Term s (PAsData a) -&gt; Term s a
 </span><a href="#local-6989586621679199049"><span class="hs-identifier hs-var">input</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">((PTxInInfo s -&gt; Term s PBool) -&gt; Term s PBool)
 -&gt; (PTxInInfo s -&gt; Term s PBool) -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
 </span><span id="line-248"></span><span>                        </span><span class="annot"><span class="hs-identifier hs-type">PTxInInfo</span></span><span> </span><span class="annot"><span class="annottext">Term s PTxOutRef
 </span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679199050"><span class="annot"><span class="annottext">Term s PTxOut
 </span><a href="#local-6989586621679199050"><span class="hs-identifier hs-var">resolved</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
@@ -1317,7 +1317,7 @@ Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 </span><a href="#local-6989586621679199052"><span class="hs-identifier hs-var">cred</span></a></span><span> </span><span class="annot"><span class="annottext">((PCredential s -&gt; Term s PBool) -&gt; Term s PBool)
 -&gt; (PCredential s -&gt; Term s PBool) -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
 </span><span id="line-252"></span><span>                            </span><span class="annot"><span class="hs-identifier hs-type">PScriptCredential</span></span><span> </span><span id="local-6989586621679199053"><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
 </span><a href="#local-6989586621679199053"><span class="hs-identifier hs-var">scriptHash</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-253"></span><span>                              </span><span class="annot"><span class="annottext">Term s (PAsData PScriptHash)
@@ -1348,7 +1348,7 @@ forall (s :: S). Term s PString -&gt; Term s PBool -&gt; Term s PBool
 </span><span class="hs-identifier hs-var">ptraceInfoIfFalse</span></span><span> </span><span class="annot"><span class="annottext">Term s PString
 </span><span class="hs-string">&quot;Transaction must contain an input from Proxy Validator.&quot;</span></span><span> </span><span class="annot"><span class="annottext">(Term s PBool -&gt; Term s PBool) -&gt; Term s PBool -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/6hbgd0w57swq4rl9pcga8m90m9ayylh2-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span>
+</span><a href="file:///nix/store/047giax7r17h4668jd3x4nwryqypsrhc-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span>
 </span><span id="line-259"></span><span>              </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term
   s
   ((PAsData PTxInInfo :--&gt; PBool)
