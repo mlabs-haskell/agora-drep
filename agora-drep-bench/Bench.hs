@@ -1,5 +1,6 @@
 module Main (main) where
 
+import Agora.Effect.Voting (votingEffectScript)
 import Agora.Proxy (proxyScript)
 import Data.Kind (Type)
 import Plutarch.Internal.Term (
@@ -13,6 +14,7 @@ import Plutarch.Internal.Term (
 import Plutarch.Script (Script (Script))
 import Plutarch.Test.Bench (bench, defaultMain)
 import PlutusLedgerApi.V3 (CurrencySymbol (CurrencySymbol), ScriptContext)
+import Spec.Effect.Voting.Context qualified as Voting
 import Spec.Proxy.Context qualified as Proxy
 import Spec.Utils (TestConfig (testConfigFromScript), uncheckedApplyDataToScript)
 import Test.Tasty (TestName, TestTree, testGroup)
@@ -25,6 +27,9 @@ main =
       "Benchmarks"
       [ benchScript "GAT V2 Spend" compiledProxyScript Proxy.validGAT2Spend
       , benchScript "GAT V3 Mint" compiledProxyScript Proxy.validGAT3Mint
+      , benchScript "Voting Effect Certify" compiledVotingScript Voting.validCert
+      , benchScript "Voting Effect Spend" compiledVotingScript Voting.validSpend
+      , benchScript "Voting Effect Vote" compiledVotingScript Voting.validVote
       ]
 
 benchScript :: (TestConfig c) => TestName -> Script -> (c -> ScriptContext) -> TestTree
@@ -41,6 +46,11 @@ compiledProxyScript :: Script
 compiledProxyScript =
   either (error . show) id $
     compile NoTracing proxyScript
+
+compiledVotingScript :: Script
+compiledVotingScript =
+  either (error . show) id $
+    compile NoTracing votingEffectScript
 
 unsafeTermFromScript :: forall (p :: S -> Type). Script -> (forall (s :: S). Term s p)
 unsafeTermFromScript (Script script) =
