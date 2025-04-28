@@ -23,6 +23,7 @@
 \usepackage[a4paper]{geometry}
 
 \begin{document}
+\pagenumbering{roman}
 
 \title{\textbf{Agora DRep Effect Specification}}
 \author{
@@ -41,6 +42,13 @@
   Using Agora proposals, organization members will be able to decide how their DAO will vote instead.
 \end{abstract}
 \vskip 5mm
+
+\newpage
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
 \section{Overview}
 
 This document provides a specification of a set of Cardano validators that together provide Agora effect that
@@ -96,6 +104,8 @@ data Datum = Datum
   }
 \end{lstlisting}
 
+Redeemer is ignored by the validator so any PlutusData blob can be used.
+
 \subsubsection*{Spending Conditions}
 
 \begin{itemize}
@@ -111,26 +121,18 @@ data Datum = Datum
 
 Minting validator is tightly coupled to the spending validator and some checks are offloaded there. This validator succeeds when the transaction spends from the spending validator address (that already ensures proper handling of V2 GAT) and that it mints exactly one V3 GAT with empty token name.
 
+\subsubsection*{Data Types}
+
+Redeemer is ignored by the validator so any PlutusData blob can be used.
+
 \subsubsection*{Spending Conditions}
 
 \begin{itemize}
   \item Transaction contains an input from Proxy Spending Validator. The address is known as Minting and Spending validators share the same hash.
 \end{itemize}
 
-\subsection{Spending Effect Validator}
-
-Because onchain voting action is gated behind burning pGAT the effect implementation has to be split into spending and voting validators. Spending validator simply allows only for burning the pGAT as long as the transaction.
-
-\subsubsection*{Spending Conditions}
-
-\begin{itemize}
-  \item Transaction contains a vote with own drep hash
-\end{itemize}
-
-Rest  of the checks if performed by the Voting Effect validator.
-
-\subsubsection*{Interaction diagrams}
-
+\subsubsection*{Interaction Diagrams}
+Spencing and minting validators are executed in the same transaction so they share a diagram.
 \begin{figure}[H]
   \begin{center}
     \begin{tikzpicture}
@@ -189,6 +191,29 @@ Rest  of the checks if performed by the Voting Effect validator.
   \caption[]{GAT Upgrade to V3}
 \end{figure}
 
+\subsection{Spending Effect Validator}
+
+Because onchain voting action is gated behind burning pGAT the effect implementation has to be split into spending and voting validators. Spending validator simply allows only for burning the pGAT as long as the transaction.
+
+\subsubsection*{Data Types}
+
+\begin{lstlisting}[language=Haskell]
+data Datum = Datum
+  { governanceActionId :: GovernanceActionId
+  , vote :: Vote
+  }
+\end{lstlisting}
+
+Redeemer is ignored by the validator so any PlutusData blob can be used.
+
+\subsubsection*{Spending Conditions}
+
+\begin{itemize}
+  \item Transaction contains a vote with own drep hash
+\end{itemize}
+
+Rest  of the checks if performed by the Voting Effect validator.
+
 \subsection{Voting Effect Validator}
 
 The Voting Effect validator will utilise the above established Proxy Minting Validator, minting a Proxy Governance Authority Token (pGAT).
@@ -211,12 +236,7 @@ The validator script will allow DRep registration unconditionally, but DRep upda
 
 \subsubsection*{Data Types}
 
-\begin{lstlisting}[language=Haskell]
-data Datum = Datum
-  { governanceActionId :: GovernanceActionId
-  , vote :: Vote
-  }
-\end{lstlisting}
+Redeemer is ignored by the validator so any PlutusData blob can be used.
 
 \subsubsection*{Spending Conditions}
 
@@ -251,7 +271,7 @@ data Datum = Datum
 \end{itemize}
 
 \subsubsection*{Interaction Diagrams}
-
+Spencing and voting validators are executed in the same transaction so they share a diagram.
 \begin{figure}[H]
   \begin{center}
     \begin{tikzpicture}
@@ -280,18 +300,18 @@ data Datum = Datum
           \verb|status| = \verb|Locked|
         \end{tabular}
       };
-      \node[shape=rectangle,fill=blue!30,below left=of tx](p2){
-        \begin{tabular}{l}
-          Proposal UTxO \\ \toprule
-          \verb|status| = \verb|Finished|
-        \end{tabular}
-      };
-      \node[shape=rectangle,fill=purple!30,below right=of tx](gat1){
+      \node[shape=rectangle,fill=purple!30,below=of tx](gat1){
         \begin{tabular}{l}
           Proxy UTxO                     \\ \toprule
           1 GAT V2                       \\
           \verb|receiverScript| = Voting \\
           \verb|datumHash| = $hash(\verb|governanceActionId, vote|)$
+        \end{tabular}
+      };
+      \node[shape=rectangle,fill=blue!30,left=of gat1](p2){
+        \begin{tabular}{l}
+          Proposal UTxO \\ \toprule
+          \verb|status| = \verb|Finished|
         \end{tabular}
       };
       \draw[->] (p1) -- (tx1);
@@ -393,5 +413,11 @@ Note that the following encodings can be achieved automatically using Plutarch's
         \end{itemize}
 \end{itemize}
 Total: 1331 h
+
+\section{Summary}
+
+Described set of four validators allow existing Agora DAO instances to bridge their authority tokens from Plutus V2 to V3 and enable using them in transactions that perform V3 actions that are not permitted with V2 scripts such as voting in Cardano native governance.
+The proxy mechanism is universal and can be used with other validators than described here voting effect.
+Voting script allows DAOs to register a script dRep and to use their existing Agora infrastructure to control voting in Cardano governance.
 
 \end{document}

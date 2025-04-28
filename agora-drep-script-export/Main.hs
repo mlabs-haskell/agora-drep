@@ -1,6 +1,6 @@
 module Main (main) where
 
-import Agora.Effects.Voting (votingEffectValidator)
+import Agora.Effect.Voting (votingEffectScript)
 import Agora.Proxy (proxyScript)
 import Cardano.Binary qualified as CBOR
 import Data.ByteString (ByteString)
@@ -46,4 +46,4 @@ main = do
   let writeAgoraScriptToFile fp = writeScriptToFile ("./scripts/agora/" <> fp)
 
   writeAgoraScriptToFile "proxyScript" proxyScript
-  writeAgoraScriptToFile "votingEffectScript" votingEffectValidator
+  writeAgoraScriptToFile "votingEffectScript" votingEffectScript

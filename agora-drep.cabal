@@ -86,7 +86,7 @@ library
   hs-source-dirs:  agora-drep
   exposed-modules:
     Agora.AuthorityToken
-    Agora.Effects.Voting
+    Agora.Effect.Voting
     Agora.Proxy
     Agora.Utils
 
@@ -117,8 +117,8 @@ library agora-drep-spec
   import:          lang
   hs-source-dirs:  agora-drep-spec
   exposed-modules:
-    Spec.Effects.Voting
-    Spec.Effects.Voting.Context
+    Spec.Effect.Voting
+    Spec.Effect.Voting.Context
     Spec.Proxy
     Spec.Proxy.Context
     Spec.Utils
