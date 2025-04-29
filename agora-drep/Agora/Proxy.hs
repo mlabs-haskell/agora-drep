@@ -240,7 +240,7 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
               ]
           PMintingScript currencySymbol -> P.do
             -- When this script runs also V2 GAT gets burned so that guarantees that no V3 thing happens
-            PTxInfo inputs _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <- pmatch txInfo
+            PTxInfo inputs _ _ _ mint _ _ _ _ _ _ _ _ _ _ _ <- pmatch txInfo
 
             let isValidatorInput =
                   plam
@@ -254,9 +254,43 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
                             _ -> pcon PFalse
                     )
 
-            -- Spending Condition 1: Transaction contains an input from Proxy Spending Validator.
-            ptraceInfoIfFalse "Transaction must contain an input from Proxy Validator." $
-              (pcountIf # isValidatorInput # pfromData inputs) #== 1
+            PValue mintAssetMap <- pmatch (pfromData mint)
+            PMap mintAssetList <- pmatch mintAssetMap
+            PCons mintAssetPair1 mintAssetListRest1 <- pmatch mintAssetList
+            let mintCs1 = pfstBuiltin # mintAssetPair1
+            PMap mintTokens1 <- pmatch $ pfromData (psndBuiltin # mintAssetPair1)
+            PCons mintTokenPair1 mintTokens1Rest <- pmatch mintTokens1
+            PNil <- pmatch mintTokens1Rest
+
+            -- We have to account for minting and burning scenarios. Minting must
+            -- Minting:
+            --  - must have two asset classes (GAT burn and pGAT mint)
+            --  - rules are enforced in the spending validator
+            -- Burning:
+            --  - must have exactly one asset class (pGAT burn)
+            --  - transaction must contain an input from the Proxy script validator
+            pif
+              (mintCs1 #== currencySymbol)
+              ( pif
+                  (pfromData (psndBuiltin # mintTokenPair1) #== pconstant 1)
+                  ((pcountIf # isValidatorInput # pfromData inputs) #== 1)
+                  ( P.do
+                      PNil <- pmatch mintAssetListRest1
+                      pfromData (psndBuiltin # mintTokenPair1) #== pconstant (-1)
+                  )
+              )
+              ( P.do
+                  PCons mintAssetPair2 mintAssetListRest2 <- pmatch mintAssetListRest1
+                  PNil <- pmatch mintAssetListRest2
+                  let mintCs2 = pfstBuiltin # mintAssetPair2
+                  PMap mintTokens2 <- pmatch $ pfromData (psndBuiltin # mintAssetPair2)
+                  PCons mintTokenPair2 mintTokens2Rest <- pmatch mintTokens2
+                  PNil <- pmatch mintTokens2Rest
+
+                  (mintCs2 #== currencySymbol)
+                    #&& ((pcountIf # isValidatorInput # pfromData inputs) #== 1)
+                    #&& (pfromData (psndBuiltin # mintTokenPair2) #== 1)
+              )
           _ -> perror
 
   pif valid (pcon PUnit) perror

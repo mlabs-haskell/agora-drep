@@ -199,12 +199,13 @@ votingEffectScript = plam $ \authSymbol' ctx -> P.do
                   ( \self input rest -> pmatch (pfromData input) $ \case
                       PTxInInfo _ resolved -> P.do
                         PTxOut addr _ datum _ <- pmatch resolved
-                        POutputDatumHash datumHash <- pmatch datum
                         PAddress cred _ <- pmatch addr
                         pmatch cred $ \case
-                          PScriptCredential _ -> pmatch (self # rest) $ \case
-                            PNothing -> pjust # datumHash
-                            PJust _ -> perror
+                          PScriptCredential _ -> P.do
+                            POutputDatumHash datumHash <- pmatch datum
+                            pmatch (self # rest) $ \case
+                              PNothing -> pjust # datumHash
+                              PJust _ -> perror
                           _ -> self # rest
                   )
                   (const (pconstant @(PMaybe (PAsData PDatumHash)) Nothing))

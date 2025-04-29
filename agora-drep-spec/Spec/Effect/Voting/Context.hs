@@ -88,6 +88,7 @@ spendingContextSpec votingScript =
     testGroup
       "Spending Context tests"
       [ mkTest' "OK case: Valid spending transaction" validSpend ScriptSuccess
+      , mkTest' "Fail case: transaction not burning pGAT" missingGat3Burn ScriptFailure
       , mkTest' "Fail case: transaction missing Authority token" missingGat3Spending ScriptFailure
       ]
 
@@ -224,6 +225,18 @@ validSpend config =
     mconcat
       [ withSpendingUTXO (gat3Utxo config)
       , mint (Value.singleton gat3CurSym (TokenName "") (-1))
+      , input (gat3Utxo config)
+      , vote
+          (DRepVoter (DRepCredential (vsCredential config)))
+          (GovernanceActionId (TxId "") 0)
+          VoteYes
+      ]
+
+missingGat3Burn :: TestConfigVoting -> ScriptContext
+missingGat3Burn config =
+  buildSpending' $
+    mconcat
+      [ withSpendingUTXO (gat3Utxo config)
       , input (gat3Utxo config)
       , vote
           (DRepVoter (DRepCredential (vsCredential config)))

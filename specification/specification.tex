@@ -246,23 +246,24 @@ Redeemer is ignored by the validator so any PlutusData blob can be used.
           \item if \verb|Spending|
                 \begin {itemize}
 
-          \item \verb|ScriptContext| contains exactly 1 script input
-          \item \verb|ScriptContext| contains exactly 1 vote where the \verb|Voter| is the DRep credential of the Voting Script (script hash is common with the spending script)
+          \item Transaction contains exactly 1 script input
+          \item Transaction burns one pGAT (symbol is known from script parameter)
+          \item Transaction contains exactly 1 vote where the \verb|Voter| is the DRep credential of the Voting Script (script hash is common with the spending script)
         \end{itemize}
   \item if \verb|Certifying|
         \begin{itemize}
-          \item \verb|ScriptContext| contains exactly 1 transaction DRep registration certificate
-          \item \verb|ScriptContext| does not contain a vote
-          \item \verb|ScriptContext| does not contain proposal procedures
-          \item \verb|ScriptContext| does not contain treasury donations
+          \item Transaction contains exactly 1 transaction DRep registration certificate
+          \item Transaction does not contain a vote
+          \item Transaction does not contain proposal procedures
+          \item Transaction does not contain treasury donations
         \end{itemize}
   \item if \verb|Voting|
         \begin{itemize}
-          \item above input has \verb|Voting Effect datum| as a hashed datum
-          \item \verb|ScriptContext| contains exactly 1 vote, where the \verb|GovernanceId| and \verb|Vote| match the ones in the \verb|Voting Effect's datum|
-          \item \verb|ScriptContext| does not contain a certificate
-          \item \verb|ScriptContext| does not contain proposal procedures
-          \item \verb|ScriptContext| does not contain treasury donations
+          \item Script input has \verb|Voting Effect datum| as a hashed datum (the spending validator makes sure that we only have 1 script input)
+          \item Transaction contains exactly 1 vote, where the \verb|GovernanceId| and \verb|Vote| match the ones in the \verb|Voting Effect's datum|
+          \item Transaction does not contain a certificate
+          \item Transaction does not contain proposal procedures
+          \item Transaction does not contain treasury donations
         \end{itemize}
 
 
