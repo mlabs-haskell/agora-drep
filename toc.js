@@ -10,7 +10,7 @@ class MDBookSidebarScrollbox extends HTMLElement {
     connectedCallback() {
         this.innerHTML = '<ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="specification.html"><strong aria-hidden="true">2.</strong> Specification</a></li><li class="chapter-item expanded "><a href="haddock.html"><strong aria-hidden="true">3.</strong> Haddock</a></li></ol>';
         // Set the current, active page, and reveal it if it's hidden
-        let current_page = document.location.href.toString().split("#")[0];
+        let current_page = document.location.href.toString().split("#")[0].split("?")[0];
         if (current_page.endsWith("/")) {
             current_page += "index.html";
         }
