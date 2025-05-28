@@ -66,6 +66,7 @@ spendingContextSpec gat3Script =
     testGroup
       "Spending Context tests"
       [ mkTest' "OK case: Valid GAT2 spend" validGAT2Spend ScriptSuccess
+      , mkTest' "Fail case: Invalid V3 name" invalidV3Name ScriptFailure
       , mkTest' "Fail case: Missing GAT v2 burn" missingGat2Burn ScriptFailure
       , mkTest' "Fail case: Missing GAT v2 token from spent UTxO" missingGat2FromUtxo ScriptFailure
       , mkTest' "Fail case: Minting more than one GAT v3" mintMoreThan1Gat3 ScriptFailure
@@ -102,6 +103,17 @@ validGAT2Spend config =
       , output (gat3Utxo config)
       , mint (Value.singleton gat2CurSym (TokenName "") (-1))
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
+      ]
+
+invalidV3Name :: TestConfigProxy -> ScriptContext
+invalidV3Name config =
+  buildSpending' $
+    mconcat
+      [ withSpendingUTXO (gat2Utxo config)
+      , input (gat2Utxo config)
+      , output (gat3Utxo config)
+      , mint (Value.singleton gat2CurSym (TokenName "") (-1))
+      , mint (Value.singleton (gat3CurSym config) (TokenName "aabbcc") 1)
       ]
 
 missingGat2Burn :: TestConfigProxy -> ScriptContext
