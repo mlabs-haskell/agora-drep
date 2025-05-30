@@ -46,7 +46,6 @@ import Plutarch.Prelude (
   pfstBuiltin,
   pif,
   plam,
-  plet,
   pmatch,
   precList,
   psndBuiltin,
@@ -186,7 +185,7 @@ proxyScript = plam $ \authSymbol' ctx -> P.do
 
             -- Spending condition 6: Transaction does not include script inputs other than own input.
             PJust ownScriptHash <- pmatch scriptInputs
-            ownCurrencySymbol <- plet $ pscriptHashToCurrencySymbol ownScriptHash
+            let ownCurrencySymbol = pscriptHashToCurrencySymbol ownScriptHash
 
             -- Spending Condition 1: Transaction burns one GAT (symbol is known from script parameter)
             -- Spending Condition 2: Spent UTxO contains GAT
