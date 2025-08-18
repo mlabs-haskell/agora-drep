@@ -29,7 +29,7 @@
     {
       inherit (agora-drep) checks apps;
 
-      devShells.agora-drep = agora-drep.devShell;
+      devShells.agora-drep = agora-drep.devShells.default;
 
       packages = agora-drep.packages // {
         compiled-scripts =
