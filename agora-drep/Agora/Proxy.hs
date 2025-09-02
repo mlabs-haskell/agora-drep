@@ -1,4 +1,7 @@
--- | @since WIP
+{- | Agora DRep Proxy script
+
+@since 1.0.0
+-}
 module Agora.Proxy (proxyScript, PProxyDatum (..), ProxyDatum (..)) where
 
 import Agora.Utils (pcountIf, pcurrencySymbolToScriptHash, pscriptHashToCurrencySymbol)
@@ -65,24 +68,24 @@ import PlutusTx.Builtins (chooseData, unsafeDataAsList)
 
 {- | Haskell-level datum for the Proxy Validator script.
 
- @since WIP
+@since 1.0.0
 -}
 data ProxyDatum = ProxyDatum
   { pdReceiverScript :: ScriptHash
   , pdDatumHash :: DatumHash
   }
   deriving stock
-    ( -- | @since WIP
+    ( -- | @since 1.0.0
       Show
-    , -- | @since WIP
+    , -- | @since 1.0.0
       GHC.Generic
     )
   deriving anyclass
-    ( -- | @since WIP
+    ( -- | @since 1.0.0
       SOP.Generic
     )
 
--- | @since WIP
+-- | @since 1.0.0
 instance PlutusTx.FromData ProxyDatum where
   {-# INLINEABLE fromBuiltinData #-}
   fromBuiltinData d =
@@ -102,25 +105,40 @@ instance PlutusTx.FromData ProxyDatum where
       (const Nothing)
       d
 
--- | @since WIP
+-- | @since 1.0.0
 instance PlutusTx.ToData ProxyDatum where
   {-# INLINEABLE toBuiltinData #-}
   toBuiltinData (ProxyDatum receiverScript datumHash) =
     toBuiltin $ PlutusTx.List [toData receiverScript, toData datumHash]
 
--- | @since WIP
+{- | Datum stored at the proxy validator script
+
+@since 1.0.0
+-}
 type PProxyDatum :: S -> Type
 data PProxyDatum s = PProxyDatum
   { receiverScript :: Term s (PAsData PScriptHash)
+  -- ^ Script hash of the Plutus V3 effect
   , datumHash :: Term s (PAsData PDatumHash)
+  -- ^ Hash of the datum that must be created at the receiver script
   }
   deriving stock (GHC.Generic)
   deriving anyclass (SOP.Generic, PEq, PIsData)
   deriving (PlutusType) via (DeriveAsDataRec PProxyDatum)
 
+-- | @since 1.0.0
 instance PTryFrom PData (PAsData PProxyDatum)
 
--- | @since WIP
+{- | Proxy script
+
+This script serves both validator script and minting script purposes.
+  - Mint a Proxied Governance Authority Token
+  - Verify spending from the proxy effect script address
+
+See details in the [specification](https://mlabs-haskell.github.io/agora-drep/static/agora-drep-specification.pdf).
+
+@since 1.0.0
+-}
 proxyScript :: (forall (s :: S). Term s (PAsData PCurrencySymbol :--> PAsData PScriptContext :--> PUnit))
 proxyScript = plam $ \authSymbol' ctx -> P.do
   PScriptContext txInfo _redeemer scriptInfo <- pmatch $ pfromData ctx

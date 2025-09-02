@@ -1,3 +1,7 @@
+{- | Proxy script unit tests
+
+@since 1.0.0
+-}
 module Spec.Proxy (spec) where
 
 import Agora.Proxy (proxyScript)
@@ -7,6 +11,10 @@ import Spec.Proxy.Context (mintingContextSpec, spendingContextSpec)
 import Test.Tasty (TestTree, adjustOption, testGroup)
 import Test.Tasty.QuickCheck (QuickCheckTests)
 
+{- | Proxy script unit tests
+
+@since 1.0.0
+-}
 spec :: TestTree
 spec =
   adjustOption extraOptions $

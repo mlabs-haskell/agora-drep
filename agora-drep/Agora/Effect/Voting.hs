@@ -1,3 +1,7 @@
+{- | Agora DRep Voting Effect script
+
+@since 1.0.0
+-}
 module Agora.Effect.Voting (votingEffectScript, VotingDatum (..)) where
 
 import Agora.AuthorityToken (singleAuthorityTokenBurned)
@@ -71,13 +75,14 @@ import PlutusTx.Builtins (chooseData, unsafeDataAsList)
 
 {- | Haskell-level datum for the Voting Effect Validator script.
 
- @since 0.1.0
+@since 1.0.0
 -}
 data VotingDatum = VotingDatum
   { vdGovernanceActionId :: GovernanceActionId
   , vdVote :: Vote
   }
 
+-- | @since 1.0.0
 instance PlutusTx.FromData VotingDatum where
   {-# INLINEABLE fromBuiltinData #-}
   fromBuiltinData d =
@@ -97,22 +102,42 @@ instance PlutusTx.FromData VotingDatum where
       (const Nothing)
       d
 
+-- | @since 1.0.0
 instance PlutusTx.ToData VotingDatum where
   {-# INLINEABLE toBuiltinData #-}
   toBuiltinData (VotingDatum governanceActionId vote) =
     toBuiltin $ PlutusTx.List [toData governanceActionId, toData vote]
 
+{- | Voting Effect Datum
+
+This script serves both validator script and certifying script purposes.
+
+@since 1.0.0
+-}
 type PVotingDatum :: S -> Type
 data PVotingDatum s = PVotingDatum
   { governanceActionId :: Term s (PAsData PGovernanceActionId)
+  -- ^ Id of the governance action the vote is casted for
   , vote :: Term s (PAsData PVote)
+  -- ^ Vote for the governance action
   }
   deriving stock (GHC.Generic)
   deriving anyclass (SOP.Generic, PEq, PIsData)
   deriving (PlutusType) via (DeriveAsDataRec PVotingDatum)
 
+-- | @since 1.0.0
 instance PTryFrom PData (PAsData PVotingDatum)
 
+{- | Voting Effect Plutarch script
+ -
+This script is used to:
+  - certify new DRep registration
+  - verify the DRep vote on behalf of the DRep based on the Agora voting result
+
+See details in the [specification](https://mlabs-haskell.github.io/agora-drep/static/agora-drep-specification.pdf).
+
+@since 1.0.0
+-}
 votingEffectScript :: ClosedTerm (PAsData PCurrencySymbol :--> PAsData PScriptContext :--> PUnit)
 votingEffectScript = plam $ \authSymbol' ctx -> P.do
   PScriptContext txInfo _redeemer scriptInfo <- pmatch $ pfromData ctx

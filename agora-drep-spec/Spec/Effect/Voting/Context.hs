@@ -1,3 +1,7 @@
+{- | Voting Effect script unit tests
+
+@since 1.0.0
+-}
 module Spec.Effect.Voting.Context (
   certifyingContextSpec,
   votingContextSpec,
@@ -30,11 +34,16 @@ import PlutusLedgerApi.V3.Contexts (TxCert (TxCertRegDRep, TxCertRegStaking), Vo
 import Spec.Utils (TestConfig (ownScript), mkTest, testConfigFromScript, uncheckedApplyDataToScript)
 import Test.Tasty (TestTree, testGroup)
 
+{- | Context for the test case
+
+@since 1.0.0
+-}
 data TestConfigVoting = TestConfigVoting
   { vsCredential :: Credential
   , vsScript :: Script
   }
 
+-- | @since 1.0.0
 instance TestConfig TestConfigVoting where
   ownScript config = uncheckedApplyDataToScript gat3CurSym (vsScript config)
 
@@ -45,7 +54,10 @@ instance TestConfig TestConfigVoting where
           , vsScript = votingScript
           }
 
--- | Unit tests
+{- | Voting Effect script unit tests for certifying cases
+
+@since 1.0.0
+-}
 certifyingContextSpec :: Script -> TestTree
 certifyingContextSpec votingScript =
   let
@@ -61,7 +73,10 @@ certifyingContextSpec votingScript =
       , mkTest' "Fail case: transaction contains treasury donations" hasTrDonations ScriptFailure
       ]
 
--- | Unit tests
+{- | Voting Effect script unit tests for voting cases
+
+@since 1.0.0
+-}
 votingContextSpec :: Script -> TestTree
 votingContextSpec votingScript =
   let
@@ -78,7 +93,10 @@ votingContextSpec votingScript =
       , mkTest' "Fail case: transaction contains treasury donations" hasTrDonationsVoting ScriptFailure
       ]
 
--- | Unit tests
+{- | Voting Effect script unit tests for spending cases
+
+@since 1.0.0
+-}
 spendingContextSpec :: Script -> TestTree
 spendingContextSpec votingScript =
   let
@@ -92,8 +110,12 @@ spendingContextSpec votingScript =
       , mkTest' "Fail case: transaction missing Authority token" missingGat3Spending ScriptFailure
       ]
 
--- -- * ScriptContexts for the test cases
+-- * ScriptContexts for the test cases
 
+{- | Valid DRep registration certifying transaction (should pass)
+
+@since 1.0.0
+-}
 validCert :: TestConfigVoting -> ScriptContext
 validCert config =
   let regDRep = TxCertRegDRep (DRepCredential (vsCredential config)) (Lovelace 5_000_000)
@@ -104,6 +126,10 @@ validCert config =
           , txCert regDRep
           ]
 
+{- | Certifying transaction also has votes (should fail)
+
+@since 1.0.0
+-}
 hasVotes :: TestConfigVoting -> ScriptContext
 hasVotes config =
   let regDRep = TxCertRegDRep (DRepCredential (vsCredential config)) (Lovelace 5_000_000)
@@ -118,6 +144,10 @@ hasVotes config =
           , txCert regDRep
           ]
 
+{- | More than one certificates are included in the transaction (should fail)
+
+@since 1.0.0
+-}
 multipleTxCerts :: TestConfigVoting -> ScriptContext
 multipleTxCerts config =
   let regDRep = TxCertRegDRep (DRepCredential (vsCredential config)) 5_000_000
@@ -129,6 +159,10 @@ multipleTxCerts config =
           , txCert (TxCertRegStaking (vsCredential config) (Just 5_000_000))
           ]
 
+{- | Proposal procedures are included in the certifying transaction (should fail)
+
+@since 1.0.0
+-}
 hasPProcs :: TestConfigVoting -> ScriptContext
 hasPProcs config =
   let regDRep = TxCertRegDRep (DRepCredential (vsCredential config)) 5_000_000
@@ -140,6 +174,10 @@ hasPProcs config =
           , proposalProcedure (ProposalProcedure 5_000_000 (vsCredential config) InfoAction)
           ]
 
+{- | Treasury donations are included in the transaction (should fail)
+
+@since 1.0.0
+-}
 hasTrDonations :: TestConfigVoting -> ScriptContext
 hasTrDonations config =
   let regDRep = TxCertRegDRep (DRepCredential (vsCredential config)) (Lovelace 5_000_000)
@@ -151,6 +189,10 @@ hasTrDonations config =
           , treasuryDonation 5_000_000
           ]
 
+{- | Valid voting transaction (should pass)
+
+@since 1.0.0
+-}
 validVote :: TestConfigVoting -> ScriptContext
 validVote config =
   let voter = DRepVoter (DRepCredential (vsCredential config))
@@ -164,6 +206,11 @@ validVote config =
               VoteYes
           ]
 
+{- | Voting transaction is missing a valid Governance Authority Token
+(should fail)
+
+@since 1.0.0
+-}
 missingGat3 :: TestConfigVoting -> ScriptContext
 missingGat3 config =
   let voter = DRepVoter (DRepCredential (vsCredential config))
@@ -176,6 +223,10 @@ missingGat3 config =
               VoteYes
           ]
 
+{- | DRep vote doesn't match the datum of the effect (should fail)
+
+@since 1.0.0
+-}
 mismatchingVote :: TestConfigVoting -> ScriptContext
 mismatchingVote config =
   let voter = DRepVoter (DRepCredential (vsCredential config))
@@ -189,6 +240,10 @@ mismatchingVote config =
               VoteNo
           ]
 
+{- | Voting transaction includes certificates (should fail)
+
+@since 1.0.0
+-}
 hasTxCerts :: TestConfigVoting -> ScriptContext
 hasTxCerts config =
   let voter = DRepVoter (DRepCredential (vsCredential config))
@@ -199,6 +254,10 @@ hasTxCerts config =
           , txCert (TxCertRegStaking (vsCredential config) (Just 5_000_000))
           ]
 
+{- | Voting transaction includes proposal procedures (should fail)
+
+@since 1.0.0
+-}
 hasPProcsVoting :: TestConfigVoting -> ScriptContext
 hasPProcsVoting config =
   let voter = DRepVoter (DRepCredential (vsCredential config))
@@ -209,6 +268,10 @@ hasPProcsVoting config =
           , proposalProcedure (ProposalProcedure 5_000_000 (vsCredential config) InfoAction)
           ]
 
+{- | Voting transaction includes treasury donations (should fail)
+
+@since 1.0.0
+-}
 hasTrDonationsVoting :: TestConfigVoting -> ScriptContext
 hasTrDonationsVoting config =
   let voter = DRepVoter (DRepCredential (vsCredential config))
@@ -219,6 +282,10 @@ hasTrDonationsVoting config =
           , treasuryDonation 5_000_000
           ]
 
+{- | Valid spend from the Voting Effect validator script address (should pass)
+
+@since 1.0.0
+-}
 validSpend :: TestConfigVoting -> ScriptContext
 validSpend config =
   buildSpending' $
@@ -232,6 +299,11 @@ validSpend config =
           VoteYes
       ]
 
+{- | Attempt to spend from Voting Effect Validator without burning a Governance
+Authority Token (should fail)
+
+@since 1.0.0
+-}
 missingGat3Burn :: TestConfigVoting -> ScriptContext
 missingGat3Burn config =
   buildSpending' $
@@ -244,6 +316,11 @@ missingGat3Burn config =
           VoteYes
       ]
 
+{- | Attempt to spend from Voting Effect Validator without spending a
+Governance Authority Token (should fail)
+
+@since 1.0.0
+-}
 missingGat3Spending :: TestConfigVoting -> ScriptContext
 missingGat3Spending config =
   buildSpending' $
@@ -256,7 +333,10 @@ missingGat3Spending config =
           VoteYes
       ]
 
--- | Proxy Datum, attached to the GAT v2 token's UTxO
+{- | Proxy Datum, attached to the GAT v2 token's UTxO
+
+@since 1.0.0
+-}
 votingDatum :: VotingDatum
 votingDatum =
   VotingDatum
@@ -264,11 +344,17 @@ votingDatum =
     , vdVote = VoteYes
     }
 
--- | GAT v2 currency symbol
+{- | GAT v2 currency symbol
+
+@since 1.0.0
+-}
 gat3CurSym :: CurrencySymbol
 gat3CurSym = CurrencySymbol "aabbcc"
 
--- | UTxO containing GAT v2 token
+{- | UTxO containing GAT v2 token
+
+@since 1.0.0
+-}
 gat3Utxo :: TestConfigVoting -> UTXO
 gat3Utxo config =
   mconcat

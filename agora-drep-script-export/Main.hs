@@ -1,3 +1,7 @@
+{- | Utility to export scripts as files
+
+@since 1.0.0
+-}
 module Main (main) where
 
 import Agora.Effect.Voting (votingEffectScript)
@@ -17,6 +21,10 @@ import PlutusLedgerApi.Common (serialiseUPLC)
 import System.Directory (createDirectoryIfMissing)
 import System.IO (hFlush, stdout)
 
+{- | Compile and serialise a Plutarch Term into a bytestring
+
+@since 1.0.0
+-}
 compileAndSerialise :: (MonadFail m) => Config -> ClosedTerm a -> m ByteString
 compileAndSerialise config script = do
   Script compiled <- case compile config script of
@@ -24,6 +32,10 @@ compileAndSerialise config script = do
     Left e -> fail $ show e
   pure $ CBOR.serialize' $ serialiseUPLC compiled
 
+{- | Compile, serialise and write a Plutarch Term to a file
+
+@since 1.0.0
+-}
 writeScriptToFile :: FilePath -> ClosedTerm p -> IO ()
 writeScriptToFile fp script = do
   putStr ("Exporting " <> fp <> " ...")
@@ -37,6 +49,10 @@ writeScriptToFile fp script = do
 
   putStrLn " done"
 
+{- | Export all Agora DRep scripts to files under `scripts`
+
+@since 1.0.0
+-}
 main :: IO ()
 main = do
   putStrLn "Serialising scripts..."
