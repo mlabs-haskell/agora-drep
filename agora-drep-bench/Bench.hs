@@ -1,3 +1,7 @@
+{- | Plutarch script benchmarks
+
+@since 1.0.0
+-}
 module Main (main) where
 
 import Agora.Effect.Voting (votingEffectScript)
@@ -20,6 +24,10 @@ import Spec.Utils (TestConfig (testConfigFromScript), uncheckedApplyDataToScript
 import Test.Tasty (TestName, TestTree, testGroup)
 import UntypedPlutusCore (Program (_progTerm))
 
+{- | Benchmarks
+
+@since 1.0.0
+-}
 main :: IO ()
 main =
   defaultMain $
@@ -32,6 +40,10 @@ main =
       , benchScript "Voting Effect Vote" compiledVotingScript Voting.validVote
       ]
 
+{- | Benchmark script
+
+@since 1.0.0
+-}
 benchScript :: (TestConfig c) => TestName -> Script -> (c -> ScriptContext) -> TestTree
 benchScript name script mkContext =
   let
@@ -42,16 +54,28 @@ benchScript name script mkContext =
       name
       (unsafeTermFromScript (uncheckedApplyDataToScript (mkContext (testConfigFromScript script)) $ uncheckedApplyDataToScript gat2CurSym script))
 
+{- | Compiled Proxy script
+
+@since 1.0.0
+-}
 compiledProxyScript :: Script
 compiledProxyScript =
   either (error . show) id $
     compile NoTracing proxyScript
 
+{- | Compiled Voting Effect script
+
+@since 1.0.0
+-}
 compiledVotingScript :: Script
 compiledVotingScript =
   either (error . show) id $
     compile NoTracing votingEffectScript
 
+{- | Unwrap a Script into a Term for benchmarking
+
+@since 1.0.0
+-}
 unsafeTermFromScript :: forall (p :: S -> Type). Script -> (forall (s :: S). Term s p)
 unsafeTermFromScript (Script script) =
   Term $ const $ pure $ TermResult (RCompiled $ _progTerm script) []

@@ -1,3 +1,7 @@
+{- | Proxy script unit tests
+
+@since 1.0.0
+-}
 module Spec.Proxy.Context (
   spendingContextSpec,
   mintingContextSpec,
@@ -38,12 +42,17 @@ import PlutusLedgerApi.V3 (
 import Spec.Utils (TestConfig (ownScript, testConfigFromScript), mkTest, uncheckedApplyDataToScript)
 import Test.Tasty (TestTree, testGroup)
 
+{- | Context for the test case
+
+@since 1.0.0
+-}
 data TestConfigProxy = TestConfigProxy
   { gat3Credential :: Credential
   , gat3CurSym :: CurrencySymbol
   , gat3Script :: Script
   }
 
+-- | @since 1.0.0
 instance TestConfig TestConfigProxy where
   ownScript config = uncheckedApplyDataToScript gat2CurSym (gat3Script config)
 
@@ -56,7 +65,10 @@ instance TestConfig TestConfigProxy where
           , gat3Script
           }
 
--- | Unit tests
+{- | Proxy script unit tests for spending cases
+
+@since 1.0.0
+-}
 spendingContextSpec :: Script -> TestTree
 spendingContextSpec gat3Script =
   let
@@ -78,7 +90,10 @@ spendingContextSpec gat3Script =
       , mkTest' "Fail case: Transaction includes script input other than own input" includesOtherScripts ScriptFailure
       ]
 
--- | Unit tests
+{- | Proxy script unit tests for minting cases
+
+@since 1.0.0
+-}
 mintingContextSpec :: Script -> TestTree
 mintingContextSpec gat3Script =
   let
@@ -94,6 +109,10 @@ mintingContextSpec gat3Script =
 
 -- * ScriptContexts for the test cases
 
+{- | Valid Governcance Authority Token spending (should pass)
+
+@since 1.0.0
+-}
 validGAT2Spend :: TestConfigProxy -> ScriptContext
 validGAT2Spend config =
   buildSpending' $
@@ -105,6 +124,11 @@ validGAT2Spend config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
       ]
 
+{- | Attempt to spend Proxied Governance Authority Token with a non-empty name
+(should fail)
+
+@since 1.0.0
+-}
 invalidV3Name :: TestConfigProxy -> ScriptContext
 invalidV3Name config =
   buildSpending' $
@@ -116,6 +140,11 @@ invalidV3Name config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "aabbcc") 1)
       ]
 
+{- | Attempt to spend Proxied Governance Authority Token without burning its V2
+counterpart (should fail)
+
+@since 1.0.0
+-}
 missingGat2Burn :: TestConfigProxy -> ScriptContext
 missingGat2Burn config =
   buildSpending' $
@@ -126,6 +155,11 @@ missingGat2Burn config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
       ]
 
+{- | Attempt to spend Proxied Governance Authority Token without including its
+V2 counterpart in the transaction(should fail)
+
+@since 1.0.0
+-}
 missingGat2FromUtxo :: TestConfigProxy -> ScriptContext
 missingGat2FromUtxo config =
   buildSpending' $
@@ -135,6 +169,11 @@ missingGat2FromUtxo config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
       ]
 
+{- | Attempt to mint more than one Proxied Governance Authority Tokens
+(should fail)
+
+@since 1.0.0
+-}
 mintMoreThan1Gat3 :: TestConfigProxy -> ScriptContext
 mintMoreThan1Gat3 config =
   buildSpending' $
@@ -146,6 +185,11 @@ mintMoreThan1Gat3 config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 2)
       ]
 
+{- | Attempt to mint a Proxied Governance Authority Token without sending it to
+the designated address (should fail)
+
+@since 1.0.0
+-}
 missingReceiverOutput :: TestConfigProxy -> ScriptContext
 missingReceiverOutput config =
   buildSpending' $
@@ -156,6 +200,11 @@ missingReceiverOutput config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
       ]
 
+{- | Attempt to send a Proxied Governance Authority Token with a datum not
+matching the hash designated by the V2 GAT (should fail)
+
+@since 1.0.0
+-}
 invalidGAT3Datum :: TestConfigProxy -> ScriptContext
 invalidGAT3Datum config =
   buildSpending' $
@@ -167,6 +216,10 @@ invalidGAT3Datum config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
       ]
 
+{- | Attempt to mint other unknown tokens in the transaction (should fail)
+
+@since 1.0.0
+-}
 mint3rdToken :: TestConfigProxy -> ScriptContext
 mint3rdToken config =
   buildSpending' $
@@ -179,6 +232,10 @@ mint3rdToken config =
       , mint (Value.singleton (CurrencySymbol "aabbccdd1234") (TokenName "") 1)
       ]
 
+{- | Attempt to include certificates in the transaction (should fail)
+
+@since 1.0.0
+-}
 includesCerts :: TestConfigProxy -> ScriptContext
 includesCerts config =
   buildSpending' $
@@ -191,6 +248,11 @@ includesCerts config =
       , txCert (TxCertRegStaking (gat3Credential config) (Just 5000000))
       ]
 
+{- | Attempt to include other unknown Plutus scripts in the transaction
+(should fail)
+
+@since 1.0.0
+-}
 includesOtherScripts :: TestConfigProxy -> ScriptContext
 includesOtherScripts config =
   buildSpending' $
@@ -207,6 +269,10 @@ includesOtherScripts config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") 1)
       ]
 
+{- | Valid Governance Authority Token mint (should pass)
+
+@since 1.0.0
+-}
 validGAT3Mint :: TestConfigProxy -> ScriptContext
 validGAT3Mint config =
   buildMinting' $
@@ -217,6 +283,10 @@ validGAT3Mint config =
       , mint (Value.singleton gat2CurSym (TokenName "") (-1))
       ]
 
+{- | Valid Governance Authority Token burn (should pass)
+
+@since 1.0.0
+-}
 validGAT3Burn :: TestConfigProxy -> ScriptContext
 validGAT3Burn config =
   buildMinting' $
@@ -225,6 +295,11 @@ validGAT3Burn config =
       , mint (Value.singleton (gat3CurSym config) (TokenName "") (-1))
       ]
 
+{- | Attempt to mint a Governance Authority Token with the spending validator
+failing (should fail)
+
+@since 1.0.0
+-}
 mintWithoutSpend :: TestConfigProxy -> ScriptContext
 mintWithoutSpend config =
   buildMinting' $
@@ -235,19 +310,31 @@ mintWithoutSpend config =
 
 -- * Building blocks for the test ScriptContexts
 
--- | Hash of the receiver script of the GAT v3 token
+{- | Hash of the receiver script of the GAT v3 token
+
+@since 1.0.0
+-}
 receiverScriptHash :: ScriptHash
 receiverScriptHash = ScriptHash "001122"
 
--- | Address credential of the receiver script of the Proxy token
+{- | Address credential of the receiver script of the Proxy token
+
+@since 1.0.0
+-}
 receiverCredential :: Credential
 receiverCredential = ScriptCredential receiverScriptHash
 
--- | Datum attached to the GAT v3 token's UTxO
+{- | Datum attached to the GAT v3 token's UTxO
+
+@since 1.0.0
+-}
 receiverDatum :: Integer
 receiverDatum = 112233
 
--- | Proxy Datum, attached to the GAT v2 token's UTxO
+{- | Proxy Datum, attached to the GAT v2 token's UTxO
+
+@since 1.0.0
+-}
 proxyDatum :: ProxyDatum
 proxyDatum =
   ProxyDatum
@@ -255,11 +342,17 @@ proxyDatum =
     , pdDatumHash = datumHash . Datum . toBuiltinData $ receiverDatum
     }
 
--- | GAT v2 currency symbol
+{- | GAT v2 currency symbol
+
+@since 1.0.0
+-}
 gat2CurSym :: CurrencySymbol
 gat2CurSym = CurrencySymbol "aabbcc"
 
--- | UTxO containing GAT v2 token
+{- | UTxO containing GAT v2 token
+
+@since 1.0.0
+-}
 gat2Utxo :: TestConfigProxy -> UTXO
 gat2Utxo config =
   mconcat
@@ -268,7 +361,10 @@ gat2Utxo config =
     , withCredential (gat3Credential config)
     ]
 
--- | UTxO containing GAT v3 token
+{- | UTxO containing GAT v3 token
+
+@since 1.0.0
+-}
 gat3Utxo :: TestConfigProxy -> UTXO
 gat3Utxo config =
   mconcat
@@ -277,7 +373,10 @@ gat3Utxo config =
     , withCredential receiverCredential
     ]
 
--- | UTxO containing GAT v3 token
+{- | UTxO containing GAT v3 token
+
+@since 1.0.0
+-}
 invalidGat3Utxo :: TestConfigProxy -> UTXO
 invalidGat3Utxo config =
   mconcat

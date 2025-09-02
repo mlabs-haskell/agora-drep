@@ -1,3 +1,7 @@
+{- | Voting Effect script unit tests
+
+@since 1.0.0
+-}
 module Spec.Effect.Voting (spec) where
 
 import Agora.Effect.Voting (votingEffectScript)
@@ -7,6 +11,10 @@ import Spec.Effect.Voting.Context (certifyingContextSpec, spendingContextSpec, v
 import Test.Tasty (TestTree, adjustOption, testGroup)
 import Test.Tasty.QuickCheck (QuickCheckTests)
 
+{- | Voting Effect script unit tests
+
+@since 1.0.0
+-}
 spec :: TestTree
 spec =
   adjustOption extraOptions $

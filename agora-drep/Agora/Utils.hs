@@ -1,4 +1,7 @@
--- | @since WIP
+{- | Plutarch utilities
+
+@since 1.0.0
+-}
 module Agora.Utils (
   psymbolValueOf,
   pcountIf,
@@ -33,7 +36,7 @@ import Plutarch.Prelude (
 
 {- | Get the sum of all values belonging to a particular CurrencySymbol.
 
-  @since WIP
+@since 1.0.0
 -}
 psymbolValueOf ::
   forall (keys :: KeyGuarantees) (amounts :: AmountGuarantees) (s :: S).
@@ -48,9 +51,9 @@ psymbolValueOf =
             PMap m -> pfoldr # plam (\x v -> pfromData (psndBuiltin # x) + v) # 0 # m
         PNothing -> 0
 
-{- | Fused filter and length
+{- | Fused filter and length function for Plutarch lists
 
-@since WIP
+@since 1.0.0
 -}
 pcountIf ::
   forall (list :: (S -> Type) -> (S -> Type)) (a :: S -> Type) (s :: S).
@@ -68,14 +71,20 @@ pcountIf =
         )
         (const 0)
 
--- | @since WIP
+{- | Extract PScriptHash of PCurrencySymbol
+
+@since 1.0.0
+-}
 pcurrencySymbolToScriptHash ::
   forall (s :: S).
   Term s (PAsData PCurrencySymbol) ->
   Term s (PAsData PScriptHash)
 pcurrencySymbolToScriptHash = punsafeCoerce
 
--- | @since WIP
+{- | Convert a PScriptHash to PCurrencySymbol
+
+@since 1.0.0
+-}
 pscriptHashToCurrencySymbol ::
   forall (s :: S).
   Term s (PAsData PScriptHash) ->

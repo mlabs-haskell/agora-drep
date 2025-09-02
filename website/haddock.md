@@ -1,3 +1,3 @@
-# Haddock
+# API reference (Haddock)
 
 [Haddock](./haddock/)
