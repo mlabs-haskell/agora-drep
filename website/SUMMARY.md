@@ -2,4 +2,4 @@
 
 - [Introduction](introduction.md)
 - [Specification](specification.md)
-- [Haddock](haddock.md)
+- [API reference (Haddock)](haddock.md)
