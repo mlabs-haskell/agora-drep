@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="annot"><span class="hs-comment">{- | This module was copied from the Liqwid-Labs/agora repo, and updated to work with Plutus V3 and Plutarch 1.10.1
 
- @since WIP
+ @since 1.0.0
 -}</span></span><span>
 </span><span id="line-5"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Agora.AuthorityToken</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Agora.AuthorityToken.html#singleAuthorityTokenBurned"><span class="hs-identifier">singleAuthorityTokenBurned</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Agora.AuthorityToken.html#authorityTokensValidIn"><span class="hs-identifier">authorityTokensValidIn</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-6"></span><span>
@@ -57,7 +57,7 @@
   In other words, check that all assets of a particular currency symbol
   are tagged with a TokenName that matches where they live.
 
-  @since WIP
+  @since 1.0.0
 -}</span></span><span>
 </span><span id="line-62"></span><span class="annot"><a href="Agora.AuthorityToken.html#authorityTokensValidIn"><span class="hs-identifier hs-type">authorityTokensValidIn</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679200540"><span class="annot"><a href="#local-6989586621679200540"><span class="hs-identifier hs-type">s</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">S</span></span><span class="hs-special">)</span><span class="hs-operator">.</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679200540"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PCurrencySymbol</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">:--&gt;</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PTxOut</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">:--&gt;</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PBool</span></span><span class="hs-special">)</span><span>
 </span><span id="line-63"></span><span id="authorityTokensValidIn"><span class="annot"><span class="annottext">authorityTokensValidIn :: forall (s :: S). Term s (PCurrencySymbol :--&gt; (PTxOut :--&gt; PBool))
@@ -226,7 +226,7 @@ forall (s :: S). PBool s
 </span><span id="line-84"></span><span>
 </span><span id="line-85"></span><span class="annot"><span class="hs-comment">{- | Assert that a single authority token has been burned.
 
-  @since WIP
+  @since 1.0.0
 -}</span></span><span>
 </span><span id="line-89"></span><span class="annot"><a href="Agora.AuthorityToken.html#singleAuthorityTokenBurned"><span class="hs-identifier hs-type">singleAuthorityTokenBurned</span></a></span><span> </span><span class="hs-glyph">::</span><span>
 </span><span id="line-90"></span><span>  </span><span class="hs-keyword">forall</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679200624"><span class="annot"><a href="#local-6989586621679200624"><span class="hs-identifier hs-type">keys</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">KeyGuarantees</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679200625"><span class="annot"><a href="#local-6989586621679200625"><span class="hs-identifier hs-type">amounts</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">AmountGuarantees</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679200621"><span class="annot"><a href="#local-6989586621679200621"><span class="hs-identifier hs-type">s</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">S</span></span><span class="hs-special">)</span><span class="hs-operator">.</span><span>

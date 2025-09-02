@@ -3,44 +3,48 @@
 
 
 @package agora-drep
-@version 0.1.0.0
+@version 1.0.0.0
 
 
--- | @since WIP
+-- | Plutarch utilities
 module Agora.Utils
 
 -- | Get the sum of all values belonging to a particular CurrencySymbol.
---   
---   @since WIP
 psymbolValueOf :: forall (keys :: KeyGuarantees) (amounts :: AmountGuarantees) (s :: S). Term s (PCurrencySymbol :--> (PValue keys amounts :--> PInteger))
 
--- | Fused filter and length
---   
---   @since WIP
+-- | Fused filter and length function for Plutarch lists
 pcountIf :: forall (list :: (S -> Type) -> S -> Type) (a :: S -> Type) (s :: S). PIsListLike list a => Term s ((a :--> PBool) :--> (list a :--> PInteger))
 
--- | @since WIP
+-- | Extract PScriptHash of PCurrencySymbol
 pcurrencySymbolToScriptHash :: forall (s :: S). Term s (PAsData PCurrencySymbol) -> Term s (PAsData PScriptHash)
 
--- | @since WIP
+-- | Convert a PScriptHash to PCurrencySymbol
 pscriptHashToCurrencySymbol :: forall (s :: S). Term s (PAsData PScriptHash) -> Term s (PAsData PCurrencySymbol)
 
 
--- | @since WIP
+-- | Agora DRep Proxy script
 module Agora.Proxy
 
--- | @since WIP
+-- | Proxy script
+--   
+--   This script serves both validator script and minting script purposes.
+--   - Mint a Proxied Governance Authority Token - Verify spending from the
+--   proxy effect script address
+--   
+--   See details in the <a>specification</a>.
 proxyScript :: forall (s :: S). Term s (PAsData PCurrencySymbol :--> (PAsData PScriptContext :--> PUnit))
 
--- | @since WIP
+-- | Datum stored at the proxy validator script
 data PProxyDatum s
 PProxyDatum :: Term s (PAsData PScriptHash) -> Term s (PAsData PDatumHash) -> PProxyDatum s
+
+-- | Script hash of the Plutus V3 effect
 [$sel:receiverScript:PProxyDatum] :: PProxyDatum s -> Term s (PAsData PScriptHash)
+
+-- | Hash of the datum that must be created at the receiver script
 [$sel:datumHash:PProxyDatum] :: PProxyDatum s -> Term s (PAsData PDatumHash)
 
 -- | Haskell-level datum for the Proxy Validator script.
---   
---   @since WIP
 data ProxyDatum
 ProxyDatum :: ScriptHash -> DatumHash -> ProxyDatum
 [$sel:pdReceiverScript:ProxyDatum] :: ProxyDatum -> ScriptHash
@@ -60,13 +64,9 @@ instance PlutusTx.IsData.Class.ToData Agora.Proxy.ProxyDatum
 
 -- | This module was copied from the Liqwid-Labs/agora repo, and updated to
 --   work with Plutus V3 and Plutarch 1.10.1
---   
---   @since WIP
 module Agora.AuthorityToken
 
 -- | Assert that a single authority token has been burned.
---   
---   @since WIP
 singleAuthorityTokenBurned :: forall (keys :: KeyGuarantees) (amounts :: AmountGuarantees) (s :: S). Term s PCurrencySymbol -> Term s (PBuiltinList (PAsData PTxInInfo)) -> Term s (PValue keys amounts) -> Term s PBool
 
 -- | Check that all GATs are valid in a particular TxOut.
@@ -85,11 +85,17 @@ singleAuthorityTokenBurned :: forall (keys :: KeyGuarantees) (amounts :: AmountG
 --   this is enough to prove validity. In other words, check that all
 --   assets of a particular currency symbol are tagged with a TokenName
 --   that matches where they live.
---   
---   @since WIP
 authorityTokensValidIn :: forall (s :: S). Term s (PCurrencySymbol :--> (PTxOut :--> PBool))
 
+
+-- | Agora DRep Voting Effect script
 module Agora.Effect.Voting
+
+-- | Voting Effect Plutarch script - This script is used to: - certify new
+--   DRep registration - verify the DRep vote on behalf of the DRep based
+--   on the Agora voting result
+--   
+--   See details in the <a>specification</a>.
 votingEffectScript :: ClosedTerm (PAsData PCurrencySymbol :--> (PAsData PScriptContext :--> PUnit))
 
 -- | Haskell-level datum for the Voting Effect Validator script.
