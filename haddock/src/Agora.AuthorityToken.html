@@ -59,7 +59,7 @@
 
   @since 1.0.0
 -}</span></span><span>
-</span><span id="line-62"></span><span class="annot"><a href="Agora.AuthorityToken.html#authorityTokensValidIn"><span class="hs-identifier hs-type">authorityTokensValidIn</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679200542"><span class="annot"><a href="#local-6989586621679200542"><span class="hs-identifier hs-type">s</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">S</span></span><span class="hs-special">)</span><span class="hs-operator">.</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679200542"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PCurrencySymbol</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">:--&gt;</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PTxOut</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">:--&gt;</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PBool</span></span><span class="hs-special">)</span><span>
+</span><span id="line-62"></span><span class="annot"><a href="Agora.AuthorityToken.html#authorityTokensValidIn"><span class="hs-identifier hs-type">authorityTokensValidIn</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679200563"><span class="annot"><a href="#local-6989586621679200563"><span class="hs-identifier hs-type">s</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">S</span></span><span class="hs-special">)</span><span class="hs-operator">.</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679200563"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PCurrencySymbol</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">:--&gt;</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PTxOut</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">:--&gt;</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PBool</span></span><span class="hs-special">)</span><span>
 </span><span id="line-63"></span><span id="authorityTokensValidIn"><span class="annot"><span class="annottext">authorityTokensValidIn :: forall (s :: S). Term s (PCurrencySymbol :--&gt; (PTxOut :--&gt; PBool))
 </span><a href="Agora.AuthorityToken.html#authorityTokensValidIn"><span class="hs-identifier hs-var hs-var">authorityTokensValidIn</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(forall (s :: S).
  Term s (PCurrencySymbol :--&gt; (PTxOut :--&gt; PBool)))
@@ -89,30 +89,30 @@ HasCallStack =&gt;
 -&gt; (Term s PCurrencySymbol -&gt; Term s PTxOut -&gt; Term s PBool)
 -&gt; Term s (PCurrencySymbol :--&gt; (PTxOut :--&gt; PBool))
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><a href="file:///nix/store/k2vxnk5i10jajcxyxk55lfshl65rzg3d-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679200715"><span class="annot"><span class="annottext">Term s PCurrencySymbol
-</span><a href="#local-6989586621679200715"><span class="hs-identifier hs-var">authorityTokenSym</span></a></span></span><span> </span><span id="local-6989586621679200716"><span class="annot"><span class="annottext">Term s PTxOut
-</span><a href="#local-6989586621679200716"><span class="hs-identifier hs-var">txOut</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
-</span><span id="line-65"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">PTxOut</span></span><span> </span><span id="local-6989586621679200717"><span class="annot"><span class="annottext">Term s PAddress
-</span><a href="#local-6989586621679200717"><span class="hs-identifier hs-var">address</span></a></span></span><span> </span><span id="local-6989586621679200718"><span class="annot"><span class="annottext">Term s (PAsData (PValue 'Sorted 'Positive))
-</span><a href="#local-6989586621679200718"><span class="hs-identifier hs-var">value</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s POutputDatum
+</span><a href="file:///nix/store/k2vxnk5i10jajcxyxk55lfshl65rzg3d-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679200736"><span class="annot"><span class="annottext">Term s PCurrencySymbol
+</span><a href="#local-6989586621679200736"><span class="hs-identifier hs-var">authorityTokenSym</span></a></span></span><span> </span><span id="local-6989586621679200737"><span class="annot"><span class="annottext">Term s PTxOut
+</span><a href="#local-6989586621679200737"><span class="hs-identifier hs-var">txOut</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">P.do</span><span>
+</span><span id="line-65"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">PTxOut</span></span><span> </span><span id="local-6989586621679200738"><span class="annot"><span class="annottext">Term s PAddress
+</span><a href="#local-6989586621679200738"><span class="hs-identifier hs-var">address</span></a></span></span><span> </span><span id="local-6989586621679200739"><span class="annot"><span class="annottext">Term s (PAsData (PValue 'Sorted 'Positive))
+</span><a href="#local-6989586621679200739"><span class="hs-identifier hs-var">value</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s POutputDatum
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PScriptHash)
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s PTxOut -&gt; (PTxOut s -&gt; Term s PBool) -&gt; Term s PBool
 forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
 Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 </span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s PTxOut
-</span><a href="#local-6989586621679200716"><span class="hs-identifier hs-var">txOut</span></a></span><span>
-</span><span id="line-66"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">PAddress</span></span><span> </span><span id="local-6989586621679200719"><span class="annot"><span class="annottext">Term s PCredential
-</span><a href="#local-6989586621679200719"><span class="hs-identifier hs-var">credential</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PStakingCredential)
+</span><a href="#local-6989586621679200737"><span class="hs-identifier hs-var">txOut</span></a></span><span>
+</span><span id="line-66"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">PAddress</span></span><span> </span><span id="local-6989586621679200740"><span class="annot"><span class="annottext">Term s PCredential
+</span><a href="#local-6989586621679200740"><span class="hs-identifier hs-var">credential</span></a></span></span><span> </span><span class="annot"><span class="annottext">Term s (PMaybeData PStakingCredential)
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s PAddress -&gt; (PAddress s -&gt; Term s PBool) -&gt; Term s PBool
 forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
 Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 </span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s PAddress
-</span><a href="#local-6989586621679200717"><span class="hs-identifier hs-var">address</span></a></span><span>
-</span><span id="line-67"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">PValue</span></span><span> </span><span id="local-6989586621679200720"><span class="annot"><span class="annottext">Term
+</span><a href="#local-6989586621679200738"><span class="hs-identifier hs-var">address</span></a></span><span>
+</span><span id="line-67"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">PValue</span></span><span> </span><span id="local-6989586621679200741"><span class="annot"><span class="annottext">Term
   s (PMap 'Sorted PCurrencySymbol (PMap 'Sorted PTokenName PInteger))
-</span><a href="#local-6989586621679200720"><span class="hs-identifier hs-var">assetMap</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s (PValue 'Sorted 'Positive)
+</span><a href="#local-6989586621679200741"><span class="hs-identifier hs-var">assetMap</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term s (PValue 'Sorted 'Positive)
 -&gt; (PValue 'Sorted 'Positive s -&gt; Term s PBool) -&gt; Term s PBool
 forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
@@ -129,7 +129,7 @@ forall (a :: PType) (s :: S).
 PIsData a =&gt;
 Term s (PAsData a) -&gt; Term s a
 </span><span class="hs-identifier hs-var">pfromData</span></span><span> </span><span class="annot"><span class="annottext">Term s (PAsData (PValue 'Sorted 'Positive))
-</span><a href="#local-6989586621679200718"><span class="hs-identifier hs-var">value</span></a></span><span>
+</span><a href="#local-6989586621679200739"><span class="hs-identifier hs-var">value</span></a></span><span>
 </span><span id="line-68"></span><span>    </span><span class="annot"><span class="annottext">Term s (PMaybe (PMap 'Sorted PTokenName PInteger))
 -&gt; (PMaybe (PMap 'Sorted PTokenName PInteger) s -&gt; Term s PBool)
 -&gt; Term s PBool
@@ -159,7 +159,7 @@ Term s (k :--&gt; (PMap any k v :--&gt; PMaybe v))
 forall (s :: S) (a :: PType) (b :: PType).
 Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
 </span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term s PCurrencySymbol
-</span><a href="#local-6989586621679200715"><span class="hs-identifier hs-var">authorityTokenSym</span></a></span><span> </span><span class="annot"><span class="annottext">Term
+</span><a href="#local-6989586621679200736"><span class="hs-identifier hs-var">authorityTokenSym</span></a></span><span> </span><span class="annot"><span class="annottext">Term
   s
   (PMap 'Sorted PCurrencySymbol (PMap 'Sorted PTokenName PInteger)
    :--&gt; PMaybe (PMap 'Sorted PTokenName PInteger))
@@ -170,14 +170,14 @@ forall (s :: S) (a :: PType) (b :: PType).
 Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
 </span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term
   s (PMap 'Sorted PCurrencySymbol (PMap 'Sorted PTokenName PInteger))
-</span><a href="#local-6989586621679200720"><span class="hs-identifier hs-var">assetMap</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">((PMaybe (PMap 'Sorted PTokenName PInteger) s -&gt; Term s PBool)
+</span><a href="#local-6989586621679200741"><span class="hs-identifier hs-var">assetMap</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">((PMaybe (PMap 'Sorted PTokenName PInteger) s -&gt; Term s PBool)
  -&gt; Term s PBool)
 -&gt; (PMaybe (PMap 'Sorted PTokenName PInteger) s -&gt; Term s PBool)
 -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="file:///nix/store/k2vxnk5i10jajcxyxk55lfshl65rzg3d-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-69"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">PJust</span></span><span> </span><span id="local-6989586621679200722"><span class="annot"><span class="annottext">Term s (PMap 'Sorted PTokenName PInteger)
-</span><a href="#local-6989586621679200722"><span class="hs-identifier hs-var">_tokenMap</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-69"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">PJust</span></span><span> </span><span id="local-6989586621679200743"><span class="annot"><span class="annottext">Term s (PMap 'Sorted PTokenName PInteger)
+</span><a href="#local-6989586621679200743"><span class="hs-identifier hs-var">_tokenMap</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-70"></span><span>        </span><span class="hs-comment">-- TODO: This check only needs to happen for outputs, not inputs (performance)</span><span>
 </span><span id="line-71"></span><span>        </span><span class="annot"><span class="annottext">Term s PCredential
 -&gt; (PCredential s -&gt; Term s PBool) -&gt; Term s PBool
@@ -185,7 +185,7 @@ forall (a :: PType) (s :: S) (b :: PType).
 PlutusType a =&gt;
 Term s a -&gt; (a s -&gt; Term s b) -&gt; Term s b
 </span><span class="hs-identifier hs-var">pmatch</span></span><span> </span><span class="annot"><span class="annottext">Term s PCredential
-</span><a href="#local-6989586621679200719"><span class="hs-identifier hs-var">credential</span></a></span><span> </span><span class="annot"><span class="annottext">((PCredential s -&gt; Term s PBool) -&gt; Term s PBool)
+</span><a href="#local-6989586621679200740"><span class="hs-identifier hs-var">credential</span></a></span><span> </span><span class="annot"><span class="annottext">((PCredential s -&gt; Term s PBool) -&gt; Term s PBool)
 -&gt; (PCredential s -&gt; Term s PBool) -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="file:///nix/store/k2vxnk5i10jajcxyxk55lfshl65rzg3d-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
@@ -229,24 +229,24 @@ forall (s :: S). PBool s
   @since 1.0.0
 -}</span></span><span>
 </span><span id="line-89"></span><span class="annot"><a href="Agora.AuthorityToken.html#singleAuthorityTokenBurned"><span class="hs-identifier hs-type">singleAuthorityTokenBurned</span></a></span><span> </span><span class="hs-glyph">::</span><span>
-</span><span id="line-90"></span><span>  </span><span class="hs-keyword">forall</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679200626"><span class="annot"><a href="#local-6989586621679200626"><span class="hs-identifier hs-type">keys</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">KeyGuarantees</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679200627"><span class="annot"><a href="#local-6989586621679200627"><span class="hs-identifier hs-type">amounts</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">AmountGuarantees</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679200623"><span class="annot"><a href="#local-6989586621679200623"><span class="hs-identifier hs-type">s</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">S</span></span><span class="hs-special">)</span><span class="hs-operator">.</span><span>
-</span><span id="line-91"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679200623"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PCurrencySymbol</span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
-</span><span id="line-92"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679200623"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PBuiltinList</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PAsData</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PTxInInfo</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span>
-</span><span id="line-93"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679200623"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PValue</span></span><span> </span><span class="annot"><a href="#local-6989586621679200626"><span class="hs-identifier hs-type">keys</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679200627"><span class="hs-identifier hs-type">amounts</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span>
-</span><span id="line-94"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679200623"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PBool</span></span><span>
+</span><span id="line-90"></span><span>  </span><span class="hs-keyword">forall</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679200647"><span class="annot"><a href="#local-6989586621679200647"><span class="hs-identifier hs-type">keys</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">KeyGuarantees</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679200648"><span class="annot"><a href="#local-6989586621679200648"><span class="hs-identifier hs-type">amounts</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">AmountGuarantees</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679200644"><span class="annot"><a href="#local-6989586621679200644"><span class="hs-identifier hs-type">s</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">S</span></span><span class="hs-special">)</span><span class="hs-operator">.</span><span>
+</span><span id="line-91"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679200644"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PCurrencySymbol</span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-92"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679200644"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PBuiltinList</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PAsData</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PTxInInfo</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-93"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679200644"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PValue</span></span><span> </span><span class="annot"><a href="#local-6989586621679200647"><span class="hs-identifier hs-type">keys</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679200648"><span class="hs-identifier hs-type">amounts</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-94"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><a href="#local-6989586621679200644"><span class="hs-identifier hs-type">s</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PBool</span></span><span>
 </span><span id="line-95"></span><span id="singleAuthorityTokenBurned"><span class="annot"><span class="annottext">singleAuthorityTokenBurned :: forall (keys :: KeyGuarantees) (amounts :: AmountGuarantees)
        (s :: S).
 Term s PCurrencySymbol
 -&gt; Term s (PBuiltinList (PAsData PTxInInfo))
 -&gt; Term s (PValue keys amounts)
 -&gt; Term s PBool
-</span><a href="Agora.AuthorityToken.html#singleAuthorityTokenBurned"><span class="hs-identifier hs-var hs-var">singleAuthorityTokenBurned</span></a></span></span><span> </span><span id="local-6989586621679200756"><span class="annot"><span class="annottext">Term s PCurrencySymbol
-</span><a href="#local-6989586621679200756"><span class="hs-identifier hs-var">gatCs</span></a></span></span><span> </span><span id="local-6989586621679200757"><span class="annot"><span class="annottext">Term s (PBuiltinList (PAsData PTxInInfo))
-</span><a href="#local-6989586621679200757"><span class="hs-identifier hs-var">inputs</span></a></span></span><span> </span><span id="local-6989586621679200758"><span class="annot"><span class="annottext">Term s (PValue keys amounts)
-</span><a href="#local-6989586621679200758"><span class="hs-identifier hs-var">mint</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">P.do</span><span>
-</span><span id="line-96"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span class="annot"><a href="#local-6989586621679200759"><span class="hs-identifier hs-type">gatAmountMinted</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PInteger</span></span><span>
-</span><span id="line-97"></span><span>      </span><span id="local-6989586621679200759"><span class="annot"><span class="annottext">gatAmountMinted :: Term s PInteger
-</span><a href="#local-6989586621679200759"><span class="hs-identifier hs-var hs-var">gatAmountMinted</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term s (PCurrencySymbol :--&gt; (PValue keys amounts :--&gt; PInteger))
+</span><a href="Agora.AuthorityToken.html#singleAuthorityTokenBurned"><span class="hs-identifier hs-var hs-var">singleAuthorityTokenBurned</span></a></span></span><span> </span><span id="local-6989586621679200777"><span class="annot"><span class="annottext">Term s PCurrencySymbol
+</span><a href="#local-6989586621679200777"><span class="hs-identifier hs-var">gatCs</span></a></span></span><span> </span><span id="local-6989586621679200778"><span class="annot"><span class="annottext">Term s (PBuiltinList (PAsData PTxInInfo))
+</span><a href="#local-6989586621679200778"><span class="hs-identifier hs-var">inputs</span></a></span></span><span> </span><span id="local-6989586621679200779"><span class="annot"><span class="annottext">Term s (PValue keys amounts)
+</span><a href="#local-6989586621679200779"><span class="hs-identifier hs-var">mint</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">P.do</span><span>
+</span><span id="line-96"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span class="annot"><a href="#local-6989586621679200780"><span class="hs-identifier hs-type">gatAmountMinted</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Term</span></span><span> </span><span class="annot"><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PInteger</span></span><span>
+</span><span id="line-97"></span><span>      </span><span id="local-6989586621679200780"><span class="annot"><span class="annottext">gatAmountMinted :: Term s PInteger
+</span><a href="#local-6989586621679200780"><span class="hs-identifier hs-var hs-var">gatAmountMinted</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term s (PCurrencySymbol :--&gt; (PValue keys amounts :--&gt; PInteger))
 forall (keys :: KeyGuarantees) (amounts :: AmountGuarantees)
        (s :: S).
 Term s (PCurrencySymbol :--&gt; (PValue keys amounts :--&gt; PInteger))
@@ -256,15 +256,15 @@ Term s (PCurrencySymbol :--&gt; (PValue keys amounts :--&gt; PInteger))
 forall (s :: S) (a :: PType) (b :: PType).
 Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
 </span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term s PCurrencySymbol
-</span><a href="#local-6989586621679200756"><span class="hs-identifier hs-var">gatCs</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PValue keys amounts :--&gt; PInteger)
+</span><a href="#local-6989586621679200777"><span class="hs-identifier hs-var">gatCs</span></a></span><span> </span><span class="annot"><span class="annottext">Term s (PValue keys amounts :--&gt; PInteger)
 -&gt; Term s (PValue keys amounts) -&gt; Term s PInteger
 forall (s :: S) (a :: PType) (b :: PType).
 Term s (a :--&gt; b) -&gt; Term s a -&gt; Term s b
 </span><span class="hs-operator hs-var">#</span></span><span> </span><span class="annot"><span class="annottext">Term s (PValue keys amounts)
-</span><a href="#local-6989586621679200758"><span class="hs-identifier hs-var">mint</span></a></span><span>
+</span><a href="#local-6989586621679200779"><span class="hs-identifier hs-var">mint</span></a></span><span>
 </span><span id="line-98"></span><span>
-</span><span id="line-99"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679200760"><span class="annot"><span class="annottext">inputsWithGAT :: Term s PInteger
-</span><a href="#local-6989586621679200760"><span class="hs-identifier hs-var hs-var">inputsWithGAT</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-99"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679200781"><span class="annot"><span class="annottext">inputsWithGAT :: Term s PInteger
+</span><a href="#local-6989586621679200781"><span class="hs-identifier hs-var hs-var">inputsWithGAT</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-100"></span><span>        </span><span class="annot"><span class="annottext">Term
   s
   ((PAsData PTxInInfo :--&gt; (PInteger :--&gt; PInteger))
@@ -306,7 +306,7 @@ forall (s :: S). Term s PString -&gt; Term s PBool -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="file:///nix/store/k2vxnk5i10jajcxyxk55lfshl65rzg3d-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span>
 </span><span id="line-119"></span><span>        </span><span class="annot"><span class="annottext">Term s PInteger
-</span><a href="#local-6989586621679200759"><span class="hs-identifier hs-var">gatAmountMinted</span></a></span><span> </span><span class="annot"><span class="annottext">Term s PInteger -&gt; Term s PInteger -&gt; Term s PBool
+</span><a href="#local-6989586621679200780"><span class="hs-identifier hs-var">gatAmountMinted</span></a></span><span> </span><span class="annot"><span class="annottext">Term s PInteger -&gt; Term s PInteger -&gt; Term s PBool
 forall (s :: S). Term s PInteger -&gt; Term s PInteger -&gt; Term s PBool
 forall (t :: PType) (s :: S).
 PEq t =&gt;
@@ -320,7 +320,7 @@ forall (s :: S). Term s PString -&gt; Term s PBool -&gt; Term s PBool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="file:///nix/store/k2vxnk5i10jajcxyxk55lfshl65rzg3d-ghc-9.6.6-doc/share/doc/ghc-9.6.6/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span>
 </span><span id="line-121"></span><span>        </span><span class="annot"><span class="annottext">Term s PInteger
-</span><a href="#local-6989586621679200760"><span class="hs-identifier hs-var">inputsWithGAT</span></a></span><span> </span><span class="annot"><span class="annottext">Term s PInteger -&gt; Term s PInteger -&gt; Term s PBool
+</span><a href="#local-6989586621679200781"><span class="hs-identifier hs-var">inputsWithGAT</span></a></span><span> </span><span class="annot"><span class="annottext">Term s PInteger -&gt; Term s PInteger -&gt; Term s PBool
 forall (s :: S). Term s PInteger -&gt; Term s PInteger -&gt; Term s PBool
 forall (t :: PType) (s :: S).
 PEq t =&gt;
