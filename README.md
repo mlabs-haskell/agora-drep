@@ -3,7 +3,7 @@
 ## Introduction
 
 This repository contains the source code for a new set of Plutus scripts that
-allow the [the Agora governance system](https://github.com/Liqwid-Labs/agora)
+allow [the Agora governance system](https://github.com/Liqwid-Labs/agora)
 to participate in Cardano governance proposals (see
 [Cardano Governance](https://cardano.org/governance/)).
 
@@ -28,7 +28,7 @@ The following terms are used in the document:
 * _Agora system_: any governance system implemented using the set of governance
   modules provided by [Agora](https://github.com/Liqwid-Labs/agora/tree/staging).
 
-* _Agora DAO_: A specific Agora system implemented by [Clarity](www.clarity.vote).
+* _Agora DAO_: A specific Agora system implemented by [Clarity](https://www.clarity.vote).
 
 * _DRep_: An actor in Cardano's governance system which can author and vote on
   Cardano governance proposals.
@@ -72,7 +72,7 @@ to be used in tandem.
 The intended use of the scripts pre-suppose the following:
 
 * _An Agora-based governance system exists_, allowing a set of actors to
-  propose actions (implemented as Agora effects) and joinly choose to execute them
+  propose actions (implemented as Agora effects) and jointly choose to execute them
   or reject them (via any mechanism or policy of their choice).
 
 * _The participants of this Agora system choose to delegate some or all of their
@@ -156,9 +156,9 @@ For effect creation, consult the definition of the datum types of the scripts:
 For creating a voting effect, the following requirements must be met:
 
 * A UTxO **must** be created at the address of the desired effect.
-* The UTxO **must** contain a valid datum according the data definitions linked previously
+* The UTxO **must** contain a valid datum according to the data definitions linked previously
   (i.e: the datum must be of type `VotingDatum`).
-* The UTxO **must** contain.
+* The UTxO **must** contain a valid GAT.
 
 Any failure to comply with these will make the UTxO unspendable.
 
@@ -194,7 +194,7 @@ exiting Agora based system should be able to support the new voting effect:
 > which can subsequently vote on Cardano governance proposals **when and only when** the
 > DAO members wish it to do so.
 
-This use case is already implemented in [Clarity](www.clarity.vote), but let's see
+This use case is already implemented in [Clarity](https://www.clarity.vote), but let's see
 how it can be achieved with the work provided here:
 
 * Agora DAOs have treasuries, with a specific associated payment and staking address.
@@ -266,5 +266,5 @@ Please consult the following documents for more information about specific topic
 - For more information about the Agora system: [Agora repository](https://github.com/Liqwid-Labs/agora)
 - For a specificaction of the Agora system: [Agora specification](https://liqwid.notion.site/Agora-Specs-Overview-fd7df78313cf4dc0b1522cb9260b77d1)
 - For more information on how to use an Agora DAO as a DRep: [Clarity's "Agora DAO as a DRep"](https://docs.clarity.vote/clarity-v1/agora-dao-as-a-drep)
-- [Catalyst Closeout report](./closeout-report.pdf)
+- [Catalyst Closeout report](./website/closeout-report.pdf)
 - [Catalyst Closeout video](https://youtu.be/2RtffHLBsZ8)
