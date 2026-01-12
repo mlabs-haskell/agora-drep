@@ -266,5 +266,6 @@ Please consult the following documents for more information about specific topic
 - For more information about the Agora system: [Agora repository](https://github.com/Liqwid-Labs/agora)
 - For a specificaction of the Agora system: [Agora specification](https://liqwid.notion.site/Agora-Specs-Overview-fd7df78313cf4dc0b1522cb9260b77d1)
 - For more information on how to use an Agora DAO as a DRep: [Clarity's "Agora DAO as a DRep"](https://docs.clarity.vote/clarity-v1/agora-dao-as-a-drep)
+- [Catalyst Benchmark / Feature demo](https://youtu.be/PDtfe4f0aUA)
 - [Catalyst Closeout report](./website/closeout-report.pdf)
 - [Catalyst Closeout video](https://youtu.be/2RtffHLBsZ8)
